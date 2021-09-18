@@ -6,6 +6,7 @@ public class Note : MonoBehaviour
 {
     [SerializeField] protected GameObject noteObj;
     [SerializeField] private float speed = 10;
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,14 @@ public class Note : MonoBehaviour
 
     public void RandomizeGeminiColor()
     {
-        float r = Random.Range(0.0f, 1.0f);
-        float g = Random.Range(0.0f, 1.0f);
-        float b = Random.Range(0.0f, 1.0f);
+        int r = Random.Range(0, 2);
+        int g = Random.Range(0, 2);
+        int b = Random.Range(0, 2);
+
+        if (r < 2 && g < 2) { r = 0; g = 0; b = 1;}
+        if (r < 2 && b < 2) { r = 0; g = 1; b = 0;}
+        if (b < 2 && g < 2) { r = 1; g = 0; b = 0;}
+        if (b < 2 && g < 2 && r < 2) { r = 0; g = 0; b = 1; }
 
         Color color = new Color(r, g, b);
         this.noteObj.GetComponent<MeshRenderer>().material.SetColor("_Color", color);

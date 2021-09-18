@@ -5,17 +5,21 @@ using UnityEngine.UI;
 
 public class OnCollision : MonoBehaviour
 {
-    [SerializeField] private Text points;
-    int nPoints = 5;
+    [SerializeField] private Text HP_points;
+    [SerializeField] private Text Score_points;
+    int HPPoints = 5;
+    int ScorePoints = 0;
 
     private void Awake()
     {
-        points.text = "LIVES: " + nPoints.ToString();
+        HP_points.text = "LIVES: " + HPPoints.ToString();
+        Score_points.text = "LIVES: " + ScorePoints.ToString();
+
     }
 
     private void Update()
     {
-        if(nPoints <= 0)
+        if(HPPoints <= 0)
         {
             Debug.Log("You are dead");
         }
@@ -24,7 +28,7 @@ public class OnCollision : MonoBehaviour
     private void OnCollisionEnter(Collision col)
     {
         Destroy(col.gameObject);
-        nPoints -= 1;
-        points.text = "LIVES: " + nPoints.ToString();
+        HPPoints -= 1;
+        HP_points.text = "LIVES: " + HPPoints.ToString();
     }
 }
