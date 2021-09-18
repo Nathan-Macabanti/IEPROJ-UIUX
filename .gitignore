@@ -61,9 +61,7 @@ sysinfo.txt
 *.unitypackage
 <<<<<<< HEAD
 *.log
-UserSettings/EditorUserSettings.asset
-*.log
-*.log
+*.asset
 =======
 
 # Crashlytics generated file
