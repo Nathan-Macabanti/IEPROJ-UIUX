@@ -7,6 +7,12 @@ public class MainMenu : MonoBehaviour
 {
     public void onPlayPress()
     {
+        SceneManager.LoadScene("ChapterSelection");
+    }
+
+    public void onPlayGamePress()
+    {
         SceneManager.LoadScene("Prototype");
     }
+
 }
