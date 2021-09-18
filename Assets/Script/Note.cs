@@ -27,8 +27,11 @@ public class Note : MonoBehaviour
         int b = Random.Range(0, 2);
 
         if (r < 2 && g < 2) { r = 0; g = 0; b = 1;}
+        if (g < 2 && r < 2) { r = 0; g = 0; b = 1; }
         if (r < 2 && b < 2) { r = 0; g = 1; b = 0;}
+        if (b < 2 && r < 2) { r = 0; g = 1; b = 0; }
         if (b < 2 && g < 2) { r = 1; g = 0; b = 0;}
+        if (g < 2 && b < 2) { r = 1; g = 0; b = 0; }
         if (b < 2 && g < 2 && r < 2) { r = 0; g = 0; b = 1; }
 
         Color color = new Color(r, g, b);

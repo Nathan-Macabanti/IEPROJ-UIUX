@@ -7,13 +7,14 @@ public class OnCollision : MonoBehaviour
 {
     [SerializeField] private Text HP_points;
     [SerializeField] private Text Score_points;
-    int HPPoints = 5;
-    int ScorePoints = 0;
+    public Transform player;
+    uint HPPoints = 5;
+    uint ScorePoints = 0;
 
     private void Awake()
     {
         HP_points.text = "LIVES: " + HPPoints.ToString();
-        Score_points.text = "LIVES: " + ScorePoints.ToString();
+        Score_points.text = "SCORES: " + ScorePoints.ToString();
 
     }
 
@@ -21,14 +22,25 @@ public class OnCollision : MonoBehaviour
     {
         if(HPPoints <= 0)
         {
-            Debug.Log("You are dead");
+            Debug.Log("Game Over");
         }
+
+        ScorePoints += (((uint)player.position.z));
+        Score_points.text = "SCORES: " + ScorePoints.ToString();
+        
     }
 
     private void OnCollisionEnter(Collision col)
     {
         Destroy(col.gameObject);
-        HPPoints -= 1;
-        HP_points.text = "LIVES: " + HPPoints.ToString();
+
+        if(HPPoints <= 0) { HPPoints = 0; }
+        else { HPPoints -= 1; }
+        
+        HP_points.text = "LIVES: " + HPPoints.ToString();  
+      
+        HPPoints += 0;
+        ScorePoints -= 200;
+      
     }
 }

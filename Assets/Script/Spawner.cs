@@ -10,7 +10,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<Note> NoteList;
     //[SerializeField] private AudioSource music;
     public Note note;
-
     private float ticks = 0.0f;
     private float SPAWN_INTERVAL;
 
