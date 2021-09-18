@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+<<<<<<< HEAD
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,4 +16,15 @@ public class MainMenu : MonoBehaviour
     {
         
     }
+=======
+using UnityEngine.SceneManagement;
+
+public class MainMenu : MonoBehaviour
+{
+    public void onPlayPress()
+    {
+        SceneManager.LoadScene("Prototype");
+    }
+
+>>>>>>> main
 }
