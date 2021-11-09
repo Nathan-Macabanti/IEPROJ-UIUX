@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour
     public void SpawnNote()
     {
         Note note;
-        note = Instantiate(this.NoteCopy, this.transform.position, this.transform.rotation);
+        note = Instantiate(this.NoteCopy, this.transform.position, this.transform.rotation, this.transform);
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
 
