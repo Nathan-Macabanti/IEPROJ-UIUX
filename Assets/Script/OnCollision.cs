@@ -5,17 +5,24 @@ using UnityEngine.UI;
 
 public class OnCollision : MonoBehaviour
 {
+    [SerializeField] private SongManager2 song;
+    [SerializeField] private float lengthOfInvincibility;
+    [SerializeField] private float invincibilityTicks;
+    [SerializeField] private bool isHurt;
+    [SerializeField] private bool isInvincible;
     [SerializeField] private Text HP_points;
     [SerializeField] private Text Score_points;
     public Transform player;
-    uint HPPoints = 5;
-    uint ScorePoints = 0;
+    [SerializeField] private GameObject playerSprite;
+    private uint HPPoints = 5;
+    private int ScorePoints = 0;
 
     private void Awake()
     {
         HP_points.text = "LIVES: " + HPPoints.ToString();
         Score_points.text = "SCORES: " + ScorePoints.ToString();
-
+        isInvincible = false;
+        isHurt = false;
     }
 
     private void Update()
@@ -24,23 +31,63 @@ public class OnCollision : MonoBehaviour
         {
             Debug.Log("Game Over");
         }
+        if (isInvincible)
+        {
+            BecomeInvicible();
+        }
 
-        ScorePoints += (((uint)player.position.z));
-        Score_points.text = "SCORES: " + ScorePoints.ToString();
+        //ScorePoints += (((uint)player.position.z));
+        //Score_points.text = "SCORES: " + ScorePoints.ToString();
         
     }
 
-    private void OnCollisionEnter(Collision col)
+    public void BecomeInvicible()
     {
-        Destroy(col.gameObject);
-
-        if(HPPoints <= 0) { HPPoints = 0; }
-        else { HPPoints -= 1; }
-        
-        HP_points.text = "LIVES: " + HPPoints.ToString();  
-      
-        HPPoints += 0;
-        ScorePoints -= 200;
-      
+        playerSprite.GetComponent<SpriteRenderer>().material.color = new Color(1F, 1F ,1F ,0.5f);
+        invincibilityTicks += Time.deltaTime * song.BPM / 4;
+        if (invincibilityTicks >= lengthOfInvincibility)
+        {
+            playerSprite.GetComponent<SpriteRenderer>().material.color = new Color(1F, 1F, 1F, 1F);
+            isInvincible = false;
+            isHurt = false;
+        }
     }
+
+    public void UpdateScore(int addedPoints)
+    {
+        ScorePoints += addedPoints;
+        Score_points.text = "SCORES: " + ScorePoints.ToString();
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (!isInvincible)
+        {
+            if (!isHurt)
+            {
+                isHurt = true;
+                invincibilityTicks = 0;
+            }
+
+            isInvincible = true;
+            Destroy(col.gameObject);
+
+            if (HPPoints <= 0) { HPPoints = 0; }
+            else { HPPoints -= 1; }
+
+            HP_points.text = "LIVES: " + HPPoints.ToString();
+
+            HPPoints += 0;
+            if (ScorePoints >= 0)
+            {
+                ScorePoints = 0;
+            }
+            else
+            {
+                ScorePoints -= 200;
+            }
+        }
+    }
+
+    public uint GetHPPoints { get { return HPPoints; } }
 }

@@ -7,7 +7,7 @@ public class ChapterSelection : MonoBehaviour
 {
     public void onPlayPress()
     {
-        SceneManager.LoadScene("Prototype");
+        SceneManager.LoadScene("Prototype ver2");
     }
 
     public void onBackPress()

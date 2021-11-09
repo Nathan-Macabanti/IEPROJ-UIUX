@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainLobby.unity
     guid: ecb636bebe47bb64b88574384b144116
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototype.unity
     guid: 0ef2e78e389062946ba31c489f51767b
   - enabled: 1
     path: Assets/Scenes/ChapterSelection.unity
     guid: 757c7c6620f953b48919a5b2a43f5551
+  - enabled: 1
+    path: Assets/Scenes/Prototype ver2.unity
+    guid: 4e4a67153e3cbdb4d8b06bec95d7f2ff
   m_configObjects: {}
