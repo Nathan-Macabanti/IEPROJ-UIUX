@@ -32,6 +32,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NoteCopy.gameObject.SetActive(false);
         //mat = GetComponentInChildren<Renderer>().material;
         //initialColor = mat.color;
     }

@@ -10,6 +10,7 @@ public class OnCollision : MonoBehaviour
     [SerializeField] private float invincibilityTicks;
     [SerializeField] private bool isHurt;
     [SerializeField] private bool isInvincible;
+    [SerializeField] private bool isDebugging;
     [SerializeField] private Text HP_points;
     [SerializeField] private Text Score_points;
     public Transform player;
@@ -19,6 +20,10 @@ public class OnCollision : MonoBehaviour
 
     private void Awake()
     {
+        if (isDebugging)
+        {
+            HPPoints = 9999;
+        }
         HP_points.text = "LIVES: " + HPPoints.ToString();
         Score_points.text = "SCORES: " + ScorePoints.ToString();
         isInvincible = false;

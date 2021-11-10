@@ -37,7 +37,7 @@ public class SongManager2 : MonoBehaviour
     [Header("Spawner Manager")]
     [SerializeField] private Spawner[] spawners;
     public List<int> spawnerIndex;
-    [SerializeField] private Note _note;
+    //[SerializeField] private Note _note;
     [SerializeField] private float beatsShownInAdvance;
 
     int playedOnce;
@@ -58,7 +58,7 @@ public class SongManager2 : MonoBehaviour
     void Start()
     {
         bpm = bpm / 4;
-        _note.gameObject.SetActive(false);
+        //_note.gameObject.SetActive(false);
         secondsPerBeat = 60F / bpm;
         //dspTimeSong = (float)AudioSettings.dspTime;
         nextIndex = 0;
@@ -70,20 +70,22 @@ public class SongManager2 : MonoBehaviour
     {
         if(nCountDown == -1)
         {
-            if(playedOnce != 1)
+            countDown.text = " ";
+            if (playedOnce != 1)
             {
                 GetComponent<AudioSource>().Play();
                 playedOnce = 1;
             }
             songPosition = (float)GetComponent<AudioSource>().time;
             songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
-            songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
+            if(GetComponent<AudioSource>().isPlaying)
+                songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
             Debug.Log(songPositionInBeats);
             //Debug.Log(nextIndex);
-            if (nextIndex < notes.Length)
+            if (nextIndex < notes.Length && GetComponent<AudioSource>().isPlaying)
             {
                 beatsShownInAdvance = 0.25f;
-                if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance && 
+                if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
                     spawnerIndexStr[nextIndex] != "")
                 {
                     spawnerIndex.Clear();
@@ -98,7 +100,8 @@ public class SongManager2 : MonoBehaviour
                     nextIndex++;
                 }
             }
-            else if(!GetComponent<AudioSource>().isPlaying)
+            else if (!GetComponent<AudioSource>().isPlaying &&
+                GetComponent<AudioSource>().time >= GetComponent<AudioSource>().clip.length)
             {
                 countDown.text = "Level Done";
             }
@@ -111,6 +114,7 @@ public class SongManager2 : MonoBehaviour
 
     [Header("CountDown till start")]
     [SerializeField] private float beatTimer = 0;
+    #region Functions
     public void CountDown()
     {
         //bool beatFull;
@@ -133,7 +137,25 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
+    public void ChangeAudioTime()
+    {
+        if (!GetComponent<AudioSource>().isPlaying)
+        {
+            GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * songSlider.value;
+        }
+    }
 
+    public void PauseMusic()
+    {
+        GetComponent<AudioSource>().Pause();
+    }
+    public void PlayMusic()
+    {
+        GetComponent<AudioSource>().Pause();
+    }
+    #endregion
+
+    #region Getters
     public float BPM { get { return bpm; } }
 
     public float SecondsPerBeat { get { return secondsPerBeat; } }
@@ -144,4 +166,5 @@ public class SongManager2 : MonoBehaviour
     public Transform CenterSpawnerLocation { get { return spawners[1].transform; } }
     public string[] SpawnerIndexArray { get { return spawnerIndexStr; } }
     public float SongPositionInBeats { get { return songPositionInBeats; } }
+    #endregion
 }
