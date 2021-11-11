@@ -78,9 +78,9 @@ public class SongManager2 : MonoBehaviour
             }
             songPosition = (float)GetComponent<AudioSource>().time;
             songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
-            if(GetComponent<AudioSource>().isPlaying)
-                songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
-            Debug.Log(songPositionInBeats);
+            if (GetComponent<AudioSource>().isPlaying)
+               songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
+            //Debug.Log(songPositionInBeats);
             //Debug.Log(nextIndex);
             if (nextIndex < notes.Length && GetComponent<AudioSource>().isPlaying)
             {
@@ -100,8 +100,7 @@ public class SongManager2 : MonoBehaviour
                     nextIndex++;
                 }
             }
-            else if (!GetComponent<AudioSource>().isPlaying &&
-                GetComponent<AudioSource>().time >= GetComponent<AudioSource>().clip.length)
+            else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Length)
             {
                 countDown.text = "Level Done";
             }
@@ -139,7 +138,7 @@ public class SongManager2 : MonoBehaviour
 
     public void ChangeAudioTime()
     {
-        if (!GetComponent<AudioSource>().isPlaying)
+        if (!GetComponent<AudioSource>().isPlaying && GetComponent<AudioSource>().clip.length != 0)
         {
             GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * songSlider.value;
         }
