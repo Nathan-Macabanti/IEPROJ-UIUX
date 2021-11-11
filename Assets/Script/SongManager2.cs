@@ -7,6 +7,7 @@ using UnityEngine.UI;
 //using System.IO;
 using System.Linq;
 using System;
+using System.IO;
 
 [RequireComponent(typeof(AudioSource))]
 public class SongManager2 : MonoBehaviour
@@ -14,8 +15,10 @@ public class SongManager2 : MonoBehaviour
     public static SongManager2 songManager2Instance;
 
     [Header("Text File")]
-    [SerializeField] private string Path;
+    [SerializeField] private string ChartFile;
 
+    [Header("Debugging")]
+    [SerializeField] private bool isDebugging;
     [Header("UI stuff")]
     [SerializeField] private Text countDown;
     [SerializeField] private int nCountDown = 3;
@@ -24,8 +27,8 @@ public class SongManager2 : MonoBehaviour
     [Header("BPM calculator")]
     [SerializeField] private float offset = 0.25f;
     [SerializeField] private float bpm;
-    [SerializeField] private float[] notes;
-    [SerializeField] private string[] spawnerIndexStr;
+    [SerializeField] private List<float> notes;
+    [SerializeField] private List<string> spawnerIndexStr;
     [SerializeField] private int nextIndex = 0;
 
     [Header("Song Position from seconds to beats calculator")]
@@ -44,15 +47,38 @@ public class SongManager2 : MonoBehaviour
 
     private void Awake()
     {
-        if(songManager2Instance == null)
+        if (songManager2Instance == null)
         {
             songManager2Instance = this;
             //DontDestroyOnLoad(this);
-        } else if(songManager2Instance != null){
+        }
+        else if (songManager2Instance != null)
+        {
             Destroy(this);
         }
+        //string Path = ChartFile + ".txt";
+        string Path = Application.dataPath + "/" + ChartFile + ".txt";
+
         //Read From The File
-        //offset += nCountDown;
+        if (File.Exists(Path))
+        {
+            StreamReader reader = new StreamReader(Path);
+            bpm = float.Parse(reader.ReadLine().ToString());
+            int index = int.Parse(reader.ReadLine().ToString());
+            notes.Clear();
+            for (int i = 0; i < index; i++)
+            {
+                notes.Add(float.Parse(reader.ReadLine().ToString()));
+            }
+            spawnerIndexStr.Clear();
+            for (int i = 0; i < index; i++)
+            {
+                spawnerIndexStr.Add(reader.ReadLine().ToString());
+            }
+
+            reader.Close();
+            //offset += nCountDown;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -68,7 +94,7 @@ public class SongManager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(nCountDown == -1)
+        if (nCountDown == -1)
         {
             countDown.text = " ";
             if (playedOnce != 1)
@@ -79,10 +105,10 @@ public class SongManager2 : MonoBehaviour
             songPosition = (float)GetComponent<AudioSource>().time;
             songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
             if (GetComponent<AudioSource>().isPlaying)
-               songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
+                songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
             //Debug.Log(songPositionInBeats);
             //Debug.Log(nextIndex);
-            if (nextIndex < notes.Length && GetComponent<AudioSource>().isPlaying)
+            if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying)
             {
                 beatsShownInAdvance = 0.25f;
                 if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
@@ -100,7 +126,7 @@ public class SongManager2 : MonoBehaviour
                     nextIndex++;
                 }
             }
-            else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Length)
+            else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count)
             {
                 countDown.text = "Level Done";
             }
@@ -136,9 +162,14 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
+    public void LoadChart()
+    {
+        
+    }
     public void ChangeAudioTime()
     {
-        if (!GetComponent<AudioSource>().isPlaying && GetComponent<AudioSource>().clip.length != 0)
+        if (!GetComponent<AudioSource>().isPlaying && GetComponent<AudioSource>().clip.length != 0
+            && isDebugging)
         {
             GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * songSlider.value;
         }
@@ -159,11 +190,11 @@ public class SongManager2 : MonoBehaviour
 
     public float SecondsPerBeat { get { return secondsPerBeat; } }
     public float BeatsShownInAdvance { get { return beatsShownInAdvance; } }
-    public float[] Notes { get { return notes; } }
+    public List<float> Notes { get { return notes; } }
 
     public AudioSource AudioSource { get { return GetComponent<AudioSource>(); } }
     public Transform CenterSpawnerLocation { get { return spawners[1].transform; } }
-    public string[] SpawnerIndexArray { get { return spawnerIndexStr; } }
+    public List<string> SpawnerIndexArray { get { return spawnerIndexStr; } }
     public float SongPositionInBeats { get { return songPositionInBeats; } }
     #endregion
 }

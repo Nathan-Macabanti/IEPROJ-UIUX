@@ -20,17 +20,18 @@ namespace BeatMap
                 using (StreamWriter writer = new StreamWriter(path))
                 {
                     writer.WriteLine(SngManager.BPM * 4);
-                    for(int i = 0; i < SngManager.Notes.Length; i++)
+                    writer.WriteLine(SngManager.Notes.Count);
+                    for(int i = 0; i < SngManager.Notes.Count; i++)
                     {
                         IsSaving.text = "Saving...";
                         writer.WriteLine(SngManager.Notes[i].ToString());
                     }
-                    for (int i = 0; i < SngManager.SpawnerIndexArray.Length; i++)
+                    for (int i = 0; i < SngManager.SpawnerIndexArray.Count; i++)
                     {
                         IsSaving.text = "Saving...";
                         writer.WriteLine(SngManager.SpawnerIndexArray[i]);
                     }
-                    writer.WriteLine(SngManager.Notes.Length.ToString());
+                    writer.WriteLine(SngManager.Notes.Count.ToString());
                 }
                 IsSaving.text = "Saved";
             }
