@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5408c5a37dce0c244af84a0cb1d41936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChartFile: Shosple_Colupis
+  ChartFile: tuts
   isDebugging: 0
   countDown: {fileID: 97550443}
   nCountDown: 3
@@ -1346,7 +1346,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b98c3c0b924ffd64c9ccab9712d8c916, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e6c5cbaea0fc9c24091bd38536b95a26, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
