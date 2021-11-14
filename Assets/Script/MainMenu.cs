@@ -9,8 +9,4 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Prototype");
     }
-    public void onPlayerExit()
-    {
-        Application.Quit();
-    }
 }
