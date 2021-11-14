@@ -5,9 +5,9 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
     //OnCollision col;
-
-    float min = -3;
-    float max = 3;
+    [SerializeField] private float min = -3;
+    [SerializeField] private float max = 3;
+    [SerializeField] private float jumpHeight = 2;
     private float ticks = 0.0f;
     private float JUMP_INTERVAL = 0.13f;
     private bool isInAir;
@@ -21,52 +21,59 @@ public class Trigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        
+        if (Input.GetKey(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if(transform.position.z > min)
+            if (transform.position.z > min)
                 transform.position = transform.position + new Vector3(0, 0, min);
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (transform.position.z < max)
                 transform.position = transform.position + new Vector3(0, 0, max);
         }
-
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isInAir != true)
+        else
         {
-            isInAir = true;
-            transform.position = transform.position + new Vector3(0, 2, 0);
+            if (transform.position.z >= max)
+                transform.position = transform.position + new Vector3(0, 0, -max);
+            else if (transform.position.z <= min)
+            {
+                transform.position = transform.position + new Vector3(0, 0, -min);
+            }
         }
 
         jumpAndFalling();
-
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !isInAir)
+        {
+            transform.position = transform.position + new Vector3(0, jumpHeight, 0);
+            isInAir = true;
+        }
         /*
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, min);
-        }
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, max);
-        }*/
+           if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && transform.position.z > min)
+           {
+               transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + min);
+           }
+           else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && transform.position.z < max)
+           {
+               transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + max);
+           }
+
+        */
+        
     }
 
     void jumpAndFalling()
     {
-        if(isInAir == true)
+        if (isInAir == true)
         {
             this.ticks += Time.deltaTime;
         }
-
         if (this.ticks >= JUMP_INTERVAL)
         {
             this.ticks = 0.0f;
             isInAir = false;
-            transform.position = transform.position + new Vector3(0, -2, 0);
+            transform.position = transform.position + new Vector3(0, -jumpHeight, 0);
         }
     }
+
 }
