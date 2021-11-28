@@ -43,6 +43,10 @@ public class SongManager2 : MonoBehaviour
     //[SerializeField] private Note _note;
     [SerializeField] private float beatsShownInAdvance;
 
+    [Header("Warning Diamonds")]
+    [SerializeField] private GameObject[] warningDiamonds;
+    [SerializeField] private List<int> spawnerNextIndex;
+
     int playedOnce;
 
     private void Awake()
@@ -94,6 +98,7 @@ public class SongManager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        WarningPing();
         if (nCountDown == -1)
         {
             countDown.text = " ";
@@ -104,7 +109,7 @@ public class SongManager2 : MonoBehaviour
             }
             songPosition = (float)GetComponent<AudioSource>().time;
             songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
-            if (GetComponent<AudioSource>().isPlaying)
+            //if (GetComponent<AudioSource>().isPlaying)
                 songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
             //Debug.Log(songPositionInBeats);
             //Debug.Log(nextIndex);
@@ -162,10 +167,33 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
-    public void LoadChart()
+    public void WarningPing()
     {
-        
+        /*
+        Color D1 = warningDiamonds[0].GetComponent<SpriteRenderer>().material.color;
+        Color D2 = warningDiamonds[1].GetComponent<SpriteRenderer>().material.color;
+        Color D3 = warningDiamonds[2].GetComponent<SpriteRenderer>().material.color;
+
+        Color Invisible = new Color(1,1,1,0);*/
+
+        if (nextIndex < notes.Count)
+        {
+            spawnerNextIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
+        }
+
+        if(spawnerNextIndex != null)
+        {
+            warningDiamonds[0].SetActive(false);
+            warningDiamonds[1].SetActive(false);
+            warningDiamonds[2].SetActive(false);
+
+            for (int i = 0; i < spawnerNextIndex.Count; i++){
+                if (spawnerNextIndex[i] >= 0)
+                    warningDiamonds[spawnerNextIndex[i]].SetActive(true);
+            }
+        }
     }
+
     public void ChangeAudioTime()
     {
         if (!GetComponent<AudioSource>().isPlaying && GetComponent<AudioSource>().clip.length != 0
