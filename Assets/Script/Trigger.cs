@@ -46,6 +46,8 @@ public class Trigger : MonoBehaviour
         }
         else
         {
+            playerAnimator.SetBool("Left", false);
+            playerAnimator.SetBool("Right", false);
             if (transform.position.z >= max)
             {
                 transform.position = transform.position + new Vector3(0, 0, -max);
@@ -56,8 +58,6 @@ public class Trigger : MonoBehaviour
             else if (transform.position.z <= min)
             {
                 transform.position = transform.position + new Vector3(0, 0, -min);
-                //playerAnimator.SetBool("Left", true);
-                //playerAnimator.SetBool("Right", false);
             }
         }
 
