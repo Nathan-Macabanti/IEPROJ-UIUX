@@ -12,6 +12,7 @@ public class Trigger : MonoBehaviour
     [SerializeField] private float JUMP_INTERVAL = 0.15f;
     private bool isInAir;
 
+    [SerializeField] private List<Transform> planes; 
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private Animation Player;
 
@@ -25,60 +26,71 @@ public class Trigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if(Time.timeScale == 1)
         {
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-                playerAnimator.SetBool("Left", true);
-
-            if (transform.position.z > min)
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                
-                transform.position = transform.position + new Vector3(0, 0, min);
-            }
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-                playerAnimator.SetBool("Right", true);
+                //if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+                    playerAnimator.SetBool("Left", true);
 
-            if (transform.position.z < max)
-                transform.position = transform.position + new Vector3(0, 0, max);
-        }
-        else
-        {
-            playerAnimator.SetBool("Left", false);
-            playerAnimator.SetBool("Right", false);
-            if (transform.position.z >= max)
+                if (/*transform.position.z > min*/planes[0] != null)
+                {
+                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z);
+                    //transform.position = transform.position + new Vector3(0, 0, min);
+                }
+            }
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position = transform.position + new Vector3(0, 0, -max);
-                //playerAnimator.SetBool("Left", false);
-                //playerAnimator.SetBool("Right", true);
+                //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+                    playerAnimator.SetBool("Right", true);
+
+                if (/*transform.position.z < max*/planes[2] != null)
+                {
+                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y ,planes[2].position.z);
+                    //transform.position = transform.position + new Vector3(0, 0, max);
+                }
+                    
             }
-                
-            else if (transform.position.z <= min)
+            else
             {
-                transform.position = transform.position + new Vector3(0, 0, -min);
+                playerAnimator.SetBool("Left", false);
+                playerAnimator.SetBool("Right", false);
+                transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
+                //transform.position = planes[1].position;
+#if false
+                if (transform.position.z >= max)
+                {
+                    
+                    //transform.position = transform.position + new Vector3(0, 0, -max);
+                    //playerAnimator.SetBool("Left", false);
+                    //playerAnimator.SetBool("Right", true);
+                }
+
+                else if (transform.position.z <= min)
+                {
+                    transform.position = transform.position + new Vector3(0, 0, -min);
+                }
+#endif
             }
-        }
 
-        jumpAndFalling();
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !isInAir)
-        {
-            transform.position = transform.position + new Vector3(0, jumpHeight, 0);
-            isInAir = true;
-        }
-        /*
-           if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && transform.position.z > min)
-           {
-               transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + min);
-           }
-           else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && transform.position.z < max)
-           {
-               transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + max);
-           }
+            jumpAndFalling();
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !isInAir)
+            {
+                transform.position = transform.position + new Vector3(0, jumpHeight, 0);
+                isInAir = true;
+            }
+            /*
+               if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && transform.position.z > min)
+               {
+                   transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + min);
+               }
+               else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && transform.position.z < max)
+               {
+                   transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + max);
+               }
 
-        */
-        
+            */
+        }
     }
 
     void jumpAndFalling()
@@ -97,4 +109,5 @@ public class Trigger : MonoBehaviour
         }
     }
 
+    public List<Transform> GetPlanes { get { return planes; } }
 }

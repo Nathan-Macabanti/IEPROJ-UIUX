@@ -15,7 +15,7 @@ public class OnCollision : MonoBehaviour
     [SerializeField] private Text Score_points;
     public Transform player;
     [SerializeField] private GameObject playerSprite;
-    private uint HPPoints = 5;
+    [SerializeField] private uint HPPoints = 3;
     private int ScorePoints = 0;
 
     private void Awake()
@@ -78,7 +78,13 @@ public class OnCollision : MonoBehaviour
             Destroy(col.gameObject);
 
             if (HPPoints <= 0) { HPPoints = 0; }
-            else { HPPoints -= 1; }
+            else { 
+                HPPoints -= 1;
+                if (HPPoints == 2)
+                    GetComponent<Trigger>().GetPlanes.RemoveAt(0);
+                else if(HPPoints == 1)
+                    GetComponent<Trigger>().GetPlanes.RemoveAt(2);
+            }
 
             HP_points.text = "LIVES: " + HPPoints.ToString();
 

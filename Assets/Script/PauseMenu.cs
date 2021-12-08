@@ -7,8 +7,14 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GamePaused = false;
 
+    public SongManager2 song;
+    public AudioSource radio;
     public GameObject pauseMenuUI;
 
+    private void Awake()
+    {
+        radio = song.GetComponent<AudioSource>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -28,6 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        radio.Play();
         Time.timeScale = 1f;
         GamePaused = false;
     }
@@ -35,6 +42,7 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         pauseMenuUI.SetActive(true);
+        radio.Pause();
         Time.timeScale = 0f;
         GamePaused = true;
     }
