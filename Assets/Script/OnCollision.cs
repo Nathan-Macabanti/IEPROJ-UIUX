@@ -66,7 +66,8 @@ public class OnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (!isInvincible)
+        bool isAttackNote = col.GetComponent<Note>().GetIsAttackNote;
+        if (!isInvincible && !isAttackNote /*&& col.gameObject.tag == "Note"*/)
         {
             if (!isHurt)
             {
@@ -99,6 +100,10 @@ public class OnCollision : MonoBehaviour
             {
                 ScorePoints -= 200;
             }
+        }
+        else if (isAttackNote)
+        {
+            Destroy(col.gameObject);
         }
     }
 

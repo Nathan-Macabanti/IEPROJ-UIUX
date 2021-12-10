@@ -6,6 +6,7 @@ public class Note : MonoBehaviour
 {
     [SerializeField] protected GameObject noteObj;
     [SerializeField] private float divisor = 6.0f;
+    [SerializeField] protected bool isAttackNote;
     private float speed = 0;
     [SerializeField] private SongManager2 song;
     [SerializeField] private Vector3 SpawnPosition;
@@ -53,6 +54,8 @@ public class Note : MonoBehaviour
     }
 
     public GameObject NoteObj() { return noteObj; }
+
+    public bool GetIsAttackNote { get { return isAttackNote; } }
     /*
     [SerializeField] SongManager song;
     [SerializeField] protected GameObject noteObj;

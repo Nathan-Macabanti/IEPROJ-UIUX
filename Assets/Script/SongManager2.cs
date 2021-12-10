@@ -19,6 +19,7 @@ public class SongManager2 : MonoBehaviour
 
     [Header("Debugging")]
     [SerializeField] private bool isDebugging;
+
     [Header("UI stuff")]
     [SerializeField] private Text countDown;
     [SerializeField] private int nCountDown = 3;
@@ -38,7 +39,9 @@ public class SongManager2 : MonoBehaviour
     //[SerializeField] private float dspTimeSong;
 
     [Header("Spawner Manager")]
+    [SerializeField] private NoteBlockade noteBlockade;
     [SerializeField] private Spawner[] spawners;
+    //[SerializeField] protected bool isSpawnAttack;
     public List<int> spawnerIndex;
     //[SerializeField] private Note _note;
     [SerializeField] private float beatsShownInAdvance;
@@ -113,7 +116,7 @@ public class SongManager2 : MonoBehaviour
                 songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
             //Debug.Log(songPositionInBeats);
             //Debug.Log(nextIndex);
-            if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying)
+            if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying && !noteBlockade.GetIsAttackNote())
             {
                 beatsShownInAdvance = 0.25f;
                 if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
@@ -126,7 +129,25 @@ public class SongManager2 : MonoBehaviour
                     {
                         //Debug.Log(spawners[spawnerIndex[i]]);
                         if (spawnerIndex[i] >= 0)
-                            spawners[spawnerIndex[i]].SpawnNote();
+                            spawners[spawnerIndex[i]].SpawnDodgeNote();
+                    }
+                    nextIndex++;
+                }
+            }
+            else if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying && noteBlockade.GetIsAttackNote())
+            {
+                beatsShownInAdvance = 0.25f;
+                if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
+                    spawnerIndexStr[nextIndex] != "")
+                {
+                    spawnerIndex.Clear();
+                    spawnerIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
+
+                    for (int i = 0; i < spawnerIndex.Count; i++)
+                    {
+                        //Debug.Log(spawners[spawnerIndex[i]]);
+                        if (spawnerIndex[i] >= 0)
+                            spawners[spawnerIndex[i]].SpawnAttackNote();
                     }
                     nextIndex++;
                 }

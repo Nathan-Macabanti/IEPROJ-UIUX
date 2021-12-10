@@ -12,7 +12,7 @@ public class LookAtCmeraAxis : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 targetVector = this.transform.position - mainCamera.transform.position;
         transform.rotation = Quaternion.LookRotation(targetVector, mainCamera.transform.rotation * new Vector3(0.0f, 1.0f, 0.0f));

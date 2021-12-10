@@ -11,7 +11,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Vector3 decayFactor;
     [SerializeField] private int nMaxNotes;
     //[SerializeField] private Transform spawnLoc;
-    [SerializeField] private Note NoteCopy;
+    [SerializeField] private Note DodgeNoteCopy;
+    [SerializeField] private Note AttackNoteCopy;
     public List<Note> NoteList;
     //[SerializeField] private AudioSource music;
 
@@ -32,7 +33,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NoteCopy.gameObject.SetActive(false);
+        DodgeNoteCopy.gameObject.SetActive(false);
         //mat = GetComponentInChildren<Renderer>().material;
         //initialColor = mat.color;
     }
@@ -44,10 +45,20 @@ public class Spawner : MonoBehaviour
         RemoveFromList();
     }
 
-    public void SpawnNote()
+    public void SpawnDodgeNote()
     {
         Note note;
-        note = Instantiate(this.NoteCopy, this.transform.position, this.transform.rotation, this.transform);
+        note = Instantiate(this.DodgeNoteCopy, this.transform.position, this.transform.rotation, this.transform);
+        note.NoteObj().SetActive(true);
+        NoteList.Add(note);
+
+        //mat.color = changeColor;
+    }
+
+    public void SpawnAttackNote()
+    {
+        Note note;
+        note = Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
 
