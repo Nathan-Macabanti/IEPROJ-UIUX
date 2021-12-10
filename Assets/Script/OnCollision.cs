@@ -80,10 +80,12 @@ public class OnCollision : MonoBehaviour
             if (HPPoints <= 0) { HPPoints = 0; }
             else { 
                 HPPoints -= 1;
+#if false
                 if (HPPoints == 2)
                     GetComponent<Trigger>().GetPlanes.RemoveAt(0);
                 else if(HPPoints == 1)
                     GetComponent<Trigger>().GetPlanes.RemoveAt(2);
+#endif
             }
 
             HP_points.text = "LIVES: " + HPPoints.ToString();

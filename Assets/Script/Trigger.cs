@@ -28,23 +28,23 @@ public class Trigger : MonoBehaviour
     {
         if(Time.timeScale == 1)
         {
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<OnCollision>().GetHPPoints == 3)
             {
                 //if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                     playerAnimator.SetBool("Left", true);
 
-                if (/*transform.position.z > min*/planes[0] != null)
+                if (transform.position.z > planes[0].position.z)
                 {
                     transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z);
                     //transform.position = transform.position + new Vector3(0, 0, min);
                 }
             }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<OnCollision>().GetHPPoints == 3 || GetComponent<OnCollision>().GetHPPoints == 2))
             {
                 //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                     playerAnimator.SetBool("Right", true);
 
-                if (/*transform.position.z < max*/planes[2] != null)
+                if (transform.position.z < planes[2].position.z)
                 {
                     transform.position = new Vector3(this.transform.position.x, this.transform.position.y ,planes[2].position.z);
                     //transform.position = transform.position + new Vector3(0, 0, max);
