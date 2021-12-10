@@ -80,11 +80,11 @@ public class OnCollision : MonoBehaviour
             if (HPPoints <= 0) { HPPoints = 0; }
             else { 
                 HPPoints -= 1;
-#if false
+#if true
                 if (HPPoints == 2)
-                    GetComponent<Trigger>().GetPlanes.RemoveAt(0);
+                    GetComponent<Trigger>().GetPlanes[0].gameObject.SetActive(false);
                 else if(HPPoints == 1)
-                    GetComponent<Trigger>().GetPlanes.RemoveAt(2);
+                    GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
 #endif
             }
 
