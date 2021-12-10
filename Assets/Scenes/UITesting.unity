@@ -950,5 +950,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8434523016831689571, guid: 89422613a0dd0fa469203486da1c5911, type: 3}
+      propertyPath: m_AnimationTriggers.m_SelectedTrigger
+      value: ItemSelected
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89422613a0dd0fa469203486da1c5911, type: 3}
