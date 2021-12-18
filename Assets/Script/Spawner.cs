@@ -34,6 +34,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         DodgeNoteCopy.gameObject.SetActive(false);
+        AttackNoteCopy.gameObject.SetActive(false);
         //mat = GetComponentInChildren<Renderer>().material;
         //initialColor = mat.color;
     }

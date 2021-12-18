@@ -207,7 +207,7 @@ public class SongManager2 : MonoBehaviour
             warningDiamonds[0].SetActive(false);
             warningDiamonds[1].SetActive(false);
             warningDiamonds[2].SetActive(false);
-
+            warningDiamonds[3].SetActive(false);
             for (int i = 0; i < spawnerNextIndex.Count; i++){
                 if (spawnerNextIndex[i] >= 0)
                     warningDiamonds[spawnerNextIndex[i]].SetActive(true);

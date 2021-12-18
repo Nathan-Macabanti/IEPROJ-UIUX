@@ -17,6 +17,8 @@ public class NoteBlockade : MonoBehaviour
     [SerializeField] private Text notesDodgeStateText;
     [SerializeField] private Slider notesDodgeSlider;
     [SerializeField] private Image notesDodgeSliderFill;
+    [SerializeField] private Color ColorTextNotesDodge;
+    [SerializeField] private Color ColorTextTime;
     [SerializeField] private Color ColorSliderFillNotesDodge;
     [SerializeField] private Color ColorSliderFillTime;
 
@@ -28,7 +30,7 @@ public class NoteBlockade : MonoBehaviour
     }
     private void Update()
     {
-        if (ticks > 0 && NotesDodged >= 10)
+        if (ticks > 0 && NotesDodged >= RequiredAmountToDodge)
         {
             SliderIsTheTimer();
             ticks -= Time.deltaTime;
@@ -39,7 +41,7 @@ public class NoteBlockade : MonoBehaviour
             ticks = ISATTACKNOTE_INTERVAL;
             NotesDodged = 0;
         }
-        else if(NotesDodged < 10)
+        else if(NotesDodged < RequiredAmountToDodge)
         {
             SliderIsNotesDodge();
         }
@@ -49,12 +51,15 @@ public class NoteBlockade : MonoBehaviour
     {
         notesDodgeSlider.value = NotesDodged / RequiredAmountToDodge;
         notesDodgeSliderFill.color = ColorSliderFillNotesDodge;
+        notesDodgeStateText.color = ColorTextNotesDodge;
+        notesDodgeStateText.text = "DODGE PHASE";
     }
 
     public void SliderIsTheTimer()
     {
         notesDodgeSlider.value = ticks / ISATTACKNOTE_INTERVAL;
         notesDodgeSliderFill.color = ColorSliderFillTime;
+        notesDodgeStateText.color = ColorTextTime;
         notesDodgeStateText.text = "ATTACK PHASE";
     }
 
@@ -65,7 +70,7 @@ public class NoteBlockade : MonoBehaviour
         {
             Debug.Log("NotesTouchedBlockade");
             Destroy(other.gameObject);
-            NotesDodged += 1;
+            NotesDodged++;
         }
         else if(other.gameObject.CompareTag("Note") && isAttackNote)
         {

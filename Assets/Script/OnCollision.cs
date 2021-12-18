@@ -83,9 +83,17 @@ public class OnCollision : MonoBehaviour
                 HPPoints -= 1;
 #if true
                 if (HPPoints == 2)
-                    GetComponent<Trigger>().GetPlanes[0].gameObject.SetActive(false);
+                {
+                    GameObject plane = GetComponent<Trigger>().GetPlanes[0].gameObject;
+                    plane.GetComponent<Renderer>().material.color = Color.grey;
+                    //GetComponent<Trigger>().GetPlanes[0].gameObject.SetActive(false);
+                } 
                 else if(HPPoints == 1)
-                    GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
+                {
+                    GameObject plane = GetComponent<Trigger>().GetPlanes[2].gameObject;
+                    plane.GetComponent<Renderer>().material.color = Color.grey;
+                    //GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
+                }     
 #endif
             }
 
