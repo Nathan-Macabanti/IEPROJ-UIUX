@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class OnCollision : MonoBehaviour
 {
     [SerializeField] private SongManager2 song;
+    [SerializeField] private EnemyHealth enemyHealth;
     [SerializeField] private float lengthOfInvincibility;
     [SerializeField] private float invincibilityTicks;
     [SerializeField] private bool isHurt;
@@ -13,6 +14,7 @@ public class OnCollision : MonoBehaviour
     [SerializeField] private bool isDebugging;
     [SerializeField] private Text HP_points;
     [SerializeField] private Text Score_points;
+    [SerializeField] private float damageToEnemyValue = 1;
     public Transform player;
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private uint HPPoints = 3;
@@ -111,6 +113,7 @@ public class OnCollision : MonoBehaviour
         }
         else if (isAttackNote)
         {
+            enemyHealth.DamageEnemy(damageToEnemyValue);
             Destroy(col.gameObject);
         }
     }

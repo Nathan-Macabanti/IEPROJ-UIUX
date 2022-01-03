@@ -50,6 +50,9 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private GameObject[] warningDiamonds;
     [SerializeField] private List<int> spawnerNextIndex;
 
+    [Header("Win Conditions")]
+    [SerializeField] private EnemyHealth enemy; 
+
     int playedOnce;
 
     private void Awake()
@@ -102,7 +105,8 @@ public class SongManager2 : MonoBehaviour
     void Update()
     {
         WarningPing();
-        if (nCountDown == -1)
+        
+        if (nCountDown == -1 && enemy.GetfHP > 0)
         {
             countDown.text = " ";
             if (playedOnce != 1)
@@ -152,15 +156,22 @@ public class SongManager2 : MonoBehaviour
                     nextIndex++;
                 }
             }
-            else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count)
+            else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
             {
-                countDown.text = "Level Done";
+                nextIndex = 0;
+                GetComponent<AudioSource>().Play();
             }
+        }
+        else if (enemy.GetfHP <= 0 && nCountDown == -1)
+        {
+            GetComponent<AudioSource>().Stop();
+            countDown.text = "Keld 'em";
         }
         else if (nCountDown != -1)
         {
             CountDown();
         }
+        
     }
 
     [Header("CountDown till start")]
@@ -215,6 +226,7 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
+#if false
     public void ChangeAudioTime()
     {
         if (!GetComponent<AudioSource>().isPlaying && GetComponent<AudioSource>().clip.length != 0
@@ -223,6 +235,7 @@ public class SongManager2 : MonoBehaviour
             GetComponent<AudioSource>().time = GetComponent<AudioSource>().clip.length * songSlider.value;
         }
     }
+#endif
 
     public void PauseMusic()
     {
@@ -232,9 +245,9 @@ public class SongManager2 : MonoBehaviour
     {
         GetComponent<AudioSource>().Pause();
     }
-    #endregion
+#endregion
 
-    #region Getters
+#region Getters
     public float BPM { get { return bpm; } }
 
     public float SecondsPerBeat { get { return secondsPerBeat; } }
@@ -245,5 +258,5 @@ public class SongManager2 : MonoBehaviour
     public Transform CenterSpawnerLocation { get { return spawners[1].transform; } }
     public List<string> SpawnerIndexArray { get { return spawnerIndexStr; } }
     public float SongPositionInBeats { get { return songPositionInBeats; } }
-    #endregion
+#endregion
 }

@@ -28,7 +28,7 @@ public class Trigger : MonoBehaviour
     {
         if(Time.timeScale == 1)
         {
-            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<OnCollision>().GetHPPoints == 3)
+            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<OnCollision>().GetHPPoints >= 3)
             {
                 //if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                     playerAnimator.SetBool("Left", true);
@@ -39,7 +39,7 @@ public class Trigger : MonoBehaviour
                     //transform.position = transform.position + new Vector3(0, 0, min);
                 }
             }
-            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<OnCollision>().GetHPPoints == 3 || GetComponent<OnCollision>().GetHPPoints == 2))
+            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<OnCollision>().GetHPPoints >= 3 || GetComponent<OnCollision>().GetHPPoints == 2))
             {
                 //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                     playerAnimator.SetBool("Right", true);

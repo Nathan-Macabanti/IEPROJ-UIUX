@@ -88,4 +88,6 @@ public class NoteBlockade : MonoBehaviour
         }
         return false;
     }
+
+    public float GetRequiredAmountToDodge { get { return RequiredAmountToDodge / 2.0f; } }
 }
