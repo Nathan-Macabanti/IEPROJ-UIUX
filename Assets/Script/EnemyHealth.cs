@@ -38,6 +38,12 @@ public class EnemyHealth : MonoBehaviour
 
     public float GetfHP { get { return fHP; } }
 
+    public void UpdateHealth(float HP)
+    {
+        fHP = HP;
+        fHPClone = fHP;
+    }
+
     public bool GetIsDead { 
         get {
             if (fHP <= 0) return true;

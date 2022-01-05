@@ -17,7 +17,7 @@ public class OnCollision : MonoBehaviour
     [SerializeField] private float damageToEnemyValue = 1;
     public Transform player;
     [SerializeField] private GameObject playerSprite;
-    [SerializeField] private uint HPPoints = 3;
+    [SerializeField] private int HPPoints = 3;
     private int ScorePoints = 0;
 
     private void Awake()
@@ -34,7 +34,13 @@ public class OnCollision : MonoBehaviour
 
     private void Update()
     {
-        if(HPPoints <= 0)
+#if true
+        UpdatePlane(0, 2);
+        UpdatePlane(2, 1);
+
+#endif
+
+        if (HPPoints <= 0)
         {
             Debug.Log("Game Over");
         }
@@ -42,10 +48,10 @@ public class OnCollision : MonoBehaviour
         {
             BecomeInvicible();
         }
-
+        HP_points.text = "LIVES: " + HPPoints.ToString();
         //ScorePoints += (((uint)player.position.z));
         //Score_points.text = "SCORES: " + ScorePoints.ToString();
-        
+
     }
 
     public void BecomeInvicible()
@@ -81,27 +87,13 @@ public class OnCollision : MonoBehaviour
             Destroy(col.gameObject);
 
             if (HPPoints <= 0) { HPPoints = 0; }
-            else { 
+            else 
+            { 
                 HPPoints -= 1;
-#if true
-                if (HPPoints == 2)
-                {
-                    GameObject plane = GetComponent<Trigger>().GetPlanes[0].gameObject;
-                    plane.GetComponent<Renderer>().material.color = Color.grey;
-                    //GetComponent<Trigger>().GetPlanes[0].gameObject.SetActive(false);
-                } 
-                else if(HPPoints == 1)
-                {
-                    GameObject plane = GetComponent<Trigger>().GetPlanes[2].gameObject;
-                    plane.GetComponent<Renderer>().material.color = Color.grey;
-                    //GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
-                }     
-#endif
             }
 
-            HP_points.text = "LIVES: " + HPPoints.ToString();
+            //HP_points.text = "LIVES: " + HPPoints.ToString();
 
-            HPPoints += 0;
             if (ScorePoints >= 0)
             {
                 ScorePoints = 0;
@@ -118,5 +110,26 @@ public class OnCollision : MonoBehaviour
         }
     }
 
-    public uint GetHPPoints { get { return HPPoints; } }
+    public int GetHPPoints { get { return HPPoints; } }
+
+    public void AddHealth(int Health)
+    {
+        HPPoints = Health;
+    }
+
+    public void UpdatePlane(int index, int req)
+    {
+        if (HPPoints <= req)
+        {
+            GameObject plane = GetComponent<Trigger>().GetPlanes[index].gameObject;
+            plane.GetComponent<Renderer>().material.color = Color.grey;
+            //GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
+        }
+        else
+        {
+            GameObject plane = GetComponent<Trigger>().GetPlanes[index].gameObject;
+            plane.GetComponent<Renderer>().material.color = Color.white;
+            //GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
+        }
+    }
 }

@@ -96,4 +96,11 @@ public class Note : MonoBehaviour
         Color color = new Color(r, g, b);
         this.noteObj.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
     }*/
+
+    public void ChangeSpeed(float percentage)
+    {
+        speed *= percentage;
+    }
+
+    public float GetSpeed { get { return speed; } }
 }

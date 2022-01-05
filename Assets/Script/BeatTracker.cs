@@ -21,7 +21,7 @@ public class BeatTracker : MonoBehaviour
         else
         {
             _BeatTrackerInstance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
     }
     // Start is called before the first frame update

@@ -14,6 +14,9 @@ public class SongManager2 : MonoBehaviour
 {
     public static SongManager2 songManager2Instance;
 
+    [Header("Song")]
+    [SerializeField] private Radio radio;
+
     [Header("Text File")]
     [SerializeField] private string ChartFile;
 
@@ -22,7 +25,7 @@ public class SongManager2 : MonoBehaviour
 
     [Header("UI stuff")]
     [SerializeField] private Text countDown;
-    [SerializeField] private int nCountDown = 3;
+    [SerializeField] private int nCountDown;
     [SerializeField] private Slider songSlider;
 
     [Header("BPM calculator")]
@@ -51,9 +54,15 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private List<int> spawnerNextIndex;
 
     [Header("Win Conditions")]
-    [SerializeField] private EnemyHealth enemy; 
+    //[SerializeField] private int index;
+    [SerializeField] private OnCollision player;
+    [SerializeField] private EnemyHealth enemy;
+    [SerializeField] private BreakSplashScreen breakSplashScreen;
+    //[SerializeField] private float[] enemiesHP;
+    //[SerializeField] private string[] chartList;
 
-    int playedOnce;
+    private int playedOnce;
+    private int stopedOnce;
 
     private void Awake()
     {
@@ -73,6 +82,8 @@ public class SongManager2 : MonoBehaviour
         if (File.Exists(Path))
         {
             StreamReader reader = new StreamReader(Path);
+            this.GetComponent<AudioSource>().clip = radio.GetADisc(int.Parse(reader.ReadLine()));
+            Debug.Log(this.GetComponent<AudioSource>().clip.name);
             bpm = float.Parse(reader.ReadLine().ToString());
             int index = int.Parse(reader.ReadLine().ToString());
             notes.Clear();
@@ -89,23 +100,31 @@ public class SongManager2 : MonoBehaviour
             reader.Close();
             //offset += nCountDown;
         }
+        else
+        {
+            Debug.LogError("File does not exist");
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
         bpm = bpm / 4;
+        nCountDown = 3;
         //_note.gameObject.SetActive(false);
         secondsPerBeat = 60F / bpm;
         //dspTimeSong = (float)AudioSettings.dspTime;
+        playedOnce = 0;
         nextIndex = 0;
+        stopedOnce = 0;
         countDown.text = nCountDown.ToString();
+        breakSplashScreen.Disappear();
     }
 
     // Update is called once per frame
     void Update()
     {
         WarningPing();
-        
+
         if (nCountDown == -1 && enemy.GetfHP > 0)
         {
             countDown.text = " ";
@@ -165,18 +184,26 @@ public class SongManager2 : MonoBehaviour
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
             GetComponent<AudioSource>().Stop();
+            breakSplashScreen.Appear();
             countDown.text = "Keld 'em";
+            if (stopedOnce != 1)
+            {
+                breakSplashScreen.AddPoints(player.GetHPPoints);
+                spawners[0].DestroyAllNotes();
+                spawners[1].DestroyAllNotes();
+                spawners[2].DestroyAllNotes();
+                stopedOnce = 1;
+            }
         }
-        else if (nCountDown != -1)
+        else if (enemy.GetfHP > 0 && nCountDown != -1)
         {
             CountDown();
         }
-        
     }
 
     [Header("CountDown till start")]
     [SerializeField] private float beatTimer = 0;
-    #region Functions
+#region Functions
     public void CountDown()
     {
         //bool beatFull;
@@ -226,6 +253,52 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
+    public void ChangeChart(string file)
+    {
+        //string Path = ChartFile + ".txt";
+        string Path = Application.dataPath + "/" + file + ".txt";
+
+        //Read From The File
+        if (File.Exists(Path))
+        {
+            StreamReader reader = new StreamReader(Path);
+            this.GetComponent<AudioSource>().clip = radio.GetADisc(int.Parse(reader.ReadLine()));
+            Debug.Log(this.GetComponent<AudioSource>().clip.name);
+            bpm = float.Parse(reader.ReadLine().ToString());
+            int index = int.Parse(reader.ReadLine().ToString());
+            notes.Clear();
+            for (int i = 0; i < index; i++)
+            {
+                notes.Add(float.Parse(reader.ReadLine().ToString()));
+            }
+            spawnerIndexStr.Clear();
+            for (int i = 0; i < index; i++)
+            {
+                spawnerIndexStr.Add(reader.ReadLine().ToString());
+            }
+
+            reader.Close();
+            //offset += nCountDown;
+        }
+        else
+        {
+            Debug.LogError("File does not exist");
+        }
+    }
+
+    public void StartAgain()
+    {
+        bpm = bpm / 4;
+        nCountDown = 3;
+        //_note.gameObject.SetActive(false);
+        nCountDown = 3;
+        secondsPerBeat = 60F / bpm;
+        //dspTimeSong = (float)AudioSettings.dspTime;
+        playedOnce = 0;
+        nextIndex = 0;
+        stopedOnce = 0;
+        countDown.text = nCountDown.ToString();
+    }
 #if false
     public void ChangeAudioTime()
     {

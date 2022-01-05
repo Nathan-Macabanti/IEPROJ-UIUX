@@ -85,4 +85,18 @@ public class Spawner : MonoBehaviour
             }
         }
     }
+
+    public void DestroyAllNotes()
+    {
+        for (int i = 0; i < NoteList.Count; i++)
+        {
+            if(NoteList[i] != null)
+            {
+                Debug.Log("Destroying" + NoteList[i].name);
+                Destroy(NoteList[i].gameObject);
+                NoteList.RemoveAt(i);
+            }
+
+        }
+    }
 }
