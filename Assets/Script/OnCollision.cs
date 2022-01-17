@@ -15,10 +15,10 @@ public class OnCollision : MonoBehaviour
     [SerializeField] private Text HP_points;
     [SerializeField] private Text Score_points;
     [SerializeField] private float damageToEnemyValue = 1;
-    public Transform player;
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private int HPPoints = 3;
     private int ScorePoints = 0;
+    public Transform player;
 
     private void Awake()
     {
@@ -49,8 +49,6 @@ public class OnCollision : MonoBehaviour
             BecomeInvicible();
         }
         HP_points.text = "LIVES: " + HPPoints.ToString();
-        //ScorePoints += (((uint)player.position.z));
-        //Score_points.text = "SCORES: " + ScorePoints.ToString();
 
     }
 
@@ -75,7 +73,7 @@ public class OnCollision : MonoBehaviour
     private void OnTriggerEnter(Collider col)
     {
         bool isAttackNote = col.GetComponent<Note>().GetIsAttackNote;
-        if (!isInvincible && !isAttackNote /*&& col.gameObject.tag == "Note"*/)
+        if (!isInvincible && !isAttackNote)
         {
             if (!isHurt)
             {
@@ -91,8 +89,6 @@ public class OnCollision : MonoBehaviour
             { 
                 HPPoints -= 1;
             }
-
-            //HP_points.text = "LIVES: " + HPPoints.ToString();
 
             if (ScorePoints >= 0)
             {
@@ -121,15 +117,13 @@ public class OnCollision : MonoBehaviour
     {
         if (HPPoints <= req)
         {
-            GameObject plane = GetComponent<Trigger>().GetPlanes[index].gameObject;
-            plane.GetComponent<Renderer>().material.color = Color.grey;
-            //GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
+            GameObject plane = GetComponent<PlayerMovement>().GetPlanes[index].gameObject;
+            plane.GetComponent<Renderer>().material.color = Color.black;
         }
         else
         {
-            GameObject plane = GetComponent<Trigger>().GetPlanes[index].gameObject;
+            GameObject plane = GetComponent<PlayerMovement>().GetPlanes[index].gameObject;
             plane.GetComponent<Renderer>().material.color = Color.white;
-            //GetComponent<Trigger>().GetPlanes[2].gameObject.SetActive(false);
         }
     }
 }

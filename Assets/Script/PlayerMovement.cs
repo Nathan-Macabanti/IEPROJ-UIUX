@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     //OnCollision col;
     [SerializeField] private float min = -3;
@@ -19,7 +19,6 @@ public class Trigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //JUMP_INTERVAL = playerAnimator.GetCurrentAnimatorStateInfo(2).length;
         isInAir = false;
     }
 
@@ -30,24 +29,20 @@ public class Trigger : MonoBehaviour
         {
             if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<OnCollision>().GetHPPoints >= 3)
             {
-                //if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
                     playerAnimator.SetBool("Left", true);
 
                 if (transform.position.z > planes[0].position.z)
                 {
                     transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z);
-                    //transform.position = transform.position + new Vector3(0, 0, min);
                 }
             }
             else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<OnCollision>().GetHPPoints >= 3 || GetComponent<OnCollision>().GetHPPoints == 2))
             {
-                //if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                     playerAnimator.SetBool("Right", true);
 
                 if (transform.position.z < planes[2].position.z)
                 {
                     transform.position = new Vector3(this.transform.position.x, this.transform.position.y ,planes[2].position.z);
-                    //transform.position = transform.position + new Vector3(0, 0, max);
                 }
                     
             }
@@ -56,21 +51,6 @@ public class Trigger : MonoBehaviour
                 playerAnimator.SetBool("Left", false);
                 playerAnimator.SetBool("Right", false);
                 transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
-                //transform.position = planes[1].position;
-#if false
-                if (transform.position.z >= max)
-                {
-                    
-                    //transform.position = transform.position + new Vector3(0, 0, -max);
-                    //playerAnimator.SetBool("Left", false);
-                    //playerAnimator.SetBool("Right", true);
-                }
-
-                else if (transform.position.z <= min)
-                {
-                    transform.position = transform.position + new Vector3(0, 0, -min);
-                }
-#endif
             }
 
             jumpAndFalling();
@@ -79,17 +59,6 @@ public class Trigger : MonoBehaviour
                 transform.position = transform.position + new Vector3(0, jumpHeight, 0);
                 isInAir = true;
             }
-            /*
-               if((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && transform.position.z > min)
-               {
-                   transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + min);
-               }
-               else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && transform.position.z < max)
-               {
-                   transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + max);
-               }
-
-            */
         }
     }
 
