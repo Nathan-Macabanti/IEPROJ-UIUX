@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private SongManager2 sMan;
     [SerializeField] private NoteBlockade ntBlkde;
     [SerializeField] private bool isDead;
+    [SerializeField] private Animator deathAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -53,5 +54,6 @@ public class EnemyHealth : MonoBehaviour
     public void DamageEnemy(float dmgValue)
     {
         fHP -= dmgValue;
+        deathAnim.Play("BossDamageAnimation");
     }
 }

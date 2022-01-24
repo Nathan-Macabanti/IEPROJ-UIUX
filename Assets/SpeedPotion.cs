@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SpeedPotion : MonoBehaviour, IResetable
 {
     [SerializeField] private bool hasBeenPressed;
+    [SerializeField] private PlayerCollision player;
     [SerializeField] private Button myButton;
     [SerializeField] private Note dodge;
     [SerializeField] private Note attack;
@@ -32,6 +33,7 @@ public class SpeedPotion : MonoBehaviour, IResetable
         }
     }
 
+#if false
     public void ChangeSpeed(float percent)
     {
         if (cost <= breakSplash.GetPoints && !hasBeenPressed)
@@ -45,6 +47,15 @@ public class SpeedPotion : MonoBehaviour, IResetable
             Debug.Log(attack.name + ": " + attack.GetSpeed);
             Debug.Log(attack.name + ": " + jump.GetSpeed);
         }
+    }
+#endif
+
+    public void ChangeAttack(float newValue)
+    {
+        player.ChangeDamageValue(newValue);
+        breakSplash.AddPoints(-cost);
+        hasBeenPressed = true;
+        Debug.Log(newValue);
     }
 
     public void ResetThis()

@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radio: {fileID: 1926940878}
-  ChartFile: TutorialVer2
+  ChartFile: Level1
   isDebugging: 1
   countDown: {fileID: 97550443}
   nCountDown: 3
@@ -2552,12 +2552,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 1463710528}
   UseSuggested: 0
-  fHP: 2
+  fHP: 200
   fsuggestedHP: 0
   fHPClone: 0
   sMan: {fileID: 38935251}
   ntBlkde: {fileID: 1278285999}
   isDead: 0
+  deathAnim: {fileID: 1388570688}
 --- !u!1 &309140620
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,13 +3705,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 403562833}
         m_TargetAssemblyTypeName: SpeedPotion, Assembly-CSharp
-        m_MethodName: ChangeSpeed
+        m_MethodName: ChangeAttack
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.9
+          m_FloatArgument: 1.5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3785,6 +3786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasBeenPressed: 0
+  player: {fileID: 1550848844}
   myButton: {fileID: 403562829}
   dodge: {fileID: 336421612}
   attack: {fileID: 109472300}
@@ -6428,10 +6430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe5350bd85e28546aaf7e9b641338da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chartsFiles: []
-  shopPanel: {fileID: 347330306}
-  enemy: {fileID: 297573719}
-  songMan2: {fileID: 38935251}
   player: {fileID: 1550848844}
   LoadThisSceneWhenGameOver: MainLobby
 --- !u!4 &628223908
@@ -12116,7 +12114,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -12493,7 +12491,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Slow Note Movement
+  m_Text: Attack Up
 --- !u!222 &1196985356
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15585,7 +15583,6 @@ MonoBehaviour:
   - {fileID: 648208400}
   - {fileID: 2070162767}
   playerAnimator: {fileID: 1550848845}
-  Player: {fileID: 0}
 --- !u!114 &1550848844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15604,13 +15601,13 @@ MonoBehaviour:
   invincibilityTicks: 0
   isHurt: 0
   isInvincible: 0
-  isDebugging: 0
+  isDebugging: 1
   HP_points: {fileID: 946009549}
   Score_points: {fileID: 69924653}
   damageToEnemyValue: 1
-  player: {fileID: 1550848839}
   playerSprite: {fileID: 1966474747}
   HPPoints: 3
+  player: {fileID: 1550848839}
 --- !u!95 &1550848845
 Animator:
   serializedVersion: 3
@@ -18273,17 +18270,18 @@ MonoBehaviour:
   song: {fileID: 38935251}
   enemy: {fileID: 297573719}
   enemiesHP:
-  - 10
-  - 10
-  - 10
+  - 100
+  - 100
   chartList:
-  - TutorialVer2
-  - Shosple_Colupis
+  - Level1
   - Level1
   index: 0
   points: 0
   potions:
   - {fileID: 335010422}
+  - {fileID: 403562829}
+  - {fileID: 1007748676}
+  - {fileID: 702155132}
 --- !u!1 &1772279854
 GameObject:
   m_ObjectHideFlags: 0

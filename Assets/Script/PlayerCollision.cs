@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OnCollision : MonoBehaviour
+public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private SongManager2 song;
     [SerializeField] private EnemyHealth enemyHealth;
@@ -107,6 +107,11 @@ public class OnCollision : MonoBehaviour
     }
 
     public int GetHPPoints { get { return HPPoints; } }
+
+    public void ChangeDamageValue(float newValue)
+    {
+        damageToEnemyValue = newValue;
+    }
 
     public void AddHealth(int Health)
     {

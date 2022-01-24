@@ -10,6 +10,7 @@ public class BreakSplashScreen : MonoBehaviour
 
     [Header("Backend Stuff")]
     [SerializeField] private bool IsOn;
+    //[SerializeField] private OnCollision player;
     [SerializeField] private SongManager2 song;
     [SerializeField] private EnemyHealth enemy;
     [SerializeField] private float[] enemiesHP;

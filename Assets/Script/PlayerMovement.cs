@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private List<Transform> planes; 
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private Animation Player;
+    //[SerializeField] private Animation Player;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Time.timeScale == 1)
         {
-            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<OnCollision>().GetHPPoints >= 3)
+            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<PlayerCollision>().GetHPPoints >= 3)
             {
                     playerAnimator.SetBool("Left", true);
 
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
                     transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z);
                 }
             }
-            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<OnCollision>().GetHPPoints >= 3 || GetComponent<OnCollision>().GetHPPoints == 2))
+            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<PlayerCollision>().GetHPPoints >= 3 || GetComponent<PlayerCollision>().GetHPPoints == 2))
             {
                     playerAnimator.SetBool("Right", true);
 

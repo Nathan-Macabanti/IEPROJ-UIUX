@@ -7,7 +7,7 @@ public class HealthPotion : MonoBehaviour, IResetable
 {
     [SerializeField] private bool hasBeenPressed;
     [SerializeField] private Button myButton;
-    [SerializeField] private OnCollision player;
+    [SerializeField] private PlayerCollision player;
     [SerializeField] private int cost;
     [SerializeField] private BreakSplashScreen breakSplash;
 

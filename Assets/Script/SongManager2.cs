@@ -55,7 +55,7 @@ public class SongManager2 : MonoBehaviour
 
     [Header("Win Conditions")]
     //[SerializeField] private int index;
-    [SerializeField] private OnCollision player;
+    [SerializeField] private PlayerCollision player;
     [SerializeField] private EnemyHealth enemy;
     [SerializeField] private BreakSplashScreen breakSplashScreen;
     //[SerializeField] private float[] enemiesHP;
@@ -188,6 +188,7 @@ public class SongManager2 : MonoBehaviour
             countDown.text = "Keld 'em";
             if (stopedOnce != 1)
             {
+                Debug.Log("Destroyed all notes on map");
                 breakSplashScreen.AddPoints(player.GetHPPoints);
                 spawners[0].DestroyAllNotes();
                 spawners[1].DestroyAllNotes();

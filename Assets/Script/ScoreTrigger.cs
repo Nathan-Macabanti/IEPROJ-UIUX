@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreTrigger : MonoBehaviour
 {
-    [SerializeField] private OnCollision collision;
+    [SerializeField] private PlayerCollision collision;
     public void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Player"))
