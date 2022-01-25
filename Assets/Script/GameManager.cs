@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private List<string> chartsFiles;
-    [SerializeField] private GameObject shopPanel;
     [SerializeField] private EnemyHealth enemy;
     [SerializeField] private SongManager2 songMan2;
     [SerializeField] private OnCollision player;
