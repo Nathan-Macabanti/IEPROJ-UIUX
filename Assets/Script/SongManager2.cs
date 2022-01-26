@@ -184,15 +184,15 @@ public class SongManager2 : MonoBehaviour
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
             GetComponent<AudioSource>().Stop();
+            spawners[0].DestroyAllNotes();
+            spawners[1].DestroyAllNotes();
+            spawners[2].DestroyAllNotes();
             breakSplashScreen.Appear();
             countDown.text = "Keld 'em";
             if (stopedOnce != 1)
             {
                 Debug.Log("Destroyed all notes on map");
                 breakSplashScreen.AddPoints(player.GetHPPoints);
-                spawners[0].DestroyAllNotes();
-                spawners[1].DestroyAllNotes();
-                spawners[2].DestroyAllNotes();
                 stopedOnce = 1;
             }
         }
