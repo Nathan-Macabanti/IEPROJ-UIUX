@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: d5c71b5dc083c2b45af5c9799516cd7a
+=======
+<<<<<<< Updated upstream:Assets/Animations/Verenica_animation-20211126T123706Z-001.zip.meta
+guid: cc1e5c93b6ce81242b7458183acbaddf
+=======
+guid: d5c71b5dc083c2b45af5c9799516cd7a
+>>>>>>> Stashed changes:Assets/Scenes/Tutorial/tutorial_1.0.unity.meta
+>>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 
