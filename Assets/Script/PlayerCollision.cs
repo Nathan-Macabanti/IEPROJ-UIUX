@@ -107,6 +107,10 @@ public class PlayerCollision : MonoBehaviour
     }
 
     public int GetHPPoints { get { return HPPoints; } }
+    public bool IsInvincible {
+        get { return isInvincible; }
+        set { isInvincible = value; }
+    }
 
     public void ChangeDamageValue(float newValue)
     {
@@ -130,5 +134,10 @@ public class PlayerCollision : MonoBehaviour
             GameObject plane = GetComponent<PlayerMovement>().GetPlanes[index].gameObject;
             plane.GetComponent<Renderer>().material.color = Color.white;
         }
+    }
+
+    public void Heal(int health)
+    {
+        HPPoints += health;
     }
 }

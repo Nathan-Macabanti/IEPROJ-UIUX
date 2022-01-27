@@ -58,6 +58,7 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private PlayerCollision player;
     [SerializeField] private EnemyHealth enemy;
     [SerializeField] private BreakSplashScreen breakSplashScreen;
+    [SerializeField] private Canvas VictoryCanvas;
     //[SerializeField] private float[] enemiesHP;
     //[SerializeField] private string[] chartList;
 
@@ -118,6 +119,7 @@ public class SongManager2 : MonoBehaviour
         stopedOnce = 0;
         countDown.text = nCountDown.ToString();
         breakSplashScreen.Disappear();
+        VictoryCanvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -130,6 +132,7 @@ public class SongManager2 : MonoBehaviour
             countDown.text = " ";
             if (playedOnce != 1)
             {
+                player.IsInvincible = false;
                 GetComponent<AudioSource>().Play();
                 playedOnce = 1;
             }
@@ -178,22 +181,33 @@ public class SongManager2 : MonoBehaviour
             else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
             {
                 nextIndex = 0;
+                player.Heal(1);
                 GetComponent<AudioSource>().Play();
             }
         }
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
+            player.IsInvincible = true;
             GetComponent<AudioSource>().Stop();
             spawners[0].DestroyAllNotes();
             spawners[1].DestroyAllNotes();
             spawners[2].DestroyAllNotes();
-            breakSplashScreen.Appear();
-            countDown.text = "Keld 'em";
+            //countDown.text = "Keld 'em";
             if (stopedOnce != 1)
             {
                 Debug.Log("Destroyed all notes on map");
+                breakSplashScreen.AddIndex(1);
                 breakSplashScreen.AddPoints(player.GetHPPoints);
                 stopedOnce = 1;
+            }
+
+            if(breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
+            {
+                breakSplashScreen.Appear();
+            }
+            else if(breakSplashScreen.GetListCount <= breakSplashScreen.GetIndex)
+            {
+                VictoryCanvas.gameObject.SetActive(true);
             }
         }
         else if (enemy.GetfHP > 0 && nCountDown != -1)
@@ -315,6 +329,12 @@ public class SongManager2 : MonoBehaviour
     {
         GetComponent<AudioSource>().Pause();
     }
+
+    public void StopMusic()
+    {
+        GetComponent<AudioSource>().Stop();
+    }
+
     public void PlayMusic()
     {
         GetComponent<AudioSource>().Pause();

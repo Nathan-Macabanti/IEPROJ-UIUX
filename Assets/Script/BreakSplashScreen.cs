@@ -35,7 +35,6 @@ public class BreakSplashScreen : MonoBehaviour
     {
         if (index <= chartList.Length)
         {
-            index++;
             enemy.UpdateHealth(enemiesHP[index]);
             song.ChangeChart(chartList[index]);
             song.StartAgain();
@@ -70,6 +69,13 @@ public class BreakSplashScreen : MonoBehaviour
         potions[1].GetComponent<HealthPotion>().ResetThis();
     }
 
+    public void AddIndex(int increment)
+    {
+        index += increment;
+    }
+
     public int GetPoints { get { return points; } }
     public bool GetIsON { get { return IsOn; } }
+    public int GetIndex { get { return index; } }
+    public int GetListCount { get { return chartList.Length; } }
 }

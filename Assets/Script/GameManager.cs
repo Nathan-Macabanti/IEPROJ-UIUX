@@ -8,12 +8,20 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private List<string> chartsFiles;
     //[SerializeField] private GameObject shopPanel;
     //[SerializeField] private EnemyHealth enemy;
-    //[SerializeField] private SongManager2 songMan2;
+    [SerializeField] private SongManager2 songMan2;
     [SerializeField] private PlayerCollision player;
+    [SerializeField] private Canvas LossScreen;
     [SerializeField] private string LoadThisSceneWhenGameOver;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        LossScreen.gameObject.SetActive(false);
+    }
+
     void Start()
     {
+        LossScreen.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,7 +29,18 @@ public class GameManager : MonoBehaviour
     {
         if(player.GetHPPoints <= 0)
         {
-            SceneManager.LoadScene(LoadThisSceneWhenGameOver);
+            songMan2.StopMusic();
+            LossScreen.gameObject.SetActive(true);
         }
+    }
+
+    public void SceneChange(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+
+    public void LossScreenCheckBox()
+    {
+
     }
 }
