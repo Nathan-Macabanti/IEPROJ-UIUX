@@ -18509,7 +18509,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointText: {fileID: 804578724}
+<<<<<<< HEAD
   winCanvas: {fileID: 0}
+=======
+>>>>>>> working-branch
   IsOn: 0
   song: {fileID: 38935251}
   enemy: {fileID: 297573719}

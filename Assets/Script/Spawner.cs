@@ -5,14 +5,16 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     private static Spawner _spawnerInstance;
+    //[SerializeField] private Material mat;
+    //[SerializeField] private Color initialColor;
+    //[SerializeField] private Color changeColor;
+    [SerializeField] private Vector3 decayFactor;
+    [SerializeField] private int nMaxNotes;
     //[SerializeField] private Transform spawnLoc;
-    [SerializeField] private Note NoteCopy;
-    [SerializeField] private List<Note> NoteList;
+    [SerializeField] private Note DodgeNoteCopy;
+    [SerializeField] private Note AttackNoteCopy;
+    public List<Note> NoteList;
     //[SerializeField] private AudioSource music;
-    public Note note;
-
-    private float ticks = 0.0f;
-    private float SPAWN_INTERVAL;
 
     /*
     private void Awake()
@@ -31,22 +33,37 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SPAWN_INTERVAL = Random.Range(1.0f, 3.0f);
+        DodgeNoteCopy.gameObject.SetActive(false);
+        AttackNoteCopy.gameObject.SetActive(false);
+        //mat = GetComponentInChildren<Renderer>().material;
+        //initialColor = mat.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.ticks += Time.deltaTime;
-        if (this.ticks >= SPAWN_INTERVAL)
-        {
-            this.ticks = 0.0f;
-            note = Instantiate(this.NoteCopy, this.transform.position, this.transform.rotation);
-            NoteList.Add(note);
-            SPAWN_INTERVAL = Random.Range(1.0f, 3.0f);
-        }
-        MaxNotes(5);
+        MaxNotes(50);
         RemoveFromList();
+    }
+
+    public void SpawnDodgeNote()
+    {
+        Note note;
+        note = Instantiate(this.DodgeNoteCopy, this.transform.position, this.transform.rotation, this.transform);
+        note.NoteObj().SetActive(true);
+        NoteList.Add(note);
+
+        //mat.color = changeColor;
+    }
+
+    public void SpawnAttackNote()
+    {
+        Note note;
+        note = Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
+        note.NoteObj().SetActive(true);
+        NoteList.Add(note);
+
+        //mat.color = changeColor;
     }
 
     void MaxNotes(int maximum)
@@ -66,6 +83,20 @@ public class Spawner : MonoBehaviour
             {
                 NoteList.RemoveAt(i);
             }
+        }
+    }
+
+    public void DestroyAllNotes()
+    {
+        for (int i = 0; i < NoteList.Count; i++)
+        {
+            if(NoteList[i] != null)
+            {
+                Debug.Log("Destroying" + NoteList[i].name);
+                Destroy(NoteList[i].gameObject);
+                NoteList.RemoveAt(i);
+            }
+
         }
     }
 }

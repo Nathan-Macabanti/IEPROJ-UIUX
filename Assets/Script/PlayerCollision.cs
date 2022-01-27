@@ -131,9 +131,12 @@ public class PlayerCollision : MonoBehaviour
             plane.GetComponent<Renderer>().material.color = Color.white;
         }
     }
+<<<<<<< HEAD
 
     public void Heal(int amount)
     {
         HPPoints += amount;
     }
+=======
+>>>>>>> working-branch
 }

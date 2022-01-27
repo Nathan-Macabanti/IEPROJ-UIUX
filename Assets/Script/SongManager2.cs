@@ -118,7 +118,10 @@ public class SongManager2 : MonoBehaviour
         stopedOnce = 0;
         countDown.text = nCountDown.ToString();
         breakSplashScreen.Disappear();
+<<<<<<< HEAD
         breakSplashScreen.GetWinCanvas.gameObject.SetActive(false);
+=======
+>>>>>>> working-branch
     }
 
     // Update is called once per frame
@@ -180,12 +183,16 @@ public class SongManager2 : MonoBehaviour
             {
                 nextIndex = 0;
                 GetComponent<AudioSource>().Play();
+<<<<<<< HEAD
                 player.Heal(1);
+=======
+>>>>>>> working-branch
             }
         }
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
             GetComponent<AudioSource>().Stop();
+<<<<<<< HEAD
             Debug.Log("Destroyed all notes on map");
             spawners[0].DestroyAllNotes();
             spawners[1].DestroyAllNotes();
@@ -202,6 +209,19 @@ public class SongManager2 : MonoBehaviour
                 breakSplashScreen.Appear();
             else if (breakSplashScreen.GetIndex >= breakSplashScreen.GetListSize)
                 breakSplashScreen.GetWinCanvas.gameObject.SetActive(true);
+=======
+            spawners[0].DestroyAllNotes();
+            spawners[1].DestroyAllNotes();
+            spawners[2].DestroyAllNotes();
+            breakSplashScreen.Appear();
+            countDown.text = "Keld 'em";
+            if (stopedOnce != 1)
+            {
+                Debug.Log("Destroyed all notes on map");
+                breakSplashScreen.AddPoints(player.GetHPPoints);
+                stopedOnce = 1;
+            }
+>>>>>>> working-branch
         }
         else if (enemy.GetfHP > 0 && nCountDown != -1)
         {
@@ -322,10 +342,13 @@ public class SongManager2 : MonoBehaviour
     {
         GetComponent<AudioSource>().Pause();
     }
+<<<<<<< HEAD
     public void StopMusic()
     {
         GetComponent<AudioSource>().Stop();
     }
+=======
+>>>>>>> working-branch
     public void PlayMusic()
     {
         GetComponent<AudioSource>().Pause();
