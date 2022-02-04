@@ -76,35 +76,8 @@ public class SongManager2 : MonoBehaviour
         {
             Destroy(this);
         }
-        //string Path = ChartFile + ".txt";
-        string Path = Application.dataPath + "/" + ChartFile + ".txt";
 
-        //Read From The File
-        if (File.Exists(Path))
-        {
-            StreamReader reader = new StreamReader(Path);
-            this.GetComponent<AudioSource>().clip = radio.GetADisc(int.Parse(reader.ReadLine()));
-            Debug.Log(this.GetComponent<AudioSource>().clip.name);
-            bpm = float.Parse(reader.ReadLine().ToString());
-            int index = int.Parse(reader.ReadLine().ToString());
-            notes.Clear();
-            for (int i = 0; i < index; i++)
-            {
-                notes.Add(float.Parse(reader.ReadLine().ToString()));
-            }
-            spawnerIndexStr.Clear();
-            for (int i = 0; i < index; i++)
-            {
-                spawnerIndexStr.Add(reader.ReadLine().ToString());
-            }
-
-            reader.Close();
-            //offset += nCountDown;
-        }
-        else
-        {
-            Debug.LogError("File does not exist");
-        }
+        ChangeChart(ChartFile);
     }
     // Start is called before the first frame update
     void Start()
@@ -199,6 +172,7 @@ public class SongManager2 : MonoBehaviour
                 breakSplashScreen.AddIndex(1);
                 breakSplashScreen.AddPoints(player.GetHPPoints);
                 stopedOnce = 1;
+                
             }
 
             if(breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)

@@ -7,16 +7,27 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private SongManager2 song;
     [SerializeField] private EnemyHealth enemyHealth;
+
+    [Header("Damage")]
     [SerializeField] private float lengthOfInvincibility;
     [SerializeField] private float invincibilityTicks;
     [SerializeField] private bool isHurt;
     [SerializeField] private bool isInvincible;
     [SerializeField] private bool isDebugging;
+
+    [Header("Health")]
     [SerializeField] private Text HP_points;
     [SerializeField] private Text Score_points;
-    [SerializeField] private float damageToEnemyValue = 1;
+    [SerializeField] private Canvas TVStaticCanvas;
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private int HPPoints = 3;
+
+    [Header("Attacking")]
+    [SerializeField] private float damageToEnemyValue = 1;
+    [SerializeField] private int collectedAttackNotes = 0;
+    [SerializeField] private int maxCollectedAttackNotes = 5;
+    [SerializeField] private Text ComboText;
+    
     private int ScorePoints = 0;
     public Transform player;
 
@@ -26,6 +37,7 @@ public class PlayerCollision : MonoBehaviour
         {
             HPPoints = 9999;
         }
+        collectedAttackNotes = 0;
         HP_points.text = "LIVES: " + HPPoints.ToString();
         Score_points.text = "SCORES: " + ScorePoints.ToString();
         isInvincible = false;
@@ -39,7 +51,7 @@ public class PlayerCollision : MonoBehaviour
         UpdatePlane(2, 1);
 
 #endif
-
+        //Health Update
         if (HPPoints <= 0)
         {
             Debug.Log("Game Over");
@@ -48,8 +60,25 @@ public class PlayerCollision : MonoBehaviour
         {
             BecomeInvicible();
         }
+        if(HPPoints <= 1)
+        {
+            TVStaticCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            TVStaticCanvas.gameObject.SetActive(false);
+        }
         HP_points.text = "LIVES: " + HPPoints.ToString();
 
+        //Combo Update
+        if(collectedAttackNotes <= 0)
+        {
+            ComboText.text = " ";
+        }
+        else
+        {
+            ComboText.text = (collectedAttackNotes / 1).ToString();
+        }
     }
 
     public void BecomeInvicible()
@@ -101,8 +130,14 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (isAttackNote)
         {
-            enemyHealth.DamageEnemy(damageToEnemyValue);
+            float temp = 1;
+            if(collectedAttackNotes >=  maxCollectedAttackNotes)
+                temp = damageToEnemyValue;
+            else
+                temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
+            enemyHealth.DamageEnemy(temp);
             Destroy(col.gameObject);
+            collectedAttackNotes += 1;
         }
     }
 
@@ -139,5 +174,11 @@ public class PlayerCollision : MonoBehaviour
     public void Heal(int health)
     {
         HPPoints += health;
+    }
+
+    public int CollectedAttackNotes
+    {
+        get { return collectedAttackNotes; }
+        set { collectedAttackNotes = value; }
     }
 }

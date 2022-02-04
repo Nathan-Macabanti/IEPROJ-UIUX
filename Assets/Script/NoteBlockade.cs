@@ -8,6 +8,7 @@ public class NoteBlockade : MonoBehaviour
     [Header("Notes Dodge")]
     [SerializeField] protected float NotesDodged;
     [SerializeField] private float RequiredAmountToDodge = 10;
+    [SerializeField] private PlayerCollision player;
 
     [Header("Timer")]
     [SerializeField] private float ticks;
@@ -17,6 +18,7 @@ public class NoteBlockade : MonoBehaviour
     [SerializeField] private Text notesDodgeStateText;
     [SerializeField] private Slider notesDodgeSlider;
     [SerializeField] private Image notesDodgeSliderFill;
+    [SerializeField] private bool attackPhase;
     [SerializeField] private Color ColorTextNotesDodge;
     [SerializeField] private Color ColorTextTime;
     [SerializeField] private Color ColorSliderFillNotesDodge;
@@ -53,6 +55,8 @@ public class NoteBlockade : MonoBehaviour
         notesDodgeSliderFill.color = ColorSliderFillNotesDodge;
         notesDodgeStateText.color = ColorTextNotesDodge;
         notesDodgeStateText.text = "DODGE PHASE";
+        player.CollectedAttackNotes = 0;
+        attackPhase = false;
     }
 
     public void SliderIsTheTimer()
@@ -61,6 +65,7 @@ public class NoteBlockade : MonoBehaviour
         notesDodgeSliderFill.color = ColorSliderFillTime;
         notesDodgeStateText.color = ColorTextTime;
         notesDodgeStateText.text = "ATTACK PHASE";
+        attackPhase = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,4 +95,10 @@ public class NoteBlockade : MonoBehaviour
     }
 
     public float GetRequiredAmountToDodge { get { return RequiredAmountToDodge / 2.0f; } }
+
+    public bool AttackPhase
+    {
+        get { return attackPhase; }
+        set { attackPhase = value; }
+    }
 }
