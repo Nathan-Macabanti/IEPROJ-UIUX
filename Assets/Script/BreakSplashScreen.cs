@@ -10,11 +10,12 @@ public class BreakSplashScreen : MonoBehaviour
 
     [Header("Backend Stuff")]
     [SerializeField] private bool IsOn;
+    [SerializeField] private List<EnemyInfo> enemy;
     //[SerializeField] private OnCollision player;
     [SerializeField] private SongManager2 song;
-    [SerializeField] private EnemyHealth enemy;
-    [SerializeField] private float[] enemiesHP;
-    [SerializeField] private string[] chartList;
+    [SerializeField] private EnemyHealth enemyHealth;
+    //[SerializeField] private float[] enemiesHP;
+    //[SerializeField] private string[] chartList;
     [SerializeField] private int index;
     [SerializeField] private int points = 0;
     [SerializeField] private Button[] potions;
@@ -33,11 +34,12 @@ public class BreakSplashScreen : MonoBehaviour
 
     public void DoneButton()
     {
-        if (index <= chartList.Length)
+        if (index <= enemy.Count)
         {
-            enemy.UpdateHealth(enemiesHP[index]);
-            song.ChangeChart(chartList[index]);
+            enemyHealth.UpdateHealth(enemy[index].Health);
+            song.ChangeChart(enemy[index].ChartFile);
             song.StartAgain();
+            ChangeSprite();
             Disappear();
         }
         else
@@ -74,8 +76,26 @@ public class BreakSplashScreen : MonoBehaviour
         index += increment;
     }
 
+    public void ChangeSprite()
+    {
+        //Turn every enemy sprite off
+        for(int i = 0; i < enemy.Count; i++)
+        {
+            if (i != index)
+            {
+                enemy[i].EnemySprite.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Spawning" + enemy[i].EnemySprite.gameObject.name);
+                enemy[i].EnemySprite.gameObject.SetActive(true);
+            }
+                
+        }
+    }
+
     public int GetPoints { get { return points; } }
     public bool GetIsON { get { return IsOn; } }
     public int GetIndex { get { return index; } }
-    public int GetListCount { get { return chartList.Length; } }
+    public int GetListCount { get { return enemy.Count; } }
 }

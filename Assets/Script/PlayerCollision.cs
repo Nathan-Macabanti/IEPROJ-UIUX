@@ -133,7 +133,7 @@ public class PlayerCollision : MonoBehaviour
             float temp = 1;
             if(collectedAttackNotes >=  maxCollectedAttackNotes)
                 temp = damageToEnemyValue;
-            else
+            else if(collectedAttackNotes < maxCollectedAttackNotes && collectedAttackNotes != 0)
                 temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
             enemyHealth.DamageEnemy(temp);
             Destroy(col.gameObject);
