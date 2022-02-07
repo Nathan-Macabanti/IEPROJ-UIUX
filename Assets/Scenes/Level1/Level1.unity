@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radio: {fileID: 1926940878}
-  ChartFile: Level1.2
+  ChartFile: Level1.22
   isDebugging: 1
   counterBG: {fileID: 1510767498}
   countDown: {fileID: 97550443}
@@ -2675,7 +2675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthBar: {fileID: 1463710528}
   UseSuggested: 0
-  fHP: 100
+  fHP: 150
   fsuggestedHP: 0
   fHPClone: 0
   sMan: {fileID: 38935251}
@@ -13578,7 +13578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1267212020
 Transform:
   m_ObjectHideFlags: 0
@@ -20101,12 +20101,12 @@ MonoBehaviour:
   pointText: {fileID: 804578724}
   IsOn: 0
   enemy:
-  - Health: 100
-    ChartFile: Shosple_Colupis
-    EnemySprite: {fileID: 0}
-  - Health: 100
-    ChartFile: Shosple_Colupis
-    EnemySprite: {fileID: 0}
+  - Health: 200
+    ChartFile: Level1.22
+    EnemySprite: {fileID: 1785995541}
+  - Health: 200
+    ChartFile: Level1.22
+    EnemySprite: {fileID: 1785995541}
   song: {fileID: 38935251}
   enemyHealth: {fileID: 297573719}
   index: 0
@@ -24102,5 +24102,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7947136312350977820, guid: 8e1cfb81eb5baf04993ca2e3b6d687a1, type: 3}
+      propertyPath: SongClip.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947136312350977820, guid: 8e1cfb81eb5baf04993ca2e3b6d687a1, type: 3}
+      propertyPath: SongClip.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5415c7924b692a6468192d7d74c470ed, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e1cfb81eb5baf04993ca2e3b6d687a1, type: 3}
