@@ -77,7 +77,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else
         {
-            ComboText.text = (collectedAttackNotes / 1).ToString();
+            ComboText.text = (collectedAttackNotes / 1).ToString() + "\nHITS";
         }
     }
 

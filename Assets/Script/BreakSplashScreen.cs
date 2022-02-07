@@ -22,7 +22,6 @@ public class BreakSplashScreen : MonoBehaviour
 
     private void Start()
     {
-        index = 0;
         Disappear();
         //points = 0;
     }
@@ -74,18 +73,19 @@ public class BreakSplashScreen : MonoBehaviour
     public void AddIndex(int increment)
     {
         index += increment;
+        Debug.Log("Index increased" + index);
     }
 
     public void ChangeSprite()
     {
         //Turn every enemy sprite off
-        for(int i = 0; i < enemy.Count; i++)
+        for (int i = 0; i < enemy.Count; i++)
         {
-            if (i != index)
-            {
-                enemy[i].EnemySprite.gameObject.SetActive(false);
-            }
-            else
+            enemy[i].EnemySprite.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < enemy.Count; i++)
+        {
+            if (i == index)
             {
                 Debug.Log("Spawning" + enemy[i].EnemySprite.gameObject.name);
                 enemy[i].EnemySprite.gameObject.SetActive(true);

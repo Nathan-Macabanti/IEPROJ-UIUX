@@ -24,6 +24,7 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private bool isDebugging;
 
     [Header("UI stuff")]
+    [SerializeField] private GameObject counterBG;
     [SerializeField] private Text countDown;
     [SerializeField] private int nCountDown;
     [SerializeField] private Slider songSlider;
@@ -169,17 +170,16 @@ public class SongManager2 : MonoBehaviour
             if (stopedOnce != 1)
             {
                 Debug.Log("Destroyed all notes on map");
-                breakSplashScreen.AddIndex(1);
                 breakSplashScreen.AddPoints(player.GetHPPoints);
                 stopedOnce = 1;
-                
+                breakSplashScreen.AddIndex(1);
             }
 
             if(breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
             {
                 breakSplashScreen.Appear();
             }
-            else if(breakSplashScreen.GetListCount <= breakSplashScreen.GetIndex)
+            else
             {
                 VictoryCanvas.gameObject.SetActive(true);
             }
@@ -207,11 +207,21 @@ public class SongManager2 : MonoBehaviour
             //beatFull = true;
             nCountDown -= 1;
             if (nCountDown > 0)
+            {
+                counterBG.SetActive(true);
                 countDown.text = nCountDown.ToString();
+            }    
             else if (nCountDown == 0)
+            {
+                counterBG.SetActive(true);
                 countDown.text = "GO";
+            }    
             else
+            {
+                counterBG.SetActive(false);
                 countDown.text = " ";
+            }
+                
         }
     }
 
