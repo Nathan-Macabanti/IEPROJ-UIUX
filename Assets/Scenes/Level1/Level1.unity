@@ -20101,12 +20101,12 @@ MonoBehaviour:
   pointText: {fileID: 804578724}
   IsOn: 0
   enemy:
-  - Health: 1
+  - Health: 100
     ChartFile: Shosple_Colupis
-    EnemySprite: {fileID: 1785995541}
-  - Health: 1
+    EnemySprite: {fileID: 0}
+  - Health: 100
     ChartFile: Shosple_Colupis
-    EnemySprite: {fileID: 1785995541}
+    EnemySprite: {fileID: 0}
   song: {fileID: 38935251}
   enemyHealth: {fileID: 297573719}
   index: 0
@@ -20191,8 +20191,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785995541}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.29, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalPosition: {x: 0, y: 1.84, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 297573718}
   m_RootOrder: 1
@@ -20207,7 +20207,7 @@ Animator:
   m_GameObject: {fileID: 1785995541}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 346bb8360b98fc34e9f78910c702ec9b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -20256,7 +20256,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 36a06cc0136498441aa1cf98590a37a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 48a41bba375834f49aedb74299be7750, type: 3}
   m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_FlipX: 0
   m_FlipY: 0
