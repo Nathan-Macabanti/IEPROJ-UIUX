@@ -131,6 +131,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (isAttackNote)
         {
+            collectedAttackNotes += 1;
             PlayerAnimator.Play("VerenicaAttack");
             float temp = 1;
             if(collectedAttackNotes >=  maxCollectedAttackNotes)
@@ -139,7 +140,6 @@ public class PlayerCollision : MonoBehaviour
                 temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
             enemyHealth.DamageEnemy(temp);
             Destroy(col.gameObject);
-            collectedAttackNotes += 1;
         }
     }
 

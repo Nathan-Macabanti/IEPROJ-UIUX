@@ -186,7 +186,6 @@ public class PlayerMovement : MonoBehaviour
                 if (!IsHoldingDodge)
                 {
                     playerAnimator.StopPlayback();
-                    playerAnimator.Play("VerenicaDodge");
                     playerAnimator.SetBool("Dodge", true);
                     IsHoldingDodge = true;
                 }

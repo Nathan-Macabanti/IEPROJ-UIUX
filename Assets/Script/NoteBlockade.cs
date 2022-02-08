@@ -42,6 +42,8 @@ public class NoteBlockade : MonoBehaviour
             SliderIsNotesDodge();
             ticks = ISATTACKNOTE_INTERVAL;
             NotesDodged = 0;
+            Debug.Log("Reset CollectedAttackNotes to 0");
+            
         }
         else if(NotesDodged < RequiredAmountToDodge)
         {
@@ -51,11 +53,11 @@ public class NoteBlockade : MonoBehaviour
 
     public void SliderIsNotesDodge()
     {
+        player.CollectedAttackNotes = 0;
         notesDodgeSlider.value = NotesDodged / RequiredAmountToDodge;
         notesDodgeSliderFill.color = ColorSliderFillNotesDodge;
         notesDodgeStateText.color = ColorTextNotesDodge;
         notesDodgeStateText.text = "DODGE PHASE";
-        player.CollectedAttackNotes = 0;
         attackPhase = false;
     }
 

@@ -14409,17 +14409,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NotesDodged: 0
   RequiredAmountToDodge: 10
-  player: {fileID: 1550848844}
+  player: {fileID: 622784752}
   ticks: 0
   ISATTACKNOTE_INTERVAL: 5
   notesDodgeStateText: {fileID: 982540145}
   notesDodgeSlider: {fileID: 1942643133}
   notesDodgeSliderFill: {fileID: 2077154251}
   attackPhase: 0
-  ColorTextNotesDodge: {r: 0.42818937, g: 0.14866497, b: 0.9056604, a: 1}
-  ColorTextTime: {r: 0.9433962, g: 0.61027443, b: 0.13705942, a: 1}
-  ColorSliderFillNotesDodge: {r: 0, g: 0.98097944, b: 1, a: 1}
-  ColorSliderFillTime: {r: 1, g: 0, b: 0.51128817, a: 1}
+  ColorTextNotesDodge: {r: 0.90588236, g: 0.5714465, b: 0.14901958, a: 1}
+  ColorTextTime: {r: 0.17358488, g: 0.9844382, b: 1, a: 1}
+  ColorSliderFillNotesDodge: {r: 0.8666667, g: 0.09411764, b: 0.26619756, a: 1}
+  ColorSliderFillTime: {r: 0.09029898, g: 0.45038417, b: 0.8396226, a: 1}
 --- !u!1 &1291846927
 GameObject:
   m_ObjectHideFlags: 0
