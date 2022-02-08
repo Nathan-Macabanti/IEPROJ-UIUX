@@ -28,6 +28,8 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private int maxCollectedAttackNotes = 5;
     [SerializeField] private Text ComboText;
     [SerializeField] private Animator PlayerAnimator;
+    [SerializeField] private AudioClip AtkSFX;
+    [SerializeField] private AudioSource PlayerSFX;
     
     private int ScorePoints = 0;
     public Transform player;
@@ -43,6 +45,7 @@ public class PlayerCollision : MonoBehaviour
         Score_points.text = "SCORES: " + ScorePoints.ToString();
         isInvincible = false;
         isHurt = false;
+        PlayerSFX = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -132,13 +135,15 @@ public class PlayerCollision : MonoBehaviour
         else if (isAttackNote)
         {
             collectedAttackNotes += 1;
-            PlayerAnimator.Play("VerenicaAttack");
             float temp = 1;
             if(collectedAttackNotes >=  maxCollectedAttackNotes)
                 temp = damageToEnemyValue;
             else if(collectedAttackNotes < maxCollectedAttackNotes && collectedAttackNotes != 0)
                 temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
             enemyHealth.DamageEnemy(temp);
+            PlayerAnimator.Play("VerenicaAttack");
+            PlayerSFX.clip = AtkSFX;
+            PlayerSFX.Play();
             Destroy(col.gameObject);
         }
     }
