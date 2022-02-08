@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 	}
     public void onPlayPress()
     {
-        SceneManager.LoadScene("tutorial_1.0");
+        SceneManager.LoadScene("Prototype ver2");
     }
 
     public void onPlayGamePress()

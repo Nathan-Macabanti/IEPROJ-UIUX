@@ -8,6 +8,10 @@ public class TutorialManager : MonoBehaviour
     public GameObject[] popUps;
     private int popUpIndex;
 
+    public GameObject dialogueObj;
+    public GameObject dialogueManager;
+    private Dialogue dialogueT;
+
     [SerializeField]
     public TutorialSpawner leftSpawner;
     [SerializeField]
@@ -21,24 +25,23 @@ public class TutorialManager : MonoBehaviour
     private float elapsedTime;
 
     private float movementCount = 0f;
-    private float moveCriteria = 25f;
+    private float moveCriteria = 10f;
 
     private float jumpCount = 0f;
-    private float jumpCriteria = 15f;
+    private float jumpCriteria = 10f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.time;
+        dialogueT = dialogueManager.GetComponent<Dialogue>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Time elapsed:  " + elapsedTime);
-        elapsedTime = Time.time - startTime;
-        
+        Debug.Log("Current PopUp no.: " + popUpIndex);
+
         for(int i = 0; i<popUps.Length; i++)
         {
             if(i == popUpIndex)
@@ -52,57 +55,70 @@ public class TutorialManager : MonoBehaviour
 
         }
 
-        if (popUpIndex == 0)
-        {
-            
+
+            if(popUpIndex == 0)
+            {
+                //popUps[0].SetActive(false);
+                dialogueObj.SetActive(true);
+                if(dialogueT.dialogueEnded == true)
+                {
+                    Debug.Log("Dialogue ended!");
+                    dialogueObj.SetActive(false);
+                    popUpIndex++;
+                }
+
+            }
+            else if (popUpIndex == 1)
+            {
                 // Movement
                 if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                 {
-                    if(movementCount <= moveCriteria)
+                    if (movementCount <= moveCriteria)
                     {
-                    movementCount++;
+                        movementCount++;
                     }
                     else
                     {
-                    popUpIndex++;
+                        popUpIndex++;
                     }
                 }
-            
-          
-           
-            
-        }
-        else if(popUpIndex == 1)
-        {
 
-            // Jumping
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-            {
-                if (jumpCount <= jumpCriteria)
-                {
-                    jumpCount++;
-                }
-                else
-                {
-                    popUpIndex++;
-                }
-                
             }
-            
-            
-        }
-        else if(popUpIndex == 2)
-        {
-            //Spawn Notes to Attack
-           
+            else if (popUpIndex == 2)
+            {
+
+                // Jumping
+                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+                {
+                    if (jumpCount <= jumpCriteria)
+                    {
+                        jumpCount++;
+                    }
+                    else
+                    {
+                        popUpIndex++;
+                    }
+
+                }
+
+
+            }
+            else if (popUpIndex == 3)
+            {
+                //Spawn Notes to Attack
+
                 popUpIndex++;
-                
-            
-        }
+
+
+            }
+
+
+       
+
 
     }
 
-    
+   
 
 
 }
