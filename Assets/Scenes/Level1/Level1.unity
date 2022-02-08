@@ -6351,11 +6351,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-<<<<<<< HEAD:Assets/Scenes/Level1/Prototype ver2.unity
-  m_Sprite: {fileID: 21300000, guid: 61251ed6280079f4ea4ec908365c783f, type: 3}
-=======
   m_Sprite: {fileID: 21300000, guid: 782c3b9f9bf6c664c97b19b24fd5fc96, type: 3}
->>>>>>> new-Nathan-Macabanti-branch:Assets/Scenes/Level1/Level1.unity
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6460,7 +6456,7 @@ Animator:
   m_GameObject: {fileID: 600322484}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1efd8cef5e43f784c9f4c8d6cbe54a24, type: 2}
+  m_Controller: {fileID: 9100000, guid: be7188c226214f147826201d163e0b63, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16120,7 +16116,7 @@ Animator:
   m_GameObject: {fileID: 1402883535}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: be7188c226214f147826201d163e0b63, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1efd8cef5e43f784c9f4c8d6cbe54a24, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16169,7 +16165,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 954ff60294288f7419a81b65aadc626f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61251ed6280079f4ea4ec908365c783f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
