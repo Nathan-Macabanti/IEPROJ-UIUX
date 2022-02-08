@@ -27,6 +27,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private int collectedAttackNotes = 0;
     [SerializeField] private int maxCollectedAttackNotes = 5;
     [SerializeField] private Text ComboText;
+    [SerializeField] private Animator PlayerAnimator;
     
     private int ScorePoints = 0;
     public Transform player;
@@ -130,6 +131,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (isAttackNote)
         {
+            PlayerAnimator.Play("VerenicaAttack");
             float temp = 1;
             if(collectedAttackNotes >=  maxCollectedAttackNotes)
                 temp = damageToEnemyValue;
