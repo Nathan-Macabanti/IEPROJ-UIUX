@@ -255,8 +255,8 @@ public class SongManager2 : MonoBehaviour
     public void ChangeChart(string file)
     {
         //string Path = ChartFile + ".txt";
-        string Path = Application.dataPath + "/" + file + ".txt";
-
+        string Path = Application.streamingAssetsPath + "/Charts/" + file + ".txt";
+        TextAsset txtAsset = (TextAsset)Resources.Load(Path);
         //Read From The File
         if (File.Exists(Path))
         {

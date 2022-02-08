@@ -202,8 +202,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerAnimator.StopPlayback();
                 IsHoldingDodge = false;
-                playerAnimator.SetBool("Left", false);
-                playerAnimator.SetBool("Right", false);
+                playerAnimator.SetBool("Dodge", false);
+                //playerAnimator.SetBool("Left", false);
+                //playerAnimator.SetBool("Right", false);
                 transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
             }
 
