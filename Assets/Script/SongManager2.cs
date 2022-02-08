@@ -24,6 +24,7 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private bool isDebugging;
 
     [Header("UI stuff")]
+    [SerializeField] private GameObject counterBG;
     [SerializeField] private Text countDown;
     [SerializeField] private int nCountDown;
     [SerializeField] private Slider songSlider;
@@ -58,6 +59,7 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private PlayerCollision player;
     [SerializeField] private EnemyHealth enemy;
     [SerializeField] private BreakSplashScreen breakSplashScreen;
+    [SerializeField] private Canvas VictoryCanvas;
     //[SerializeField] private float[] enemiesHP;
     //[SerializeField] private string[] chartList;
 
@@ -75,35 +77,8 @@ public class SongManager2 : MonoBehaviour
         {
             Destroy(this);
         }
-        //string Path = ChartFile + ".txt";
-        string Path = Application.dataPath + "/" + ChartFile + ".txt";
 
-        //Read From The File
-        if (File.Exists(Path))
-        {
-            StreamReader reader = new StreamReader(Path);
-            this.GetComponent<AudioSource>().clip = radio.GetADisc(int.Parse(reader.ReadLine()));
-            Debug.Log(this.GetComponent<AudioSource>().clip.name);
-            bpm = float.Parse(reader.ReadLine().ToString());
-            int index = int.Parse(reader.ReadLine().ToString());
-            notes.Clear();
-            for (int i = 0; i < index; i++)
-            {
-                notes.Add(float.Parse(reader.ReadLine().ToString()));
-            }
-            spawnerIndexStr.Clear();
-            for (int i = 0; i < index; i++)
-            {
-                spawnerIndexStr.Add(reader.ReadLine().ToString());
-            }
-
-            reader.Close();
-            //offset += nCountDown;
-        }
-        else
-        {
-            Debug.LogError("File does not exist");
-        }
+        ChangeChart(ChartFile);
     }
     // Start is called before the first frame update
     void Start()
@@ -118,6 +93,7 @@ public class SongManager2 : MonoBehaviour
         stopedOnce = 0;
         countDown.text = nCountDown.ToString();
         breakSplashScreen.Disappear();
+        VictoryCanvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -130,6 +106,7 @@ public class SongManager2 : MonoBehaviour
             countDown.text = " ";
             if (playedOnce != 1)
             {
+                player.IsInvincible = false;
                 GetComponent<AudioSource>().Play();
                 playedOnce = 1;
             }
@@ -178,22 +155,33 @@ public class SongManager2 : MonoBehaviour
             else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
             {
                 nextIndex = 0;
+                player.Heal(1);
                 GetComponent<AudioSource>().Play();
             }
         }
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
+            player.IsInvincible = true;
             GetComponent<AudioSource>().Stop();
             spawners[0].DestroyAllNotes();
             spawners[1].DestroyAllNotes();
             spawners[2].DestroyAllNotes();
-            breakSplashScreen.Appear();
-            countDown.text = "Keld 'em";
+            //countDown.text = "Keld 'em";
             if (stopedOnce != 1)
             {
                 Debug.Log("Destroyed all notes on map");
                 breakSplashScreen.AddPoints(player.GetHPPoints);
                 stopedOnce = 1;
+                breakSplashScreen.AddIndex(1);
+            }
+
+            if(breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
+            {
+                breakSplashScreen.Appear();
+            }
+            else
+            {
+                VictoryCanvas.gameObject.SetActive(true);
             }
         }
         else if (enemy.GetfHP > 0 && nCountDown != -1)
@@ -219,11 +207,21 @@ public class SongManager2 : MonoBehaviour
             //beatFull = true;
             nCountDown -= 1;
             if (nCountDown > 0)
+            {
+                counterBG.SetActive(true);
                 countDown.text = nCountDown.ToString();
+            }    
             else if (nCountDown == 0)
+            {
+                counterBG.SetActive(true);
                 countDown.text = "GO";
+            }    
             else
+            {
+                counterBG.SetActive(false);
                 countDown.text = " ";
+            }
+                
         }
     }
 
@@ -315,6 +313,12 @@ public class SongManager2 : MonoBehaviour
     {
         GetComponent<AudioSource>().Pause();
     }
+
+    public void StopMusic()
+    {
+        GetComponent<AudioSource>().Stop();
+    }
+
     public void PlayMusic()
     {
         GetComponent<AudioSource>().Pause();

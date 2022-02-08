@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SongClip:
-  - {fileID: 8300000, guid: c3149d457e3eaa64cb81bdd3ff859f45, type: 3}
-  - {fileID: 8300000, guid: b98c3c0b924ffd64c9ccab9712d8c916, type: 3}
+  - {fileID: 8300000, guid: 5056f8299c187f64795097e09323d5af, type: 3}
+  - {fileID: 8300000, guid: f1361a916fd48d04e884fd565c8f2ccb, type: 3}
   - {fileID: 8300000, guid: 49f806c66490a60469c64148b0c62a3f, type: 3}

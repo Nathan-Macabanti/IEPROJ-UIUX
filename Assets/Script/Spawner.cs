@@ -99,4 +99,16 @@ public class Spawner : MonoBehaviour
 
         }
     }
+
+    public bool CheckIfThereAreAttackNotes()
+    {
+        for (int i = 0; i < NoteList.Count; i++)
+        {
+            if (NoteList[i].GetIsAttackNote)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
