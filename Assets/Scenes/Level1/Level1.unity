@@ -6639,7 +6639,7 @@ MonoBehaviour:
   TVStaticCanvas: {fileID: 707439804}
   playerSprite: {fileID: 519665842}
   HPPoints: 3
-  damageToEnemyValue: 1
+  damageToEnemyValue: 2
   collectedAttackNotes: 0
   maxCollectedAttackNotes: 5
   ComboText: {fileID: 1795651134}

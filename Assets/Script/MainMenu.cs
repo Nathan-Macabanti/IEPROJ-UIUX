@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 	}
     public void onPlayPress()
     {
-        SceneManager.LoadScene("Prototype ver2");
+        SceneManager.LoadScene("tutorial_1.0");
     }
 
     public void onPlayGamePress()
@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
 			
 		    SpacePress = true;
 		    image.CrossFadeColor(Color.black, 5.0f, true, true);
-		    StartCoroutine(deactivate(5.0f));
+		    StartCoroutine(deactivate(4.0f));
 	    }
     }
 
