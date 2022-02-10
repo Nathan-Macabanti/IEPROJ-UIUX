@@ -35,10 +35,10 @@ public class BreakSplashScreen : MonoBehaviour
     {
         if (index <= enemy.Count)
         {
+            ChangeSprite();
             enemyHealth.UpdateHealth(enemy[index].Health);
             song.ChangeChart(enemy[index].ChartFile);
             song.StartAgain();
-            ChangeSprite();
             Disappear();
         }
         else
