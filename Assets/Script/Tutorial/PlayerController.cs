@@ -12,10 +12,18 @@ public class PlayerController : MonoBehaviour
 
     private bool isInAir;
     private float ticks = 0.0f;
-    
-
+    [SerializeField] private GameObject PlayerSprite;
+    [SerializeField] private Quaternion InitialRotation;
+    [SerializeField] private bool IsHoldingDodge;
     void Start()
     {
+        InitialRotation = new Quaternion(
+            Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.x),
+            Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.y),
+            Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.z),
+            PlayerSprite.GetComponent<Transform>().rotation.w
+            );
+        IsHoldingDodge = false;
         isInAir = false;
     }
 
@@ -26,7 +34,22 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                playerAnimator.SetBool("Left", true);
+                PlayerSprite.GetComponent<Transform>().rotation = new Quaternion(
+                    InitialRotation.x,
+                    -InitialRotation.y,
+                    InitialRotation.z,
+                    InitialRotation.w
+                    );
+                if (!IsHoldingDodge)
+                {
+                    playerAnimator.StopPlayback();
+                    playerAnimator.SetBool("Dodge", true);
+                    IsHoldingDodge = true;
+                }
+                else
+                {
+                    playerAnimator.SetBool("Dodge", false);
+                }
 
                 if (transform.position.z > planes[0].position.z)
                 {
@@ -35,7 +58,22 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                playerAnimator.SetBool("Right", true);
+                PlayerSprite.GetComponent<Transform>().rotation = new Quaternion(
+                   -InitialRotation.x,
+                   InitialRotation.y,
+                   InitialRotation.z,
+                   InitialRotation.w
+                   );
+                if (!IsHoldingDodge)
+                {
+                    playerAnimator.StopPlayback();
+                    playerAnimator.SetBool("Dodge", true);
+                    IsHoldingDodge = true;
+                }
+                else
+                {
+                    playerAnimator.SetBool("Dodge", false);
+                }
 
                 if (transform.position.z < planes[2].position.z)
                 {
@@ -45,8 +83,9 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                playerAnimator.SetBool("Left", false);
-                playerAnimator.SetBool("Right", false);
+                playerAnimator.StopPlayback();
+                IsHoldingDodge = false;
+                playerAnimator.SetBool("Dodge", false);
                 transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
             }
 
@@ -63,6 +102,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isInAir == true)
         {
+            playerAnimator.StopPlayback();
             playerAnimator.SetBool("Jump", true);
             this.ticks += Time.deltaTime;
         }

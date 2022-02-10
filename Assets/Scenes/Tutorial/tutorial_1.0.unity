@@ -3409,7 +3409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550848838}
   m_LocalRotation: {x: 0, y: 0, z: -0.08280819, w: 0.9965655}
-  m_LocalPosition: {x: 20.03, y: -1.42, z: -6.66}
+  m_LocalPosition: {x: 19.63, y: -1.42, z: -6.66}
   m_LocalScale: {x: 1.5, y: 0.25, z: 1.5}
   m_Children:
   - {fileID: 1966474748}
@@ -3488,7 +3488,7 @@ Animator:
   m_GameObject: {fileID: 1550848838}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: be625d0bb30dde848923d45b3b85bf07, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0a694a9cb75f9764a8142f289347184b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3516,6 +3516,9 @@ MonoBehaviour:
   - {fileID: 648208400}
   - {fileID: 2070162767}
   playerAnimator: {fileID: 1550848845}
+  PlayerSprite: {fileID: 1966474747}
+  InitialRotation: {x: 0, y: 0, z: 0, w: 0}
+  IsHoldingDodge: 0
 --- !u!1 &1614230188
 GameObject:
   m_ObjectHideFlags: 0
