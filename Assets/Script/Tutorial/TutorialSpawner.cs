@@ -11,6 +11,8 @@ public class TutorialSpawner : MonoBehaviour
     public TutorialNote DodgeNote;
     [SerializeField] 
     private TutorialNote AttackNote;
+    [SerializeField]
+    private TutorialNote JumpNote;
     public List<TutorialNote> NoteList;
 
 
@@ -19,6 +21,7 @@ public class TutorialSpawner : MonoBehaviour
     {
         DodgeNote.gameObject.SetActive(false);
         AttackNote.gameObject.SetActive(false);
+        JumpNote.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,6 +42,14 @@ public class TutorialSpawner : MonoBehaviour
     {
         TutorialNote note;
         note = Instantiate(this.AttackNote, this.transform.position, this.transform.rotation, this.transform);
+        note.NoteObj().SetActive(true);
+        NoteList.Add(note);
+    }
+
+    public void SpawnJumpNote()
+    {
+        TutorialNote note;
+        note = Instantiate(this.JumpNote, this.transform.position, this.transform.rotation, this.transform);
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
     }

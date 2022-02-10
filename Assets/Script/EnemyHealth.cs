@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] protected Slider HealthBar;
+    [SerializeField] private Text HealthCounter;
     [SerializeField] private bool UseSuggested;
     [SerializeField] private float fHP;
     [SerializeField] private float fsuggestedHP;
@@ -35,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
     void Update()
     {
         HealthBar.value = fHP / fHPClone;
+        HealthCounter.text = "HP " + fHP.ToString() + "/" + fHPClone.ToString();
     }
 
     public float GetfHP { get { return fHP; } }

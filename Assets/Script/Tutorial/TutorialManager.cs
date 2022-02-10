@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -19,8 +20,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     public TutorialSpawner midSpawner;
 
+    //jump spawner
 
-    public float waitTime = 10f;
+
+    public float waitTime = 5f;
     private float startTime;
     private float elapsedTime;
 
@@ -70,23 +73,30 @@ public class TutorialManager : MonoBehaviour
             }
             else if (popUpIndex == 1)
             {
-                // Movement
-                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-                {
-                    if (movementCount <= moveCriteria)
+                    leftSpawner.SpawnDodgeNote();
+                    midSpawner.SpawnDodgeNote();
+                    rightSpawner.SpawnDodgeNote();
+                    // Movement
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                     {
-                        movementCount++;
+                        if (movementCount <= moveCriteria)
+                        {
+                            movementCount++;
+                        }
+                        else
+                        {
+                            leftSpawner.DestroyAllNotes();
+                            rightSpawner.DestroyAllNotes();
+                            midSpawner.DestroyAllNotes();
+                            popUpIndex++;
+                        }
                     }
-                    else
-                    {
-                        popUpIndex++;
-                    }
-                }
 
             }
             else if (popUpIndex == 2)
             {
 
+                    midSpawner.SpawnJumpNote();
                 // Jumping
                 if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
                 {
@@ -96,7 +106,8 @@ public class TutorialManager : MonoBehaviour
                     }
                     else
                     {
-                        popUpIndex++;
+                    midSpawner.DestroyAllNotes();
+                    popUpIndex++;
                     }
 
                 }
@@ -105,15 +116,19 @@ public class TutorialManager : MonoBehaviour
             }
             else if (popUpIndex == 3)
             {
-                //Spawn Notes to Attack
 
+                StartCoroutine(TransitiontoFirstLevel(waitTime));
                 popUpIndex++;
 
 
             }
 
 
-       
+       IEnumerator TransitiontoFirstLevel(float t)
+        {
+            yield return new WaitForSeconds(t);
+            SceneManager.LoadScene("Level1");
+        }
 
 
     }

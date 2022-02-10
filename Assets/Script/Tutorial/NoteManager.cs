@@ -14,15 +14,20 @@ public class NoteManager : MonoBehaviour
     float secPerBeat;
     //Time (in seconds) has passed since start of song
     float dsptimesong;
-
     //beats per minute of a song
     float bpm;
 
+    private float offset = 0.25f;
+
     //List of notes
     TutorialNote[] Notes;
-
     //Note index
     int nextIndex = 0;
+
+    //Spawners
+    public TutorialSpawner[] Spawners;
+    public List<int> spawnerIndex;
+
 
     private void Awake()
     {
@@ -42,42 +47,25 @@ public class NoteManager : MonoBehaviour
 
         bpm = bpm / 4;
         secPerBeat = 60.0f / bpm;
-        dsptimesong = (float)AudioSettings.dspTime;
-
         GetComponent<AudioSource>().Play();
-        /*
-        tutorialNotes = new List<TutorialNote>();
-        for(int i = 0; i < _bankSize; i++)
-        {
-            GameObject noteInstance = new GameObject("note");
-            noteInstance.AddComponent<TutorialNote>();
-            noteInstance.transform.parent = this.transform;
-            tutorialNotes.Add(noteInstance.GetComponent<TutorialNote>());
-        }
-        */
+       
     }
 
     // Update is called once per frame
     public void Update()
     {
-        songPosition = (float)(AudioSettings.dspTime - dsptimesong);
+        songPosition = (float)GetComponent<AudioSource>().time;
+        songPosInBeats = (songPosition / secPerBeat) - offset + 1;
 
-        songPosInBeats = songPosition / secPerBeat;
 
-
-        /*
-        for(int i = 0; i < tutorialNotes.Count; i++)
+        for(int i = 0; i < spawnerIndex.Count; i++)
         {
-            if(tutorialNotes[i] == null)
+            if(spawnerIndex[i] >= 0)
             {
-                tutorialNotes[i] = note;
-                return;
+                Spawners[spawnerIndex[i]].SpawnDodgeNote();
             }
         }
-        GameObject noteInstance = new GameObject("note");
-        noteInstance.AddComponent<TutorialNote>();
-        noteInstance.transform.parent = this.transform;
-        tutorialNotes.Add(noteInstance.GetComponent<TutorialNote>());
-        */
+        nextIndex++;
+       
     }
 }
