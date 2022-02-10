@@ -26,6 +26,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private static bool _beatFull;
     [SerializeField] private static int _beatCountFull;
     [SerializeField] private bool SpawningAllowed;
+    [SerializeField] private PlayerController playerCtrl;
+    [SerializeField] private GameObject ThisIsYou;
     //[SerializeField] PlayerCollision playerCtrl;
 
     public float waitTime = 5f;
@@ -38,10 +40,14 @@ public class TutorialManager : MonoBehaviour
     private float jumpCount = 0f;
     private float jumpCriteria = 5f;
 
+    private float attackCount = 0f;
+    private float attackCriteria = 10f;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        ThisIsYou.SetActive(false);
         dialogueT = dialogueManager.GetComponent<Dialogue>();
         SpawningAllowed = false;
     }
@@ -90,6 +96,7 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 1)
         {
+            ThisIsYou.SetActive(true);
             
             SpawningAllowed = true;
             BeatDetection(0,2);
@@ -103,9 +110,6 @@ public class TutorialManager : MonoBehaviour
                 }
                 else
                 {
-                    leftSpawner.DestroyAllNotes();
-                    rightSpawner.DestroyAllNotes();
-                    midSpawner.DestroyAllNotes();
                     popUpIndex++;
                 }
             }
@@ -113,9 +117,9 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 2)
         {
-            
+            ThisIsYou.SetActive(false);
             SpawningAllowed = true;
-            BeatDetection(2,3);
+            BeatDetection(2,4);
             // Jumping
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
@@ -125,14 +129,25 @@ public class TutorialManager : MonoBehaviour
                 }
                 else
                 {
-                midSpawner.DestroyAllNotes();
-                popUpIndex++;
+                    popUpIndex++;
                 }
 
             }
             Debug.Log("Starting jumping tutorial");
         }
-        else if (popUpIndex == 3)
+        else if(popUpIndex == 3)
+        {
+            SpawningAllowed = true;
+            BeatDetection(4, 7);
+            // Jumping
+            
+            if(playerCtrl.CollectedAttackNotes >= attackCriteria)
+            {
+                popUpIndex++;
+            }
+            Debug.Log("Starting jumping tutorial");
+        }
+        else if (popUpIndex == 4)
         {
 
             StartCoroutine(TransitiontoFirstLevel(waitTime));
@@ -145,8 +160,6 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(t);
             SceneManager.LoadScene("Level1");
         }
-
-
     }
 
    void BeatDetection(int first, int last)
@@ -170,6 +183,10 @@ public class TutorialManager : MonoBehaviour
                     case 0: SpawnLeft(); break;
                     case 1: SpawnRight(); break;
                     case 2: SpawnJump(); break;
+                    case 3: SpawnAllDodge(); break;
+                    case 4: SpawnAttackLeft(); break;
+                    case 5: SpawnAttackMid(); break;
+                    case 6: SpawnAttackRight(); break;
                     default: Debug.Log("Out of index"); break;
                 }
             }
@@ -195,5 +212,26 @@ public class TutorialManager : MonoBehaviour
     void SpawnJump()
     {
         midSpawner.SpawnJumpNote();
+    }
+
+    void SpawnAttackLeft()
+    {
+        leftSpawner.SpawnAttackNote();
+    }
+
+    void SpawnAttackMid()
+    {
+        midSpawner.SpawnAttackNote();
+    }
+
+    void SpawnAllDodge()
+    {
+        leftSpawner.SpawnDodgeNote();
+        midSpawner.SpawnDodgeNote();
+        rightSpawner.SpawnDodgeNote();
+    }
+    void SpawnAttackRight()
+    {
+        rightSpawner.SpawnAttackNote();
     }
 }

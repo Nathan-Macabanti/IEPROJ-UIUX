@@ -14,7 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float JUMP_INTERVAL = 0.15f;
     [SerializeField] private List<Transform> planes;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private AudioClip AtkSFX;
+    [SerializeField] private AudioClip HitSFX;
     [SerializeField] private AudioSource PlayerSFX;
+    [SerializeField] private int collectedAttackNotes = 0;
 
     private bool isInAir;
     private float ticks = 0.0f;
@@ -129,7 +132,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (!isInvincible)
+        if (!isInvincible && !col.GetComponent<TutorialNote>().GetIsAttackNote)
         {
             if (!isHurt)
             {
@@ -137,14 +140,21 @@ public class PlayerController : MonoBehaviour
                 invincibilityTicks = 0;
             }
 
-            Debug.Log("Colliding with: " + col.name);
-            GameObject.Destroy(col.gameObject);
+            
             isInvincible = true;
-            //PlayerSFX.clip = HitSFX;
+            PlayerSFX.clip = HitSFX;
             PlayerSFX.Play();
         }
-            
-        
+        else if (col.GetComponent<TutorialNote>().GetIsAttackNote)
+        {
+            CollectedAttackNotes++;
+            playerAnimator.Play("VerenicaAttack");
+            PlayerSFX.clip = AtkSFX;
+            PlayerSFX.Play();
+        }
+        Debug.Log("Colliding with: " + col.name);
+        GameObject.Destroy(col.gameObject);
+
     }
 
     public void BecomeInvicible()
@@ -159,4 +169,10 @@ public class PlayerController : MonoBehaviour
         }
     }
     public List<Transform> GetPlanes { get { return planes; } }
+
+    public int CollectedAttackNotes
+    {
+        get { return collectedAttackNotes; }
+        set { collectedAttackNotes = value; }
+    }
 }
