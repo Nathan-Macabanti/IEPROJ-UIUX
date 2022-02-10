@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
    
     [SerializeField] private float jumpHeight = 2f;
+    [SerializeField] private float offset;
     [SerializeField] private float JUMP_INTERVAL = 0.15f;
     [SerializeField] private List<Transform> planes;
     [SerializeField] private Animator playerAnimator;
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
                 if (transform.position.z > planes[0].position.z)
                 {
-                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z);
+                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z + offset);
                 }
             }
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
                 if (transform.position.z < planes[2].position.z)
                 {
-                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[2].position.z);
+                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[2].position.z - offset);
                 }
 
             }
@@ -114,6 +115,51 @@ public class PlayerController : MonoBehaviour
             transform.position = transform.position + new Vector3(0, -jumpHeight, 0);
         }
     }
+    private void OnTriggerEnter(Collider col)
+    {
+        bool isAttackNote = col.GetComponent<Note>().GetIsAttackNote;
+        if (!isInvincible)
+        {
+            if (!isHurt)
+            {
+                isHurt = true;
+                invincibilityTicks = 0;
+            }
 
+            isInvincible = true;
+            Destroy(col.gameObject);
+
+            if (HPPoints <= 0) { HPPoints = 0; }
+            else
+            {
+                HPPoints -= 1;
+            }
+
+            if (ScorePoints >= 0)
+            {
+                ScorePoints = 0;
+            }
+            else
+            {
+                ScorePoints -= 200;
+            }
+            PlayerSFX.clip = HitSFX;
+            PlayerSFX.Play();
+        }
+        else if (isAttackNote)
+        {
+            collectedAttackNotes += 1;
+            float temp = 1;
+            if (collectedAttackNotes >= maxCollectedAttackNotes)
+                temp = damageToEnemyValue;
+            else if (collectedAttackNotes < maxCollectedAttackNotes && collectedAttackNotes != 0)
+                temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
+            enemyHealth.DamageEnemy(temp);
+            PlayerAnimator.Play("VerenicaAttack");
+            PlayerSFX.clip = AtkSFX;
+            PlayerSFX.Play();
+            Destroy(col.gameObject);
+        }
+    }
     public List<Transform> GetPlanes { get { return planes; } }
 }

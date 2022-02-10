@@ -92,7 +92,7 @@ public class TutorialManager : MonoBehaviour
         {
             
             SpawningAllowed = true;
-            BeatDetection(0,3);
+            BeatDetection(0,2);
                     
             // Movement
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
@@ -115,7 +115,7 @@ public class TutorialManager : MonoBehaviour
         {
             
             SpawningAllowed = true;
-            BeatDetection(3,4);
+            BeatDetection(2,3);
             // Jumping
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
@@ -159,14 +159,17 @@ public class TutorialManager : MonoBehaviour
             _beatFull = true;
             _beatCountFull++;
             Debug.Log("Full");
+            if(SpawnIndex <= 1)
+            {
+                SpawnMid();
+            }
             if (SpawningAllowed)
             {
                 switch (SpawnIndex)
                 {
                     case 0: SpawnLeft(); break;
-                    case 1: SpawnMid(); break;
-                    case 2: SpawnRight(); break;
-                    case 3: SpawnJump(); break;
+                    case 1: SpawnRight(); break;
+                    case 2: SpawnJump(); break;
                     default: Debug.Log("Out of index"); break;
                 }
             }

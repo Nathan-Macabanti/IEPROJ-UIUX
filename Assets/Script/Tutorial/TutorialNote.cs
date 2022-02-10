@@ -19,9 +19,9 @@ public class TutorialNote : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        noteSpeed = Random.Range(5f, 20f);
+        //noteSpeed = Random.Range(5f, 20f);
         Vector3 pos = new Vector3(noteSpeed, 0, 0);
         Note.transform.Translate(pos * Time.deltaTime);
     }
