@@ -57,7 +57,7 @@ public class NoteBlockade : MonoBehaviour
         notesDodgeSlider.value = NotesDodged / RequiredAmountToDodge;
         notesDodgeSliderFill.color = ColorSliderFillNotesDodge;
         notesDodgeStateText.color = ColorTextNotesDodge;
-        notesDodgeStateText.text = "DODGE PHASE";
+        notesDodgeStateText.text = "ATTACKING";
         attackPhase = false;
     }
 
@@ -66,7 +66,7 @@ public class NoteBlockade : MonoBehaviour
         notesDodgeSlider.value = ticks / ISATTACKNOTE_INTERVAL;
         notesDodgeSliderFill.color = ColorSliderFillTime;
         notesDodgeStateText.color = ColorTextTime;
-        notesDodgeStateText.text = "ATTACK PHASE";
+        notesDodgeStateText.text = "VULNERABLE";
         attackPhase = true;
     }
 

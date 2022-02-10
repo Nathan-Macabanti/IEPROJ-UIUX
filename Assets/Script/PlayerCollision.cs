@@ -16,8 +16,8 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private bool isDebugging;
 
     [Header("Health")]
-    [SerializeField] private Text HP_points;
-    [SerializeField] private Text Score_points;
+    //[SerializeField] private Text HP_points;
+    //[SerializeField] private Text Score_points;
     [SerializeField] private Canvas TVStaticCanvas;
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private Animator HPBarAnimator;
@@ -42,8 +42,8 @@ public class PlayerCollision : MonoBehaviour
             HPPoints = 9999;
         }
         collectedAttackNotes = 0;
-        HP_points.text = "LIVES: " + HPPoints.ToString();
-        Score_points.text = "SCORES: " + ScorePoints.ToString();
+        //HP_points.text = "LIVES: " + HPPoints.ToString();
+        //Score_points.text = "SCORES: " + ScorePoints.ToString();
         isInvincible = false;
         isHurt = false;
         PlayerSFX = GetComponent<AudioSource>();
@@ -74,7 +74,7 @@ public class PlayerCollision : MonoBehaviour
         {
             TVStaticCanvas.gameObject.SetActive(false);
         }
-        HP_points.text = "LIVES: " + HPPoints.ToString();
+        //HP_points.text = "LIVES: " + HPPoints.ToString();
 
         //Combo Update
         if(collectedAttackNotes <= 0)
@@ -103,7 +103,7 @@ public class PlayerCollision : MonoBehaviour
     public void UpdateScore(int addedPoints)
     {
         ScorePoints += addedPoints;
-        Score_points.text = "SCORES: " + ScorePoints.ToString();
+        //Score_points.text = "SCORES: " + ScorePoints.ToString();
     }
 
     private void OnTriggerEnter(Collider col)
