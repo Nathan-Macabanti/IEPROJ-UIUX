@@ -30,6 +30,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private Text ComboText;
     [SerializeField] private Animator PlayerAnimator;
     [SerializeField] private AudioClip AtkSFX;
+    [SerializeField] private AudioClip HitSFX;
     [SerializeField] private AudioSource PlayerSFX;
     
     private int ScorePoints = 0;
@@ -134,6 +135,8 @@ public class PlayerCollision : MonoBehaviour
             {
                 ScorePoints -= 200;
             }
+            PlayerSFX.clip = HitSFX;
+            PlayerSFX.Play();
         }
         else if (isAttackNote)
         {

@@ -81,13 +81,14 @@ public class BreakSplashScreen : MonoBehaviour
         //Turn every enemy sprite off
         for (int i = 0; i < enemy.Count; i++)
         {
+            Debug.LogWarning("Active off: " + enemy[i].EnemySprite.gameObject.name);
             enemy[i].EnemySprite.gameObject.SetActive(false);
         }
         for (int i = 0; i < enemy.Count; i++)
         {
             if (i == index)
             {
-                Debug.Log("Spawning" + enemy[i].EnemySprite.gameObject.name);
+                Debug.LogWarning("Spawning: " + enemy[i].EnemySprite.gameObject.name);
                 enemy[i].EnemySprite.gameObject.SetActive(true);
             }
                 
