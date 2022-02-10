@@ -209,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             jumpAndFalling();
-            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !isInAir)
+            if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !isInAir)
             {
                 transform.position = transform.position + new Vector3(0, jumpHeight, 0);
                 isInAir = true;

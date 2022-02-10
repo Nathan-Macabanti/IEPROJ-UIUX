@@ -27,7 +27,7 @@ public class TutorialSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MaxNotes(40);
     }
 
     public void SpawnDodgeNote()

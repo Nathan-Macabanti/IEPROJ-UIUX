@@ -17,7 +17,15 @@ public class Note : MonoBehaviour
     void Start()
     {
         //speed = 0;
-        speed = song.BPM / divisor;
+        if(song == null)
+        {
+            return;
+        }
+        else
+        {
+            speed = song.BPM / divisor;
+        }
+        
         //noteParticle.startColor = noteObj.GetComponent<Renderer>().material.color;
         //SpawnPosition = new Vector3(0F, transform.position.y, transform.position.z);
         //DestroyPosition = new Vector3(15F, transform.position.y, transform.position.z);
