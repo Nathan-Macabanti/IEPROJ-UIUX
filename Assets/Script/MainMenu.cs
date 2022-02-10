@@ -9,10 +9,12 @@ public class MainMenu : MonoBehaviour
 	private bool SpacePress = false;
 	public Image image;
 	public GameObject title;
-
+	public GameObject Glow;
+	private Animator anim;
 	void Start()
 	{
 		image = title.GetComponent<Image>();
+		anim = Glow.GetComponent<Animator>();
 	}
     public void onPlayPress()
     {
@@ -27,7 +29,6 @@ public class MainMenu : MonoBehaviour
     {
 	    if (Input.GetKeyDown(KeyCode.Space) && SpacePress == false)
 	    {
-			
 		    SpacePress = true;
 		    image.CrossFadeColor(Color.black, 5.0f, true, true);
 		    StartCoroutine(deactivate(4.0f));
@@ -38,5 +39,26 @@ public class MainMenu : MonoBehaviour
     {
 	    yield return new WaitForSeconds(t);
 		title.SetActive(false);
+    }
+
+    public void CursorHoverOnArcade()
+    {
+	    anim.SetBool("HoveredArcade", true);
+
+	}
+    public void CursorHoverOffArcade()
+    {
+	    anim.SetBool("HoveredArcade", false);
+
+    }
+    public void CursorHoverOnVending()
+    {
+	    anim.SetBool("HoveredVending", true);
+
+    }
+    public void CursorHoverOffVending()
+    {
+	    anim.SetBool("HoveredVending", false);
+
     }
 }
