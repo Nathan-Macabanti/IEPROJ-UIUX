@@ -188,7 +188,7 @@ public class PlayerCollision : MonoBehaviour
     public void Heal(int health)
     {
         HPPoints += health;
-        HPBarAnimator.SetBool("Healing", true);
+        //HPBarAnimator.SetBool("Healing", true);
     }
 
     public int CollectedAttackNotes

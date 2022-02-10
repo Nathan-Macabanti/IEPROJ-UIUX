@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-   
+    [SerializeField] private bool isInvincible;
+    [SerializeField] private float lengthOfInvincibility;
+    [SerializeField] private float invincibilityTicks;
+    [SerializeField] private bool isHurt;
+
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float offset;
     [SerializeField] private float JUMP_INTERVAL = 0.15f;
     [SerializeField] private List<Transform> planes;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private AudioSource PlayerSFX;
 
     private bool isInAir;
     private float ticks = 0.0f;
+    //[SerializeField] private TutorialManager tutsMan;
     [SerializeField] private GameObject PlayerSprite;
     [SerializeField] private Quaternion InitialRotation;
     [SerializeField] private bool IsHoldingDodge;
     void Start()
     {
+        PlayerSFX = GetComponent<AudioSource>();
         InitialRotation = new Quaternion(
             Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.x),
             Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.y),
@@ -31,6 +38,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isInvincible)
+        {
+            BecomeInvicible();
+        }
+
         if (Time.timeScale == 1)
         {
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -117,7 +129,6 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        bool isAttackNote = col.GetComponent<Note>().GetIsAttackNote;
         if (!isInvincible)
         {
             if (!isHurt)
@@ -126,39 +137,25 @@ public class PlayerController : MonoBehaviour
                 invincibilityTicks = 0;
             }
 
+            Debug.Log("Colliding with: " + col.name);
+            GameObject.Destroy(col.gameObject);
             isInvincible = true;
-            Destroy(col.gameObject);
-
-            if (HPPoints <= 0) { HPPoints = 0; }
-            else
-            {
-                HPPoints -= 1;
-            }
-
-            if (ScorePoints >= 0)
-            {
-                ScorePoints = 0;
-            }
-            else
-            {
-                ScorePoints -= 200;
-            }
-            PlayerSFX.clip = HitSFX;
+            //PlayerSFX.clip = HitSFX;
             PlayerSFX.Play();
         }
-        else if (isAttackNote)
+            
+        
+    }
+
+    public void BecomeInvicible()
+    {
+        PlayerSprite.GetComponent<SpriteRenderer>().material.color = new Color(1F, 1F, 1F, 0.5f);
+        invincibilityTicks += Time.deltaTime;
+        if (invincibilityTicks >= lengthOfInvincibility)
         {
-            collectedAttackNotes += 1;
-            float temp = 1;
-            if (collectedAttackNotes >= maxCollectedAttackNotes)
-                temp = damageToEnemyValue;
-            else if (collectedAttackNotes < maxCollectedAttackNotes && collectedAttackNotes != 0)
-                temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
-            enemyHealth.DamageEnemy(temp);
-            PlayerAnimator.Play("VerenicaAttack");
-            PlayerSFX.clip = AtkSFX;
-            PlayerSFX.Play();
-            Destroy(col.gameObject);
+            PlayerSprite.GetComponent<SpriteRenderer>().material.color = new Color(1F, 1F, 1F, 1F);
+            isInvincible = false;
+            isHurt = false;
         }
     }
     public List<Transform> GetPlanes { get { return planes; } }

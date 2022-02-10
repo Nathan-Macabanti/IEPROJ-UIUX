@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
-
     public GameObject[] popUps;
     private int popUpIndex;
 
@@ -27,16 +26,17 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private static bool _beatFull;
     [SerializeField] private static int _beatCountFull;
     [SerializeField] private bool SpawningAllowed;
+    //[SerializeField] PlayerCollision playerCtrl;
 
     public float waitTime = 5f;
     private float startTime;
     private float elapsedTime;
 
     private float movementCount = 0f;
-    private float moveCriteria = 10f;
+    private float moveCriteria = 5f;
 
     private float jumpCount = 0f;
-    private float jumpCriteria = 10f;
+    private float jumpCriteria = 5f;
 
 
     // Start is called before the first frame update
