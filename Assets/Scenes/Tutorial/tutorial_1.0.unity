@@ -370,6 +370,10 @@ MonoBehaviour:
   leftSpawner: {fileID: 1467748070}
   rightSpawner: {fileID: 1961256543}
   midSpawner: {fileID: 1770814310}
+  _bpm: 50
+  _beatInterval: 0
+  _beatTimer: 0
+  SpawningAllowed: 0
   waitTime: 3
 --- !u!1 &153138505
 GameObject:
@@ -2005,8 +2009,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Click 'here' to Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b06c8972ab8a78741945bd574ed70cb5, type: 2}
-  m_sharedMaterial: {fileID: 8716714216113189939, guid: b06c8972ab8a78741945bd574ed70cb5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2069,7 +2073,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &975331131
@@ -2554,7 +2558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1368200703
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4277,8 +4281,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f7cbbaee9ee4a7e49a893b69cb265e2a, type: 2}
-  m_sharedMaterial: {fileID: 8144771957542894388, guid: f7cbbaee9ee4a7e49a893b69cb265e2a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4302,8 +4306,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4341,7 +4345,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1948870035
