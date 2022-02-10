@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthPotion : MonoBehaviour, IResetable
 {
+    [SerializeField] private int HealFactor;
     [SerializeField] private bool hasBeenPressed;
     [SerializeField] private Button myButton;
     [SerializeField] private PlayerCollision player;
@@ -18,7 +19,7 @@ public class HealthPotion : MonoBehaviour, IResetable
 
     private void Update()
     {
-        if(cost <= breakSplash.GetPoints && !hasBeenPressed)
+        if(cost <= breakSplash.GetPoints && !hasBeenPressed && player.GetHPPoints < HealFactor)
         {
             myButton.interactable = true;
         }
@@ -28,11 +29,11 @@ public class HealthPotion : MonoBehaviour, IResetable
         }
     }
 
-    public void Heal(int i)
+    public void Heal()
     {
         if(cost <= breakSplash.GetPoints && !hasBeenPressed)
         {
-            player.AddHealth(i);
+            player.AddHealth(HealFactor);
             breakSplash.AddPoints(-cost);
             hasBeenPressed = true;
             Debug.Log(player.name + "Healed" + player.GetHPPoints);

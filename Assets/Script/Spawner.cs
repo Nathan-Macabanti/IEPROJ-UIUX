@@ -93,7 +93,7 @@ public class Spawner : MonoBehaviour
             if(NoteList[i] != null)
             {
                 Debug.Log("Destroying" + NoteList[i].name);
-                Destroy(NoteList[i].gameObject);
+                GameObject.Destroy(NoteList[i].gameObject);
                 NoteList.RemoveAt(i);
             }
 

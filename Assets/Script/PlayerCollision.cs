@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour
     [Header("Health")]
     [SerializeField] private Text HP_points;
     //[SerializeField] private Text Score_points;
-    [SerializeField] private Canvas TVStaticCanvas;
+    [SerializeField] private Image TVStaticCanvas;
     [SerializeField] private GameObject playerSprite;
     [SerializeField] private Animator HPBarAnimator;
     [SerializeField] private int HPPoints = 3;
