@@ -20,6 +20,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private Text Score_points;
     [SerializeField] private Canvas TVStaticCanvas;
     [SerializeField] private GameObject playerSprite;
+    [SerializeField] private Animator HPBarAnimator;
     [SerializeField] private int HPPoints = 3;
 
     [Header("Attacking")]
@@ -55,6 +56,7 @@ public class PlayerCollision : MonoBehaviour
         UpdatePlane(2, 1);
 
 #endif
+        HPBarAnimator.SetInteger("Lives", HPPoints);
         //Health Update
         if (HPPoints <= 0)
         {
@@ -83,6 +85,7 @@ public class PlayerCollision : MonoBehaviour
         {
             ComboText.text = (collectedAttackNotes / 1).ToString() + "\nHITS";
         }
+        HPBarAnimator.SetBool("Healing", false);
     }
 
     public void BecomeInvicible()
@@ -161,6 +164,7 @@ public class PlayerCollision : MonoBehaviour
 
     public void AddHealth(int Health)
     {
+        HPBarAnimator.SetBool("Healing", true);
         HPPoints = Health;
     }
 
@@ -181,6 +185,7 @@ public class PlayerCollision : MonoBehaviour
     public void Heal(int health)
     {
         HPPoints += health;
+        HPBarAnimator.SetBool("Healing", true);
     }
 
     public int CollectedAttackNotes

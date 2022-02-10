@@ -155,7 +155,7 @@ public class SongManager2 : MonoBehaviour
             else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
             {
                 nextIndex = 0;
-                player.Heal(1);
+                //player.Heal(1);
                 GetComponent<AudioSource>().Play();
             }
         }
