@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private bool isDebugging;
 
     [Header("Health")]
-    //[SerializeField] private Text HP_points;
+    [SerializeField] private Text HP_points;
     //[SerializeField] private Text Score_points;
     [SerializeField] private Canvas TVStaticCanvas;
     [SerializeField] private GameObject playerSprite;
@@ -43,7 +43,7 @@ public class PlayerCollision : MonoBehaviour
             HPPoints = 9999;
         }
         collectedAttackNotes = 0;
-        //HP_points.text = "LIVES: " + HPPoints.ToString();
+        HP_points.text = "LIVES: " + HPPoints.ToString();
         //Score_points.text = "SCORES: " + ScorePoints.ToString();
         isInvincible = false;
         isHurt = false;
@@ -75,7 +75,7 @@ public class PlayerCollision : MonoBehaviour
         {
             TVStaticCanvas.gameObject.SetActive(false);
         }
-        //HP_points.text = "LIVES: " + HPPoints.ToString();
+        HP_points.text = "LIVES: " + HPPoints.ToString();
 
         //Combo Update
         if(collectedAttackNotes <= 0)

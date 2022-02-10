@@ -573,6 +573,8 @@ MonoBehaviour:
   - {fileID: 1273358925}
   spawnerIndex: 
   beatsShownInAdvance: 0
+  EnemyAttackingColor: {r: 0, g: 0.51956224, b: 1, a: 1}
+  EnemyVulnarableColor: {r: 0.8679245, g: 0, b: 0.50535536, a: 1}
   warningDiamonds:
   - {fileID: 1394923757}
   - {fileID: 1646419083}
@@ -2342,7 +2344,7 @@ MonoBehaviour:
   HealthBar: {fileID: 1431062672593395893}
   HealthCounter: {fileID: 4965144014619477920}
   UseSuggested: 0
-  fHP: 100
+  fHP: 130
   fsuggestedHP: 0
   fHPClone: 0
   sMan: {fileID: 38935251}
@@ -5699,6 +5701,7 @@ MonoBehaviour:
   isHurt: 0
   isInvincible: 0
   isDebugging: 0
+  HP_points: {fileID: 3420351679482368791}
   TVStaticCanvas: {fileID: 707439804}
   playerSprite: {fileID: 519665842}
   HPBarAnimator: {fileID: 7501891987038148126}
@@ -6841,7 +6844,7 @@ RectTransform:
   m_Children:
   - {fileID: 1002788777}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7188,7 +7191,7 @@ RectTransform:
   m_Children:
   - {fileID: 829169992}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9906,7 +9909,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.45229197, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -12525,14 +12528,13 @@ GameObject:
   - component: {fileID: 1193699943}
   - component: {fileID: 1193699945}
   - component: {fileID: 1193699944}
-  - component: {fileID: 1193699946}
   m_Layer: 5
   m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1193699943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12550,8 +12552,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 199, y: 30}
+  m_SizeDelta: {x: 136.5, y: 33.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193699944
 MonoBehaviour:
@@ -12566,7 +12568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12591,20 +12593,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193699942}
   m_CullTransparentMesh: 1
---- !u!114 &1193699946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193699942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AspectMode: 3
-  m_AspectRatio: 1.7777778
 --- !u!1 &1196394426
 GameObject:
   m_ObjectHideFlags: 0
@@ -13612,7 +13600,7 @@ RectTransform:
   m_Children:
   - {fileID: 329482435}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14401,7 +14389,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.45490196, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17163,7 +17151,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.45490196, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18630,7 +18618,7 @@ RectTransform:
   m_Children:
   - {fileID: 1846953297}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18731,7 +18719,7 @@ RectTransform:
   m_Children:
   - {fileID: 347330307}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18753,10 +18741,10 @@ MonoBehaviour:
   pointText: {fileID: 804578724}
   IsOn: 0
   enemy:
-  - Health: 110
+  - Health: 150
     ChartFile: Level1.22
     EnemySprite: {fileID: 1785995541}
-  - Health: 110
+  - Health: 150
     ChartFile: Level1.22
     EnemySprite: {fileID: 1785995541}
   song: {fileID: 38935251}
@@ -19744,7 +19732,7 @@ Transform:
   - {fileID: 1278285997}
   - {fileID: 1529741420}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1893647567
 GameObject:
@@ -23815,11 +23803,11 @@ RectTransform:
   m_Father: {fileID: 1193699943}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 10}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 10, y: 0}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &3420351679482368791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23845,9 +23833,9 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 1
+    m_MinSize: 0
+    m_MaxSize: 25
+    m_Alignment: 6
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -23881,7 +23869,7 @@ RectTransform:
   - {fileID: 1675683859493013998}
   - {fileID: 2555621086995040433}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

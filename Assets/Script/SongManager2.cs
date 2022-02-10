@@ -51,6 +51,8 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private float beatsShownInAdvance;
 
     [Header("Warning Diamonds")]
+    [SerializeField] private Color EnemyAttackingColor;
+    [SerializeField] private Color EnemyVulnarableColor;
     [SerializeField] private GameObject[] warningDiamonds;
     [SerializeField] private List<int> spawnerNextIndex;
 
@@ -247,7 +249,17 @@ public class SongManager2 : MonoBehaviour
             warningDiamonds[3].SetActive(false);
             for (int i = 0; i < spawnerNextIndex.Count; i++){
                 if (spawnerNextIndex[i] >= 0)
+                {
+                    if (noteBlockade.AttackPhase)
+                    {
+                        warningDiamonds[spawnerNextIndex[i]].GetComponent<Renderer>().material.color = EnemyAttackingColor;
+                    }
+                    else
+                    {
+                        warningDiamonds[spawnerNextIndex[i]].GetComponent<Renderer>().material.color = EnemyVulnarableColor;
+                    }
                     warningDiamonds[spawnerNextIndex[i]].SetActive(true);
+                }
             }
         }
     }
