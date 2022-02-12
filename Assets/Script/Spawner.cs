@@ -111,4 +111,16 @@ public class Spawner : MonoBehaviour
         }
         return false;
     }
+
+    public Note dodgeNoteCopy
+    {
+        //get { return DodgeNoteCopy; }
+        set { DodgeNoteCopy = value; }
+    }
+
+    public Note attackNoteCopy
+    {
+        //get { return AttackNoteCopy; }
+        set { AttackNoteCopy = value; }
+    }
 }

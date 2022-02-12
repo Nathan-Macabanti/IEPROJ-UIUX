@@ -115,10 +115,10 @@ public class SongManager2 : MonoBehaviour
             songPosition = (float)GetComponent<AudioSource>().time;
             songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
             //if (GetComponent<AudioSource>().isPlaying)
-                songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
+            songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
             //Debug.Log(songPositionInBeats);
             //Debug.Log(nextIndex);
-            if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying && !noteBlockade.GetIsAttackNote())
+            if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying)
             {
                 beatsShownInAdvance = 0.25f;
                 if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
@@ -131,25 +131,18 @@ public class SongManager2 : MonoBehaviour
                     {
                         //Debug.Log(spawners[spawnerIndex[i]]);
                         if (spawnerIndex[i] >= 0)
-                            spawners[spawnerIndex[i]].SpawnDodgeNote();
-                    }
-                    nextIndex++;
-                }
-            }
-            else if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying && noteBlockade.GetIsAttackNote())
-            {
-                beatsShownInAdvance = 0.25f;
-                if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
-                    spawnerIndexStr[nextIndex] != "")
-                {
-                    spawnerIndex.Clear();
-                    spawnerIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
-
-                    for (int i = 0; i < spawnerIndex.Count; i++)
-                    {
-                        //Debug.Log(spawners[spawnerIndex[i]]);
-                        if (spawnerIndex[i] >= 0)
-                            spawners[spawnerIndex[i]].SpawnAttackNote();
+                        {
+                            //Enemy Spawns a note
+                            bool IsAttack = noteBlockade.GetIsAttackNote();
+                            enemy.Spawn(spawners[spawnerIndex[i]], IsAttack, spawnerIndex[i]);
+                            /*
+                            if(!noteBlockade.GetIsAttackNote())
+                                spawners[spawnerIndex[i]].SpawnDodgeNote();
+                            else
+                                spawners[spawnerIndex[i]].SpawnAttackNote();
+                            */
+                        }
+                            
                     }
                     nextIndex++;
                 }
@@ -177,7 +170,7 @@ public class SongManager2 : MonoBehaviour
                 breakSplashScreen.AddIndex(1);
             }
 
-            if(breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
+            if (breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
             {
                 breakSplashScreen.Appear();
             }
@@ -194,7 +187,7 @@ public class SongManager2 : MonoBehaviour
 
     [Header("CountDown till start")]
     [SerializeField] private float beatTimer = 0;
-#region Functions
+    #region Functions
     public void CountDown()
     {
         //bool beatFull;
@@ -212,18 +205,18 @@ public class SongManager2 : MonoBehaviour
             {
                 counterBG.SetActive(true);
                 countDown.text = nCountDown.ToString();
-            }    
+            }
             else if (nCountDown == 0)
             {
                 counterBG.SetActive(true);
                 countDown.text = "GO";
-            }    
+            }
             else
             {
                 counterBG.SetActive(false);
                 countDown.text = " ";
             }
-                
+
         }
     }
 
@@ -241,13 +234,13 @@ public class SongManager2 : MonoBehaviour
             spawnerNextIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
         }
 
-        if(spawnerNextIndex != null)
+        if (spawnerNextIndex != null)
         {
             warningDiamonds[0].SetActive(false);
             warningDiamonds[1].SetActive(false);
             warningDiamonds[2].SetActive(false);
             warningDiamonds[3].SetActive(false);
-            for (int i = 0; i < spawnerNextIndex.Count; i++){
+            for (int i = 0; i < spawnerNextIndex.Count; i++) {
                 if (spawnerNextIndex[i] >= 0)
                 {
                     if (noteBlockade.AttackPhase)
@@ -335,15 +328,18 @@ public class SongManager2 : MonoBehaviour
     {
         GetComponent<AudioSource>().Pause();
     }
-#endregion
+    #endregion
 
-#region Getters
+    #region Getters
     public float BPM { get { return bpm; } }
 
     public float SecondsPerBeat { get { return secondsPerBeat; } }
     public float BeatsShownInAdvance { get { return beatsShownInAdvance; } }
     public List<float> Notes { get { return notes; } }
-
+    public Spawner LeftSpawner{ get { return spawners[0]; } }
+    public Spawner MidSpawner { get { return spawners[1]; } }
+    public Spawner RightSpawner { get { return spawners[2]; } }
+    public Spawner JumpSpawner { get { return spawners[3]; } }
     public AudioSource AudioSource { get { return GetComponent<AudioSource>(); } }
     public Transform CenterSpawnerLocation { get { return spawners[1].transform; } }
     public List<string> SpawnerIndexArray { get { return spawnerIndexStr; } }

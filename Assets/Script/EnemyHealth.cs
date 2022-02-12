@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class EnemyHealth : MonoBehaviour
+
+public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
 {
     [SerializeField] protected Slider HealthBar;
     [SerializeField] private Text HealthCounter;
@@ -53,9 +54,32 @@ public class EnemyHealth : MonoBehaviour
             return false;
         } 
     }
-    public void DamageEnemy(float dmgValue)
+    public void Damage(float dmgValue)
     {
         fHP -= dmgValue;
-        deathAnim.Play("BossDamageAnimation");
+        deathAnim.StopPlayback();
+        deathAnim.Play("Damage");
+    }
+
+    public void Spawn(Spawner spawner, bool IsAttack, int spawnerIndex)
+    {
+        deathAnim.StopPlayback();
+        if (spawnerIndex != 3)
+        {
+            deathAnim.Play("Attack");
+        }
+        else
+        {
+            deathAnim.Play("JumpAttack");
+        }
+
+        if (IsAttack)
+        {
+            spawner.SpawnAttackNote();
+        }
+        else
+        {
+            spawner.SpawnDodgeNote();
+        }
     }
 }

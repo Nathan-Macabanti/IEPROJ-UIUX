@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource PlayerSFX;
     [SerializeField] private int collectedAttackNotes = 0;
 
+    [SerializeField] private AnimationClip jumpClip;
+    [SerializeField] private float JumpOffset;
+
     private bool isInAir;
     private float ticks = 0.0f;
     //[SerializeField] private TutorialManager tutsMan;
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool IsHoldingDodge;
     void Start()
     {
+        JUMP_INTERVAL = jumpClip.length - JumpOffset;
         PlayerSFX = GetComponent<AudioSource>();
         InitialRotation = new Quaternion(
             Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.x),

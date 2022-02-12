@@ -35,10 +35,30 @@ public class BreakSplashScreen : MonoBehaviour
     {
         if (index <= enemy.Count)
         {
+            //Change Enemies Sprite
             ChangeSprite();
+            //Change Health;
             enemyHealth.UpdateHealth(enemy[index].Health);
+            //Change chart
             song.ChangeChart(enemy[index].ChartFile);
+            
+            //Change notes of Left Spawner
+            song.LeftSpawner.attackNoteCopy = enemy[index].AttackNote;
+            song.LeftSpawner.dodgeNoteCopy = enemy[index].DodgeNote;
+            //Change notes of Mid Spawner
+            song.MidSpawner.attackNoteCopy = enemy[index].AttackNote;
+            song.MidSpawner.dodgeNoteCopy = enemy[index].DodgeNote;
+            //Change notes of Right Spawner
+            song.RightSpawner.attackNoteCopy = enemy[index].AttackNote;
+            song.RightSpawner.dodgeNoteCopy = enemy[index].DodgeNote;
+            //Change notes of Jump Spawner
+            song.JumpSpawner.attackNoteCopy = enemy[index].JumpNote;
+            song.JumpSpawner.dodgeNoteCopy = enemy[index].JumpNote;
+
+            //Reset the song and chart nextIndex to 0
             song.StartAgain();
+
+            //Get rid of splash screen
             Disappear();
         }
         else
@@ -81,15 +101,15 @@ public class BreakSplashScreen : MonoBehaviour
         //Turn every enemy sprite off
         for (int i = 0; i < enemy.Count; i++)
         {
-            Debug.LogWarning("Active off: " + enemy[i].EnemySprite.gameObject.name);
             enemy[i].EnemySprite.gameObject.SetActive(false);
+            Debug.LogWarning("Active off: " + enemy[i].EnemySprite.gameObject.name);
         }
         for (int i = 0; i < enemy.Count; i++)
         {
             if (i == index)
             {
-                Debug.LogWarning("Spawning: " + enemy[i].EnemySprite.gameObject.name);
                 enemy[i].EnemySprite.gameObject.SetActive(true);
+                Debug.LogWarning("Spawning: " + enemy[i].EnemySprite.gameObject.name);
             }
                 
         }

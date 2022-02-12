@@ -123,16 +123,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject PlayerSprite;
     [SerializeField] private List<Transform> planes;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private AnimationClip jumpClip;
+    [SerializeField] private float JumpOffset;
     [SerializeField] private Quaternion InitialRotation;
 
     [Header("InputsBool")]
     [SerializeField] private bool IsHoldingDodge;
+    [SerializeField] private bool IsHoldingJump;
     //[SerializeField] private bool IsHoldingRight;
     //[SerializeField] private Animation Player;
 
     // Start is called before the first frame update
     void Start()
     {
+        JUMP_INTERVAL = jumpClip.length - JumpOffset;
         //(x, y)
         InitialRotation = new Quaternion (
             Mathf.Abs(PlayerSprite.GetComponent<Transform>().rotation.x),
@@ -208,12 +212,13 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
             }
 
-            jumpAndFalling();
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !isInAir)
             {
                 transform.position = transform.position + new Vector3(0, jumpHeight, 0);
                 isInAir = true;
             }
+            
+            jumpAndFalling();
         }
     }
 
@@ -225,6 +230,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("Jump", true);
             this.ticks += Time.deltaTime;
         }
+
         if (this.ticks >= JUMP_INTERVAL)
         {
             playerAnimator.SetBool("Jump", false);

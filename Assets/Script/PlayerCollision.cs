@@ -146,7 +146,7 @@ public class PlayerCollision : MonoBehaviour
                 temp = damageToEnemyValue;
             else if(collectedAttackNotes < maxCollectedAttackNotes && collectedAttackNotes != 0)
                 temp = damageToEnemyValue * ((float)collectedAttackNotes / (float)maxCollectedAttackNotes);
-            enemyHealth.DamageEnemy(temp);
+            enemyHealth.Damage(temp);
             PlayerAnimator.Play("VerenicaAttack");
             PlayerSFX.clip = AtkSFX;
             PlayerSFX.Play();
