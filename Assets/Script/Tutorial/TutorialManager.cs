@@ -97,6 +97,19 @@ public class TutorialManager : MonoBehaviour
         else if (popUpIndex == 1)
         {
             ThisIsYou.SetActive(true);
+
+            SpawningAllowed = false;
+
+            // Movement
+            if (Input.anyKeyDown)
+            {
+                popUpIndex++;
+            }
+            Debug.Log("Starting Moving tutorial");
+        }
+        else if (popUpIndex == 2)
+        {
+            ThisIsYou.SetActive(true);
             
             SpawningAllowed = true;
             BeatDetection(0,2);
@@ -115,7 +128,21 @@ public class TutorialManager : MonoBehaviour
             }
             Debug.Log("Starting Moving tutorial");
         }
-        else if (popUpIndex == 2)
+        else if (popUpIndex == 3)
+        {
+            ThisIsYou.SetActive(true);
+
+            SpawningAllowed = false;
+            BeatDetection(0, 2);
+
+            // 
+            if (Input.anyKeyDown)
+            {
+                popUpIndex++;
+            }
+            Debug.Log("Starting Moving tutorial");
+        }
+        else if (popUpIndex == 4)
         {
             ThisIsYou.SetActive(false);
             SpawningAllowed = true;
@@ -135,7 +162,21 @@ public class TutorialManager : MonoBehaviour
             }
             Debug.Log("Starting jumping tutorial");
         }
-        else if(popUpIndex == 3)
+        else if (popUpIndex == 5)
+        {
+            ThisIsYou.SetActive(true);
+
+            SpawningAllowed = false;
+            BeatDetection(0, 2);
+
+            // 
+            if (Input.anyKeyDown)
+            {
+                popUpIndex++;
+            }
+            Debug.Log("Starting Moving tutorial");
+        }
+        else if(popUpIndex == 6)
         {
             SpawningAllowed = true;
             BeatDetection(4, 7);
@@ -147,7 +188,7 @@ public class TutorialManager : MonoBehaviour
             }
             Debug.Log("Starting jumping tutorial");
         }
-        else if (popUpIndex == 4)
+        else if (popUpIndex == 7)
         {
 
             StartCoroutine(TransitiontoFirstLevel(waitTime));

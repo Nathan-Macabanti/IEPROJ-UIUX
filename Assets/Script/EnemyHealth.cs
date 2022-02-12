@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     [SerializeField] private SongManager2 sMan;
     [SerializeField] private NoteBlockade ntBlkde;
     [SerializeField] private bool isDead;
-    [SerializeField] private Animator deathAnim;
+    [SerializeField] private Animator EnemyAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -57,20 +57,20 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     public void Damage(float dmgValue)
     {
         fHP -= dmgValue;
-        deathAnim.StopPlayback();
-        deathAnim.Play("Damage");
+        EnemyAnimator.Play("Damage");
     }
 
     public void Spawn(Spawner spawner, bool IsAttack, int spawnerIndex)
     {
-        deathAnim.StopPlayback();
+        EnemyAnimator.StopPlayback();
         if (spawnerIndex != 3)
         {
-            deathAnim.Play("Attack");
+            EnemyAnimator.Play("Attack");
         }
         else
         {
-            deathAnim.Play("JumpAttack");
+            EnemyAnimator.StopPlayback();
+            EnemyAnimator.Play("JumpAttack");
         }
 
         if (IsAttack)
@@ -81,5 +81,11 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
         {
             spawner.SpawnDodgeNote();
         }
+    }
+
+    public Animator enemyAnimator
+    {
+        get { return EnemyAnimator; }
+        set { EnemyAnimator = value; }
     }
 }
