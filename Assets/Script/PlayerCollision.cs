@@ -53,8 +53,8 @@ public class PlayerCollision : MonoBehaviour
     private void Update()
     {
 #if true
-        UpdatePlane(0, 2);
-        UpdatePlane(2, 1);
+        //UpdatePlane(0, 2);
+        //UpdatePlane(2, 1);
 
 #endif
         HPBarAnimator.SetInteger("Lives", HPPoints);
@@ -86,7 +86,7 @@ public class PlayerCollision : MonoBehaviour
         {
             ComboText.text = (collectedAttackNotes / 2).ToString() + "\nHITS";
         }
-        HPBarAnimator.SetBool("Healing", false);
+        //HPBarAnimator.SetBool("Healing", false);
     }
 
     public void BecomeInvicible()

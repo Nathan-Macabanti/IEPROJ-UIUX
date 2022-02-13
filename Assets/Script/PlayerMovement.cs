@@ -114,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
     //OnCollision col;
     [SerializeField] private float min = -3;
     [SerializeField] private float max = 3;
+    [SerializeField] private int index;
     [SerializeField] private float jumpHeight = 2;
     private float ticks = 0.0f;
     [SerializeField] private float JUMP_INTERVAL = 0.15f;
@@ -136,6 +137,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        min = planes[0].position.z;
+        max = planes[2].position.z;
+        index = 1;
         JUMP_INTERVAL = jumpClip.length - JumpOffset;
         //(x, y)
         InitialRotation = new Quaternion (
@@ -153,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.timeScale == 1)
         {
-            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && GetComponent<PlayerCollision>().GetHPPoints >= 3)
+            if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
             {
                 // (x, -y)
                 PlayerSprite.GetComponent<Transform>().rotation = new Quaternion(
@@ -162,23 +166,24 @@ public class PlayerMovement : MonoBehaviour
                     InitialRotation.z,
                     InitialRotation.w
                     );
+                /*
                 if (!IsHoldingDodge)
                 {
-                    playerAnimator.StopPlayback();
-                    playerAnimator.SetBool("Dodge", true);
                     IsHoldingDodge = true;
                 }
                 else
                 {
                     playerAnimator.SetBool("Dodge", false);
-                }
+                }*/
 
-                if (transform.position.z > planes[0].position.z)
+                if (index > 0)
                 {
-                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[0].position.z);
+                    index--;
+                    playerAnimator.StopPlayback();
+                    playerAnimator.SetBool("Dodge", true);
                 }
             }
-            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (GetComponent<PlayerCollision>().GetHPPoints >= 3 || GetComponent<PlayerCollision>().GetHPPoints == 2))
+            else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
             {
                 //(-x, y)
                 PlayerSprite.GetComponent<Transform>().rotation = new Quaternion(
@@ -187,38 +192,43 @@ public class PlayerMovement : MonoBehaviour
                    InitialRotation.z,
                    InitialRotation.w
                    );
+                /*
                 if (!IsHoldingDodge)
                 {
-                    playerAnimator.StopPlayback();
-                    playerAnimator.SetBool("Dodge", true);
+                    
                     IsHoldingDodge = true;
                 }
                 else
                 {
                     playerAnimator.SetBool("Dodge", false);
-                }
-                if (transform.position.z < planes[2].position.z)
+                }*/
+                if (index < planes.Count - 1)
                 {
-                    transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[2].position.z);
-                }
+                    index++;
+                    playerAnimator.StopPlayback();
+                    playerAnimator.SetBool("Dodge", true);
+                }  
             }
             else
             {
-                playerAnimator.StopPlayback();
-                IsHoldingDodge = false;
+                //playerAnimator.StopPlayback();
+                //IsHoldingDodge = false;
                 playerAnimator.SetBool("Dodge", false);
+                //playerAnimator.SetTrigger("Dodge");
                 //playerAnimator.SetBool("Left", false);
                 //playerAnimator.SetBool("Right", false);
-                transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
+                //transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[1].position.z);
             }
 
             if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && !isInAir)
             {
                 transform.position = transform.position + new Vector3(0, jumpHeight, 0);
                 isInAir = true;
+                JUMP_INTERVAL = jumpClip.length - JumpOffset;
             }
             
             jumpAndFalling();
+            transform.position = new Vector3(this.transform.position.x, this.transform.position.y, planes[index].position.z);
         }
     }
 
@@ -233,11 +243,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (this.ticks >= JUMP_INTERVAL)
         {
-            playerAnimator.SetBool("Jump", false);
             this.ticks = 0.0f;
             isInAir = false;
             transform.position = transform.position + new Vector3(0, -jumpHeight, 0);
+            playerAnimator.SetBool("Jump", false);
         }
+        
     }
 
     public List<Transform> GetPlanes { get { return planes; } }

@@ -6241,6 +6241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   min: -3
   max: 3
+  index: 0
   jumpHeight: 3
   JUMP_INTERVAL: 0.25
   PlayerSprite: {fileID: 519665842}
@@ -6250,7 +6251,7 @@ MonoBehaviour:
   - {fileID: 2070162767}
   playerAnimator: {fileID: 622784751}
   jumpClip: {fileID: 7400000, guid: 1df7bd31c55517742979446c3b445cf0, type: 2}
-  JumpOffset: 0.01
+  JumpOffset: 0
   InitialRotation: {x: 0, y: 0, z: 0, w: 0}
   IsHoldingDodge: 0
   IsHoldingJump: 0
