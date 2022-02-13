@@ -16,6 +16,12 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     [SerializeField] private bool isDead;
     [SerializeField] private Animator EnemyAnimator;
 
+    [Header("Existing Animations")]
+    [SerializeField] private bool LAttack;
+    [SerializeField] private bool MAttack;
+    [SerializeField] private bool RAttack;
+    [SerializeField] private bool JAttack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,15 +69,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     public void Spawn(Spawner spawner, bool IsAttack, int spawnerIndex)
     {
         EnemyAnimator.StopPlayback();
-        if (spawnerIndex != 3)
-        {
-            EnemyAnimator.Play("Attack");
-        }
-        else
-        {
-            EnemyAnimator.StopPlayback();
-            EnemyAnimator.Play("JumpAttack");
-        }
+
 
         if (IsAttack)
         {
@@ -81,6 +79,33 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
         {
             spawner.SpawnDodgeNote();
         }
+
+
+        if(spawnerIndex == 0 && LAttack) //Left Spawn Animation
+        {
+            //EnemyAnimator.StopPlayback();
+            EnemyAnimator.Play("LAttack");
+            return;
+        }
+        if (spawnerIndex == 1 && MAttack) //Mid Spawn Animation
+        {
+            //EnemyAnimator.StopPlayback();
+            EnemyAnimator.Play("MAttack");
+            return;
+        }
+        if (spawnerIndex == 2 && RAttack) //Right Spawn Animation
+        {
+            //EnemyAnimator.StopPlayback();
+            EnemyAnimator.Play("RAttack");
+            return;
+        }
+        if(spawnerIndex == 3 && JAttack)
+        {
+            //EnemyAnimator.StopPlayback();
+            EnemyAnimator.Play("JAttack");
+            return;
+        }
+        EnemyAnimator.Play("Attack");
     }
 
     public Animator enemyAnimator
@@ -88,4 +113,9 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
         get { return EnemyAnimator; }
         set { EnemyAnimator = value; }
     }
+
+    public bool LeftAtk { set { LAttack = value; } }
+    public bool MidAtk { set { MAttack = value; } }
+    public bool RightAtk { set { RAttack = value; } }
+    public bool JumpAtk { set { JAttack = value; } }
 }

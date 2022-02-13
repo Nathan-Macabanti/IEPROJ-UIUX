@@ -10,6 +10,10 @@ public class EnemyInfo
     public string ChartFile;
     public GameObject EnemySprite;  
     public Animator EnemyAnimator;
+    public bool LAttack;
+    public bool MAttack;
+    public bool RAttack;
+    public bool JAttack;
     public Note DodgeNote;
     public Note AttackNote;
     public Note JumpNote;

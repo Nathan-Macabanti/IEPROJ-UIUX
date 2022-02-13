@@ -56,6 +56,10 @@ public class BreakSplashScreen : MonoBehaviour
             song.JumpSpawner.dodgeNoteCopy = enemy[index].JumpNote;
 
             enemyHealth.enemyAnimator = enemy[index].EnemyAnimator;
+            enemyHealth.LeftAtk = enemy[index].LAttack;
+            enemyHealth.MidAtk = enemy[index].MAttack;
+            enemyHealth.RightAtk = enemy[index].RAttack;
+            enemyHealth.JumpAtk = enemy[index].JAttack;
             //Reset the song and chart nextIndex to 0
             song.StartAgain();
 
