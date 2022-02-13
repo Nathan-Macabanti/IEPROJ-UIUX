@@ -136,7 +136,7 @@ public class TutorialManager : MonoBehaviour
             BeatDetection(0, 2);
 
             // 
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
                 popUpIndex++;
             }
