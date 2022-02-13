@@ -101,7 +101,8 @@ public class TutorialManager : MonoBehaviour
             SpawningAllowed = false;
 
             // Movement
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || 
+                Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             {
                 popUpIndex++;
             }
@@ -115,7 +116,8 @@ public class TutorialManager : MonoBehaviour
             BeatDetection(0,2);
                     
             // Movement
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) ||
+                Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             {
                 if (movementCount <= moveCriteria)
                 {
