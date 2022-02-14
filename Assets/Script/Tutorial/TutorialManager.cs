@@ -2,23 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
     public GameObject[] popUps;
     private int popUpIndex;
 
+    public Button lvlLoader;
+
     public GameObject dialogueObj;
     public GameObject dialogueManager;
     private Dialogue dialogueT;
 
+    //[SerializeField] private GameObject GameUI;
+    //[SerializeField] private GameObject TutsUI;
     [SerializeField]
     public TutorialSpawner leftSpawner;
     [SerializeField]
     public TutorialSpawner rightSpawner;
     [SerializeField]
     public TutorialSpawner midSpawner;
-
+    [SerializeField] private GameObject GameUI;
     //jump spawner
 
     [SerializeField] private float _bpm;
@@ -28,25 +33,29 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private bool SpawningAllowed;
     [SerializeField] private PlayerController playerCtrl;
     [SerializeField] private GameObject ThisIsYou;
+    [SerializeField] private NoteBlockadeTuts ntBlk;
+    [SerializeField] private EnemyScript enemy;
     //[SerializeField] PlayerCollision playerCtrl;
 
     public float waitTime = 5f;
     private float startTime;
     private float elapsedTime;
 
-    private float movementCount = 0f;
-    private float moveCriteria = 5f;
+    [SerializeField] private float movementCount = 0f;
+    [SerializeField] private float moveCriteria = 5f;
 
-    private float jumpCount = 0f;
-    private float jumpCriteria = 5f;
+    [SerializeField] private float jumpCount = 0f;
+    [SerializeField] private float jumpCriteria = 5f;
 
-    private float attackCount = 0f;
-    private float attackCriteria = 10f;
+    [SerializeField] private float attackCount = 0f;
+    [SerializeField] private float attackCriteria = 10f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameUI.SetActive(false);
+        //TutsUI.SetActive(true);
         ThisIsYou.SetActive(false);
         dialogueT = dialogueManager.GetComponent<Dialogue>();
         SpawningAllowed = false;
@@ -96,26 +105,23 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 1)
         {
-            ThisIsYou.SetActive(true);
-
+            GameUI.SetActive(true);
             SpawningAllowed = false;
 
-            // Movement
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || 
-                Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-            {
-                popUpIndex++;
-            }
-            Debug.Log("Starting Moving tutorial");
+            Debug.Log("Starting Moving Splash tutorial");
         }
         else if (popUpIndex == 2)
         {
             ThisIsYou.SetActive(true);
             
             SpawningAllowed = true;
-            BeatDetection(0,2);
-                    
+            BeatDetection(0, 4);
+            if (ntBlk.AttackPhase)
+            {
+                popUpIndex++;
+            }
             // Movement
+            /*
             if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) ||
                 Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             {
@@ -127,82 +133,52 @@ public class TutorialManager : MonoBehaviour
                 {
                     popUpIndex++;
                 }
-            }
+            }*/
             Debug.Log("Starting Moving tutorial");
         }
-        else if (popUpIndex == 3)
+        else if(popUpIndex == 3)
         {
-            ThisIsYou.SetActive(true);
-
+            ThisIsYou.SetActive(false);
             SpawningAllowed = false;
-            BeatDetection(0, 2);
-
-            // 
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-            {
-                popUpIndex++;
-            }
-            Debug.Log("Starting Moving tutorial");
+            // Jumping
+            leftSpawner.DestroyAllNotes();
+            midSpawner.DestroyAllNotes();
+            rightSpawner.DestroyAllNotes();
+            Debug.Log("Starting Attack tutorial");
+            ntBlk.AlwaysVulnerableSwitch(true);
         }
         else if (popUpIndex == 4)
         {
-            ThisIsYou.SetActive(false);
+            ntBlk.TurnOffAllAlways();
             SpawningAllowed = true;
-            BeatDetection(2,4);
+            BeatDetection(7, 15);
+            
             // Jumping
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            if(enemy.GetfHP <= 0)
             {
-                if (jumpCount <= jumpCriteria)
-                {
-                    jumpCount++;
-                }
-                else
-                {
-                    popUpIndex++;
-                }
-
+                popUpIndex++;
             }
-            Debug.Log("Starting jumping tutorial");
+
+            Debug.Log("Starting Attack tutorial");
         }
         else if (popUpIndex == 5)
         {
-            ThisIsYou.SetActive(true);
-
             SpawningAllowed = false;
-            BeatDetection(0, 2);
 
-            // 
-            if (Input.anyKeyDown)
-            {
-                popUpIndex++;
-            }
-            Debug.Log("Starting Moving tutorial");
-        }
-        else if(popUpIndex == 6)
-        {
-            SpawningAllowed = true;
-            BeatDetection(4, 7);
-            // Jumping
-            
-            if(playerCtrl.CollectedAttackNotes >= attackCriteria)
-            {
-                popUpIndex++;
-            }
-            Debug.Log("Starting jumping tutorial");
-        }
-        else if (popUpIndex == 7)
-        {
+            leftSpawner.DestroyAllNotes();
+            midSpawner.DestroyAllNotes();
+            rightSpawner.DestroyAllNotes();
 
-            StartCoroutine(TransitiontoFirstLevel(waitTime));
-            popUpIndex++;
+            lvlLoader.onClick.Invoke();
+            //StartCoroutine(TransitiontoFirstLevel(waitTime));
+            //popUpIndex++;
         }
 
-
-       IEnumerator TransitiontoFirstLevel(float t)
+       /*IEnumerator TransitiontoFirstLevel(float t)
         {
             yield return new WaitForSeconds(t);
             SceneManager.LoadScene("Level1");
-        }
+        }*/
     }
 
    void BeatDetection(int first, int last)
@@ -230,6 +206,27 @@ public class TutorialManager : MonoBehaviour
                     case 4: SpawnAttackLeft(); break;
                     case 5: SpawnAttackMid(); break;
                     case 6: SpawnAttackRight(); break;
+                    case 7: enemy.Spawn(leftSpawner, ntBlk.AttackPhase, 0); break;
+                    case 8: enemy.Spawn(midSpawner, ntBlk.AttackPhase, 1); break;
+                    case 9: enemy.Spawn(rightSpawner, ntBlk.AttackPhase, 2); break;
+                    case 10: enemy.Spawn(midSpawner, ntBlk.AttackPhase, 3); break;
+                    case 11: 
+                        enemy.Spawn(leftSpawner, ntBlk.AttackPhase, 0);
+                        enemy.Spawn(midSpawner, ntBlk.AttackPhase, 1);
+                        break;
+                    case 12:
+                        enemy.Spawn(leftSpawner, ntBlk.AttackPhase, 0);
+                        enemy.Spawn(rightSpawner, ntBlk.AttackPhase, 2);
+                        break;
+                    case 13:
+                        enemy.Spawn(midSpawner, ntBlk.AttackPhase, 1);
+                        enemy.Spawn(rightSpawner, ntBlk.AttackPhase, 2);
+                        break;
+                    case 14:
+                        enemy.Spawn(leftSpawner, ntBlk.AttackPhase, 0);
+                        enemy.Spawn(midSpawner, ntBlk.AttackPhase, 1);
+                        enemy.Spawn(rightSpawner, ntBlk.AttackPhase, 2);
+                        break;
                     default: Debug.Log("Out of index"); break;
                 }
             }
@@ -276,5 +273,15 @@ public class TutorialManager : MonoBehaviour
     void SpawnAttackRight()
     {
         rightSpawner.SpawnAttackNote();
+    }
+
+    public void IncreaseIndex()
+    {
+        popUpIndex++;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }

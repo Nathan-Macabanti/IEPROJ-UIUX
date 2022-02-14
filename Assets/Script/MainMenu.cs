@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 	private bool SpacePress = false;
+    public float ticks;
 	public Image image;
 	public GameObject title;
 	public GameObject Glow;
@@ -30,8 +31,8 @@ public class MainMenu : MonoBehaviour
 	    if (Input.GetKeyDown(KeyCode.Space) && SpacePress == false)
 	    {
 		    SpacePress = true;
-		    image.CrossFadeColor(Color.black, 5.0f, true, true);
-		    StartCoroutine(deactivate(4.0f));
+		    image.CrossFadeColor(Color.black, ticks, true, true);
+		    StartCoroutine(deactivate(ticks));
 	    }
     }
 
