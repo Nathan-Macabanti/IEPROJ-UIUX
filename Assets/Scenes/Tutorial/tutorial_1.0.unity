@@ -671,6 +671,7 @@ MonoBehaviour:
   - {fileID: 431524203}
   - {fileID: 165965929}
   - {fileID: 165965929}
+  - {fileID: 165965929}
   lvlLoader: {fileID: 311974459}
   dialogueObj: {fileID: 1368200702}
   dialogueManager: {fileID: 536260436}

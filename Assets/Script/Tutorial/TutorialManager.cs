@@ -170,6 +170,7 @@ public class TutorialManager : MonoBehaviour
             rightSpawner.DestroyAllNotes();
 
             lvlLoader.onClick.Invoke();
+            popUpIndex++;
             //StartCoroutine(TransitiontoFirstLevel(waitTime));
             //popUpIndex++;
         }
