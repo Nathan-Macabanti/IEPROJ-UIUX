@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     [SerializeField] private NoteBlockade ntBlkde;
     [SerializeField] private bool isDead;
     [SerializeField] private Animator EnemyAnimator;
+    [SerializeField] private GameObject damageParticles;
 
     [Header("Existing Animations")]
     [SerializeField] private bool LAttack;
@@ -63,6 +64,12 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     public void Damage(float dmgValue)
     {
         fHP -= dmgValue;
+        if(damageParticles != null)
+        {
+            GameObject dmgParticles = (GameObject)Instantiate(damageParticles, this.transform.position, this.transform.rotation);
+            Destroy(dmgParticles, 2f);
+        }
+        
         EnemyAnimator.Play("Damage");
     }
 

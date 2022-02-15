@@ -27,6 +27,9 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private float damageToEnemyValue = 1;
     [SerializeField] private int collectedAttackNotes = 0;
     [SerializeField] private int maxCollectedAttackNotes = 5;
+    [SerializeField] private GameObject AttackNoteParticles;
+    [SerializeField] private GameObject BloodParticles;
+    [SerializeField] private Transform bloodSpawnTrans;
     [SerializeField] private Text ComboText;
     [SerializeField] private Animator PlayerAnimator;
     [SerializeField] private AudioClip AtkSFX;
@@ -117,7 +120,11 @@ public class PlayerCollision : MonoBehaviour
                 isHurt = true;
                 invincibilityTicks = 0;
             }
-
+            if(BloodParticles != null)
+            {
+                GameObject blood = (GameObject)Instantiate(BloodParticles, bloodSpawnTrans.transform.position, bloodSpawnTrans.transform.rotation);
+                Destroy(blood, 2f);
+            }
             isInvincible = true;
             Destroy(col.gameObject);
 
@@ -150,6 +157,11 @@ public class PlayerCollision : MonoBehaviour
             PlayerAnimator.Play("VerenicaAttack");
             PlayerSFX.clip = AtkSFX;
             PlayerSFX.Play();
+            if(AttackNoteParticles != null)
+            {
+                GameObject atkParticle = (GameObject)Instantiate(AttackNoteParticles, this.transform.position, this.transform.rotation);
+                Destroy(atkParticle, 2f);
+            }
             Destroy(col.gameObject);
         }
     }

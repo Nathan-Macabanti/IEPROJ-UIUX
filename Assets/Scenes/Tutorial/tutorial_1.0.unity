@@ -11430,6 +11430,7 @@ MonoBehaviour:
   HitSFX: {fileID: 8300000, guid: 1cabf658c0ca0a84ba7cfb32cdf2db6c, type: 3}
   PlayerSFX: {fileID: 0}
   collectedAttackNotes: 0
+  AttackNoteParticles: {fileID: 5829328023347626872, guid: 770bd2cb43acc3b46a1f9c0dbca81ad4, type: 3}
   jumpClip: {fileID: 7400000, guid: 1df7bd31c55517742979446c3b445cf0, type: 2}
   JumpOffset: 0
   enemy: {fileID: 297573719}

@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip HitSFX;
     [SerializeField] private AudioSource PlayerSFX;
     [SerializeField] private int collectedAttackNotes = 0;
+    [SerializeField] private Transform bloodSpawnTrans;
+    [SerializeField] private GameObject AttackNoteParticles;
 
     [Header("Jump")]
     [SerializeField] private AnimationClip jumpClip;
@@ -195,7 +197,8 @@ public class PlayerController : MonoBehaviour
             playerAnimator.Play("VerenicaAttack");
             PlayerSFX.clip = AtkSFX;
             PlayerSFX.Play();
-            Debug.Log(collectedAttackNotes + " " + col.GetComponent<TutorialNote>().GetIsAttackNote);
+            GameObject atkParticle = Instantiate(AttackNoteParticles, this.transform.position, this.transform.rotation);
+            //Debug.Log(collectedAttackNotes + " " + col.GetComponent<TutorialNote>().GetIsAttackNote);
         }
         //Debug.Log("Colliding with: " + col.name);
         GameObject.Destroy(col.gameObject);
