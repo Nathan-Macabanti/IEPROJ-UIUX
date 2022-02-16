@@ -1787,12 +1787,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1671383184}
-  m_Father: {fileID: 448653152}
-  m_RootOrder: 0
+  m_Father: {fileID: 1760192820}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 633.15564, y: 43.5}
+  m_AnchoredPosition: {x: -99.99988, y: 0}
   m_SizeDelta: {x: 400, y: 125}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &311974459
@@ -3217,8 +3217,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 311974458}
+  m_Children: []
   m_Father: {fileID: 1760192820}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4071,6 +4070,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71474b1f8043b3144b7987e9f7c26881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &605376386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605376387}
+  m_Layer: 3
+  m_Name: Bleeding
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &605376387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605376386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1550848839}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &612197769
 GameObject:
   m_ObjectHideFlags: 0
@@ -11219,6 +11248,7 @@ Transform:
   m_Children:
   - {fileID: 1966474748}
   - {fileID: 596942533}
+  - {fileID: 605376387}
   m_Father: {fileID: 1886947227}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -9.5}
@@ -11430,6 +11460,8 @@ MonoBehaviour:
   HitSFX: {fileID: 8300000, guid: 1cabf658c0ca0a84ba7cfb32cdf2db6c, type: 3}
   PlayerSFX: {fileID: 0}
   collectedAttackNotes: 0
+  bloodSpawnTrans: {fileID: 605376387}
+  bloodParticles: {fileID: 5515500336508408991, guid: ef3052e3a77797444816087c1c664f2b, type: 3}
   AttackNoteParticles: {fileID: 5829328023347626872, guid: 770bd2cb43acc3b46a1f9c0dbca81ad4, type: 3}
   jumpClip: {fileID: 7400000, guid: 1df7bd31c55517742979446c3b445cf0, type: 2}
   JumpOffset: 0
@@ -13105,6 +13137,7 @@ RectTransform:
   - {fileID: 651044922}
   - {fileID: 2099865541}
   - {fileID: 431524204}
+  - {fileID: 311974458}
   m_Father: {fileID: 733190766}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

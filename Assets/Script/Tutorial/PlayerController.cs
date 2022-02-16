@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource PlayerSFX;
     [SerializeField] private int collectedAttackNotes = 0;
     [SerializeField] private Transform bloodSpawnTrans;
+    [SerializeField] private GameObject bloodParticles;
     [SerializeField] private GameObject AttackNoteParticles;
 
     [Header("Jump")]
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour
                 invincibilityTicks = 0;
             }
 
-            
+            GameObject dgg = Instantiate(bloodParticles, this.bloodSpawnTrans.position, this.bloodSpawnTrans.rotation);
             isInvincible = true;
             PlayerSFX.clip = HitSFX;
             PlayerSFX.Play();
@@ -198,6 +199,7 @@ public class PlayerController : MonoBehaviour
             PlayerSFX.clip = AtkSFX;
             PlayerSFX.Play();
             GameObject atkParticle = Instantiate(AttackNoteParticles, this.transform.position, this.transform.rotation);
+            Destroy(atkParticle, 3f);
             //Debug.Log(collectedAttackNotes + " " + col.GetComponent<TutorialNote>().GetIsAttackNote);
         }
         //Debug.Log("Colliding with: " + col.name);
