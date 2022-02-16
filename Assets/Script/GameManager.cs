@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         if(player.GetHPPoints <= 0)
         {
             songMan2.StopMusic();
+            songMan2.TellAllSpawnereToDestroyTheirNotes();
             LossScreen.gameObject.SetActive(true);
         }
     }

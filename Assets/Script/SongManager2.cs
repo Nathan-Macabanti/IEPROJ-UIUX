@@ -158,9 +158,7 @@ public class SongManager2 : MonoBehaviour
         {
             player.IsInvincible = true;
             GetComponent<AudioSource>().Stop();
-            spawners[0].DestroyAllNotes();
-            spawners[1].DestroyAllNotes();
-            spawners[2].DestroyAllNotes();
+            TellAllSpawnereToDestroyTheirNotes();
             //countDown.text = "Keld 'em";
             if (stopedOnce != 1)
             {
@@ -313,6 +311,14 @@ public class SongManager2 : MonoBehaviour
         }
     }
 #endif
+
+    public void TellAllSpawnereToDestroyTheirNotes()
+    {
+        spawners[0].DestroyAllNotes();
+        spawners[1].DestroyAllNotes();
+        spawners[2].DestroyAllNotes();
+        spawners[3].DestroyAllNotes();
+    }
 
     public void PauseMusic()
     {
