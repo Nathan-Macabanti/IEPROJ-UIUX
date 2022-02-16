@@ -64,10 +64,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if false
         if (isInvincible)
         {
             BecomeInvicible();
         }
+#endif
 
         if(collectedAttackNotes <= 0)
         {
@@ -182,11 +184,11 @@ public class PlayerController : MonoBehaviour
             if (!isHurt)
             {
                 isHurt = true;
-                invincibilityTicks = 0;
+                //invincibilityTicks = 0;
             }
 
             GameObject dgg = Instantiate(bloodParticles, this.bloodSpawnTrans.position, this.bloodSpawnTrans.rotation);
-            isInvincible = true;
+            //isInvincible = true;
             PlayerSFX.clip = HitSFX;
             PlayerSFX.Play();
         }

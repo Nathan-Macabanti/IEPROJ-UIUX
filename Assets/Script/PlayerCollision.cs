@@ -66,10 +66,12 @@ public class PlayerCollision : MonoBehaviour
         {
             Debug.Log("Game Over");
         }
+#if false
         if (isInvincible)
         {
             BecomeInvicible();
         }
+#endif
         if(HPPoints <= 1)
         {
             TVStaticCanvas.gameObject.SetActive(true);
@@ -113,19 +115,19 @@ public class PlayerCollision : MonoBehaviour
     private void OnTriggerEnter(Collider col)
     {
         bool isAttackNote = col.GetComponent<Note>().GetIsAttackNote;
-        if (!isInvincible && !isAttackNote)
+        if (!isAttackNote)
         {
             if (!isHurt)
             {
                 isHurt = true;
-                invincibilityTicks = 0;
+                //invincibilityTicks = 0;
             }
             if(BloodParticles != null)
             {
                 GameObject blood = (GameObject)Instantiate(BloodParticles, bloodSpawnTrans.transform.position, bloodSpawnTrans.transform.rotation);
                 Destroy(blood, 2f);
             }
-            isInvincible = true;
+            //isInvincible = true;
             Destroy(col.gameObject);
 
             if (HPPoints <= 0) { HPPoints = 0; }
@@ -145,7 +147,7 @@ public class PlayerCollision : MonoBehaviour
             PlayerSFX.clip = HitSFX;
             PlayerSFX.Play();
         }
-        else if (isAttackNote)
+        if (isAttackNote)
         {
             collectedAttackNotes += 1;
             float temp = 1;
