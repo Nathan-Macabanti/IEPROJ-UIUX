@@ -1186,6 +1186,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 762542789}
   AttackNoteCopy: {fileID: 806429618}
   NoteList: []
+  DodgePortal: {fileID: 1969061674058621851, guid: 41a700d3dd521074b9d7d5884e8d191d, type: 3}
+  AttackPortal: {fileID: 123470485459542244, guid: 31e31c49f3587ab4e86dfe4971e370db, type: 3}
 --- !u!1 &51268688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1960,6 +1962,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 762542789}
   AttackNoteCopy: {fileID: 806429618}
   NoteList: []
+  DodgePortal: {fileID: 1969061674058621851, guid: 41a700d3dd521074b9d7d5884e8d191d, type: 3}
+  AttackPortal: {fileID: 123470485459542244, guid: 31e31c49f3587ab4e86dfe4971e370db, type: 3}
 --- !u!1 &149573170
 GameObject:
   m_ObjectHideFlags: 0
@@ -14235,6 +14239,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 166057880}
   AttackNoteCopy: {fileID: 166057880}
   NoteList: []
+  DodgePortal: {fileID: 0}
+  AttackPortal: {fileID: 0}
 --- !u!1 &1276216538
 GameObject:
   m_ObjectHideFlags: 0
@@ -20501,6 +20507,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 762542789}
   AttackNoteCopy: {fileID: 806429618}
   NoteList: []
+  DodgePortal: {fileID: 1969061674058621851, guid: 41a700d3dd521074b9d7d5884e8d191d, type: 3}
+  AttackPortal: {fileID: 123470485459542244, guid: 31e31c49f3587ab4e86dfe4971e370db, type: 3}
 --- !u!1 &1785995541
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Note DodgeNoteCopy;
     [SerializeField] private Note AttackNoteCopy;
     public List<Note> NoteList;
+
+    [Header("FX")]
+    [SerializeField] private GameObject DodgePortal;
+    [SerializeField] private GameObject AttackPortal;
     //[SerializeField] private AudioSource music;
 
     /*
@@ -53,6 +57,12 @@ public class Spawner : MonoBehaviour
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
 
+        if(DodgePortal != null)
+        {
+            GameObject fx = (GameObject)Instantiate(AttackPortal, this.transform.position, Quaternion.identity);
+            Destroy(fx, 2.0f);
+        }
+        
         //mat.color = changeColor;
     }
 
@@ -63,7 +73,13 @@ public class Spawner : MonoBehaviour
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
 
-        //mat.color = changeColor;
+        if (AttackPortal != null)
+        {
+            GameObject fx = (GameObject)Instantiate(DodgePortal, this.transform.position, Quaternion.identity);
+            Destroy(fx, 2.0f);
+            //mat.color = changeColor;
+        }
+
     }
 
     void MaxNotes(int maximum)
