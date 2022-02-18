@@ -109,6 +109,11 @@ public class NoteBlockadeTuts : MonoBehaviour
         return false;
     }
 
+    public void BackToZero()
+    {
+        NotesDodged = 0;
+    }
+
     public float GetRequiredAmountToDodge { get { return RequiredAmountToDodge / 2.0f; } }
 
     public bool AttackPhase

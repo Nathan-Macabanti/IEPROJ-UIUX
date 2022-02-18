@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private EnemyScript enemy;
     [SerializeField] private float damageValue = 2;
     [SerializeField] private Text HITS;
+    [SerializeField] private NoteBlockadeTuts ntblk;
 
     private bool isInAir;
     private float ticks = 0.0f;
@@ -187,7 +188,9 @@ public class PlayerController : MonoBehaviour
                 //invincibilityTicks = 0;
             }
 
+            ntblk.BackToZero();
             GameObject dgg = Instantiate(bloodParticles, this.bloodSpawnTrans.position, this.bloodSpawnTrans.rotation);
+            Destroy(dgg, 2.0f);
             //isInvincible = true;
             PlayerSFX.clip = HitSFX;
             PlayerSFX.Play();

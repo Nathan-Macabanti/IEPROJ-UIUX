@@ -11474,6 +11474,7 @@ MonoBehaviour:
   enemy: {fileID: 297573719}
   damageValue: 2
   HITS: {fileID: 1657126932}
+  ntblk: {fileID: 1762929950}
   tutsMan: {fileID: 123915029}
   PlayerSprite: {fileID: 1966474747}
   InitialRotation: {x: 0, y: 0, z: 0, w: 0}
