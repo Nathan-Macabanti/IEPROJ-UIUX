@@ -250,6 +250,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 336421612}
   AttackNoteCopy: {fileID: 109472300}
   NoteList: []
+  DodgePortal: {fileID: 0}
+  AttackPortal: {fileID: 0}
 --- !u!1 &95764018
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +622,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 336421612}
   AttackNoteCopy: {fileID: 109472300}
   NoteList: []
+  DodgePortal: {fileID: 0}
+  AttackPortal: {fileID: 0}
 --- !u!1 &123915027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297573717}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.22, y: -1.67, z: -6.66}
+  m_LocalPosition: {x: 7.38, y: -1.67, z: -6.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1434232281}
@@ -10526,6 +10530,8 @@ MonoBehaviour:
   AttackNote: {fileID: 1514671637}
   JumpNote: {fileID: 1456862840}
   NoteList: []
+  DodgePortal: {fileID: 1969061674058621851, guid: 41a700d3dd521074b9d7d5884e8d191d, type: 3}
+  AttackPortal: {fileID: 123470485459542244, guid: 31e31c49f3587ab4e86dfe4971e370db, type: 3}
 --- !u!1 &1474202248
 GameObject:
   m_ObjectHideFlags: 0
@@ -13494,6 +13500,8 @@ MonoBehaviour:
   AttackNote: {fileID: 1514671637}
   JumpNote: {fileID: 1456862840}
   NoteList: []
+  DodgePortal: {fileID: 1969061674058621851, guid: 41a700d3dd521074b9d7d5884e8d191d, type: 3}
+  AttackPortal: {fileID: 123470485459542244, guid: 31e31c49f3587ab4e86dfe4971e370db, type: 3}
 --- !u!1 &1772279854
 GameObject:
   m_ObjectHideFlags: 0
@@ -13543,6 +13551,8 @@ MonoBehaviour:
   DodgeNoteCopy: {fileID: 336421612}
   AttackNoteCopy: {fileID: 109472300}
   NoteList: []
+  DodgePortal: {fileID: 0}
+  AttackPortal: {fileID: 0}
 --- !u!1 &1772738282
 GameObject:
   m_ObjectHideFlags: 0
@@ -14647,6 +14657,8 @@ MonoBehaviour:
   AttackNote: {fileID: 1514671637}
   JumpNote: {fileID: 1456862840}
   NoteList: []
+  DodgePortal: {fileID: 1969061674058621851, guid: 41a700d3dd521074b9d7d5884e8d191d, type: 3}
+  AttackPortal: {fileID: 123470485459542244, guid: 31e31c49f3587ab4e86dfe4971e370db, type: 3}
 --- !u!1 &1966474747
 GameObject:
   m_ObjectHideFlags: 0

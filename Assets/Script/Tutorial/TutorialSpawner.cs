@@ -15,6 +15,9 @@ public class TutorialSpawner : MonoBehaviour
     private TutorialNote JumpNote;
     public List<TutorialNote> NoteList;
 
+    [Header("FX")]
+    [SerializeField] private GameObject DodgePortal;
+    [SerializeField] private GameObject AttackPortal;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,12 @@ public class TutorialSpawner : MonoBehaviour
         note = Instantiate(this.DodgeNote, this.transform.position, this.transform.rotation, this.transform);
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
+
+        if (DodgePortal != null)
+        {
+            GameObject fx = (GameObject)Instantiate(AttackPortal, this.transform.position, Quaternion.identity);
+            Destroy(fx, 2.0f);
+        }
     }
 
     public void SpawnAttackNote()
@@ -44,6 +53,13 @@ public class TutorialSpawner : MonoBehaviour
         note = Instantiate(this.AttackNote, this.transform.position, this.transform.rotation, this.transform);
         note.NoteObj().SetActive(true);
         NoteList.Add(note);
+
+        if (AttackPortal != null)
+        {
+            GameObject fx = (GameObject)Instantiate(DodgePortal, this.transform.position, Quaternion.identity);
+            Destroy(fx, 2.0f);
+            //mat.color = changeColor;
+        }
     }
 
     public void SpawnJumpNote()
