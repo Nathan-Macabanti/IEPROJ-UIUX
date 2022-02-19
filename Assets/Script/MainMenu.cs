@@ -8,20 +8,27 @@ public class MainMenu : MonoBehaviour
 {
 	private bool SpacePress = false;
     public float ticks;
-	public Image image;
+	private Image image;
 	public GameObject title;
 	public GameObject Glow;
 	private Animator anim;
 	void Start()
 	{
 		image = title.GetComponent<Image>();
-		anim = Glow.GetComponent<Animator>();
+		if (Glow== true)
+		{
+			anim = Glow.GetComponent<Animator>();
+		}
+		
 	}
     public void onPlayPress()
     {
         SceneManager.LoadScene("tutorial_1.0");
     }
-
+    public void onExitPress()
+    { 
+	    Application.Quit();
+    }
     public void onPlayGamePress()
     {
         SceneManager.LoadScene("Prototype");
