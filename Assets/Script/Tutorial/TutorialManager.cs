@@ -9,12 +9,16 @@ public class TutorialManager : MonoBehaviour
     public GameObject[] popUps;
     private int popUpIndex;
 
+    public GameObject textConditionContainer;
+    public Text conditionInstructionsText;
+    public Text conditionUIText;
     public Button lvlLoader;
 
     public GameObject dialogueObj;
     public GameObject dialogueManager;
     private Dialogue dialogueT;
 
+    [Header("Spawners")]
     //[SerializeField] private GameObject GameUI;
     //[SerializeField] private GameObject TutsUI;
     [SerializeField]
@@ -26,6 +30,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject GameUI;
     //jump spawner
 
+    [Header("Rhythm")]
     [SerializeField] private float _bpm;
     [SerializeField] private float _beatInterval, _beatTimer;
     [SerializeField] private static bool _beatFull;
@@ -105,6 +110,7 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 1)
         {
+            textConditionContainer.SetActive(false);
             GameUI.SetActive(true);
             SpawningAllowed = false;
 
@@ -112,6 +118,9 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 2)
         {
+            textConditionContainer.SetActive(true);
+            conditionInstructionsText.text = "Dodge or Jump the notes";
+            conditionUIText.text = "And fill the bar";
             ThisIsYou.SetActive(true);
             
             SpawningAllowed = true;
@@ -138,6 +147,7 @@ public class TutorialManager : MonoBehaviour
         }
         else if(popUpIndex == 3)
         {
+            textConditionContainer.SetActive(false);
             ThisIsYou.SetActive(false);
             SpawningAllowed = false;
             // Jumping
@@ -149,6 +159,10 @@ public class TutorialManager : MonoBehaviour
         }
         else if (popUpIndex == 4)
         {
+            textConditionContainer.SetActive(true);
+            conditionInstructionsText.text = "Defeat";
+            conditionUIText.text = "the enemy";
+
             ntBlk.TurnOffAllAlways();
             SpawningAllowed = true;
             BeatDetection(7, 15);

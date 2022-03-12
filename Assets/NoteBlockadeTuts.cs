@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class NoteBlockadeTuts : MonoBehaviour
 {
     [Header("Notes Dodge")]
-    [SerializeField] protected float NotesDodged;
+    public float NotesDodged;
     [SerializeField] private float RequiredAmountToDodge = 10;
     [SerializeField] private PlayerController player;
 
