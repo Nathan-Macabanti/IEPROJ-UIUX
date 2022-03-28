@@ -18,6 +18,7 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private Radio radio;
 
     [Header("Text File")]
+    [SerializeField] private NoteSequencer noteSequencer;
     [SerializeField] private string ChartFile;
 
     [Header("Debugging")]
@@ -28,13 +29,6 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private Text countDown;
     [SerializeField] private int nCountDown;
     [SerializeField] private Slider songSlider;
-
-    [Header("BPM calculator")]
-    [SerializeField] private float offset = 0.25f;
-    [SerializeField] private float bpm;
-    [SerializeField] private List<float> notes;
-    [SerializeField] private List<string> spawnerIndexStr;
-    [SerializeField] private int nextIndex = 0;
 
     [Header("Song Position from seconds to beats calculator")]
     [SerializeField] private float songPosition;
@@ -65,6 +59,12 @@ public class SongManager2 : MonoBehaviour
     //[SerializeField] private float[] enemiesHP;
     //[SerializeField] private string[] chartList;
 
+    [SerializeField] private List<float> notes;
+    [SerializeField] private List<string> spawnerIndexStr;
+    private float offset = 0.25f;
+    private float bpm;
+    private int nextIndex = 0;
+
     private int playedOnce;
     private int stopedOnce;
 
@@ -80,7 +80,8 @@ public class SongManager2 : MonoBehaviour
             Destroy(this);
         }
 
-        ChangeChart(ChartFile);
+        //ChangeChart(ChartFile);
+        ChangeChart(noteSequencer);
     }
     // Start is called before the first frame update
     void Start()
@@ -188,10 +189,7 @@ public class SongManager2 : MonoBehaviour
     #region Functions
     public void CountDown()
     {
-        //bool beatFull;
         float beatInterval;
-        //full beat count
-        //beatFull = false;
         beatInterval = secondsPerBeat / 2;
         beatTimer += Time.deltaTime;
         if (beatTimer >= beatInterval)
@@ -220,13 +218,6 @@ public class SongManager2 : MonoBehaviour
 
     public void WarningPing()
     {
-        /*
-        Color D1 = warningDiamonds[0].GetComponent<SpriteRenderer>().material.color;
-        Color D2 = warningDiamonds[1].GetComponent<SpriteRenderer>().material.color;
-        Color D3 = warningDiamonds[2].GetComponent<SpriteRenderer>().material.color;
-
-        Color Invisible = new Color(1,1,1,0);*/
-
         if (nextIndex < notes.Count)
         {
             spawnerNextIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
@@ -284,7 +275,19 @@ public class SongManager2 : MonoBehaviour
         }
         else
         {
-            Debug.LogError("File does not exist");
+            //Debug.LogError("File does not exist");
+        }
+    }
+
+    public void ChangeChart(NoteSequencer sequencer)
+    {
+        radio.GetADisc(sequencer.song);
+        bpm = sequencer.bpm;
+        for (int i = 0; i < sequencer.Sequence.Count; i++)
+        {
+            NoteInfo ntInfo = sequencer.Sequence[i];
+            notes.Add(ntInfo.beat);
+            spawnerIndexStr.Add(ntInfo.spawner);
         }
     }
 

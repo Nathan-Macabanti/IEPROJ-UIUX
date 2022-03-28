@@ -44,7 +44,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
     void Update()
     {
         HealthBar.value = fHP / fHPClone;
-        HealthCounter.text = "HP " + fHP.ToString() + "/" + fHPClone.ToString();
+        HealthCounter.text = "HP " + (Mathf.Round(fHP * 10) * 0.1).ToString() + "/" + fHPClone.ToString();
     }
 
     public float GetfHP { get { return fHP; } }

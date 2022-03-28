@@ -655,17 +655,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radio: {fileID: 1926940878}
-  ChartFile: Level1.2
-  isDebugging: 1
+  noteSequencer: {fileID: 11400000, guid: 18bb13981e9fb74428e2f949db52b92a, type: 2}
+  ChartFile: Level1_1
+  isDebugging: 0
   counterBG: {fileID: 4527101987596835215}
   countDown: {fileID: 4066834637248069600}
   nCountDown: 3
   songSlider: {fileID: 1221733307373625126}
-  offset: 0.25
-  bpm: 160
-  notes: []
-  spawnerIndexStr: []
-  nextIndex: 0
   songPosition: 0
   songPositionInBeats: 0
   secondsPerBeat: 0
@@ -700,7 +696,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 49f806c66490a60469c64148b0c62a3f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -9514,7 +9510,7 @@ RectTransform:
   m_LocalScale: {x: 0.7499999, y: 0.7499999, z: 0.7499999}
   m_Children: []
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -21410,7 +21406,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1886947227}
   m_Layer: 0
-  m_Name: Game Stage
+  m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24097,7 +24093,7 @@ RectTransform:
   m_Children:
   - {fileID: 6051964274033124836}
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -24637,7 +24633,7 @@ RectTransform:
   - {fileID: 7525422366664489216}
   - {fileID: 7597204892085523911}
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -24735,7 +24731,7 @@ RectTransform:
   - {fileID: 7724133756710666143}
   - {fileID: 731420065994916826}
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -25108,7 +25104,7 @@ Transform:
   m_LocalScale: {x: 0.41666663, y: 0.41666663, z: 0.41666663}
   m_Children: []
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2498166263475306708
 RectTransform:
@@ -25149,7 +25145,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -25658,7 +25654,6 @@ RectTransform:
   - {fileID: 1112930948761341808}
   - {fileID: 6452091503931463239}
   - {fileID: 3417358531058629918}
-  - {fileID: 6434247779916085159}
   - {fileID: 2483665638920040231}
   - {fileID: 9086019439119495422}
   - {fileID: 8447354719445875777}
@@ -25668,6 +25663,7 @@ RectTransform:
   - {fileID: 2555621086995040433}
   - {fileID: 829169992}
   - {fileID: 582371443454423874}
+  - {fileID: 6434247779916085159}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25859,7 +25855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53b945042705bd4da690aa0e0e5fbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SngManager: {fileID: 0}
+  SngManager: {fileID: 38935251}
   pathText: {fileID: 6950512202696062729}
   IsSaving: {fileID: 2933755372742604834}
 --- !u!224 &3768253128457251809
@@ -26960,7 +26956,7 @@ RectTransform:
   - {fileID: 875625958941402079}
   - {fileID: 4660331478685685337}
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 6
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27659,7 +27655,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -28078,7 +28074,7 @@ RectTransform:
   m_Children:
   - {fileID: 350109954453576235}
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28228,6 +28224,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 297573719}
     - target: {fileID: 8650449064428275924, guid: c860a31e9d4eb5247a818e2b4b6d7c9d, type: 3}
+      propertyPath: isDebugging
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650449064428275924, guid: c860a31e9d4eb5247a818e2b4b6d7c9d, type: 3}
       propertyPath: HPBarAnimator
       value: 
       objectReference: {fileID: 7501891987038148126}
@@ -28316,7 +28316,7 @@ RectTransform:
   m_Children:
   - {fileID: 4404045117409290200}
   m_Father: {fileID: 3420351679689925482}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

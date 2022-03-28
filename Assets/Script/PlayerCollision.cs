@@ -89,7 +89,7 @@ public class PlayerCollision : MonoBehaviour
         }
         else
         {
-            ComboText.text = (collectedAttackNotes / 2).ToString() + "\nHITS";
+            ComboText.text = collectedAttackNotes.ToString() + "\nHITS";
         }
         //HPBarAnimator.SetBool("Healing", false);
     }
