@@ -654,9 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5408c5a37dce0c244af84a0cb1d41936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beatTimer: 0
   radio: {fileID: 1926940878}
   noteSequencer: {fileID: 11400000, guid: 18bb13981e9fb74428e2f949db52b92a, type: 2}
-  ChartFile: Level1_1
   isDebugging: 0
   counterBG: {fileID: 4527101987596835215}
   countDown: {fileID: 4066834637248069600}
@@ -685,7 +685,8 @@ MonoBehaviour:
   enemy: {fileID: 297573719}
   breakSplashScreen: {fileID: 1752155214}
   VictoryCanvas: {fileID: 694478840}
-  beatTimer: 0
+  notes: []
+  spawnerIndexStr: []
 --- !u!82 &38935252
 AudioSource:
   m_ObjectHideFlags: 0
@@ -696,7 +697,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 49f806c66490a60469c64148b0c62a3f, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2947,7 +2948,7 @@ MonoBehaviour:
   HealthBar: {fileID: 1431062672593395893}
   HealthCounter: {fileID: 4965144014619477920}
   UseSuggested: 0
-  fHP: 130
+  fHP: 2
   fsuggestedHP: 0
   fHPClone: 0
   sMan: {fileID: 38935251}
@@ -14163,7 +14164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1267212020
 Transform:
   m_ObjectHideFlags: 0
@@ -14406,7 +14407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NotesDodged: 0
-  RequiredAmountToDodge: 10
+  RequiredAmountToDodge: 1
   player: {fileID: 622784752}
   ticks: 0
   ISATTACKNOTE_INTERVAL: 5
@@ -20372,7 +20373,7 @@ MonoBehaviour:
   IsOn: 0
   enemy:
   - Health: 110
-    ChartFile: Level1.2
+    noteSequencer: {fileID: 11400000, guid: 18bb13981e9fb74428e2f949db52b92a, type: 2}
     EnemySprite: {fileID: 270575299}
     EnemyAnimator: {fileID: 1388570688}
     LAttack: 0
@@ -20383,7 +20384,7 @@ MonoBehaviour:
     AttackNote: {fileID: 1927209512}
     JumpNote: {fileID: 1909816425}
   - Health: 150
-    ChartFile: Level1.22
+    noteSequencer: {fileID: 11400000, guid: 400ea0788bec6b0499723eda3c131402, type: 2}
     EnemySprite: {fileID: 28597607}
     EnemyAnimator: {fileID: 28597610}
     LAttack: 1

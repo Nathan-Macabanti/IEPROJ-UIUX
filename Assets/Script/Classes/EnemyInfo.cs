@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class EnemyInfo
 {
     public float Health;
-    public string ChartFile;
+    //public string ChartFile;
+    public NoteSequencer noteSequencer;
     public GameObject EnemySprite;  
     public Animator EnemyAnimator;
     public bool LAttack;

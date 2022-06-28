@@ -11,11 +11,8 @@ public class BreakSplashScreen : MonoBehaviour
     [Header("Backend Stuff")]
     [SerializeField] private bool IsOn;
     [SerializeField] private List<EnemyInfo> enemy;
-    //[SerializeField] private OnCollision player;
     [SerializeField] private SongManager2 song;
     [SerializeField] private EnemyHealth enemyHealth;
-    //[SerializeField] private float[] enemiesHP;
-    //[SerializeField] private string[] chartList;
     [SerializeField] private int index;
     [SerializeField] private int points = 0;
     [SerializeField] private Button[] potions;
@@ -40,7 +37,7 @@ public class BreakSplashScreen : MonoBehaviour
             //Change Health;
             enemyHealth.UpdateHealth(enemy[index].Health);
             //Change chart
-            song.ChangeChart(enemy[index].ChartFile);
+            song.ChangeChart(enemy[index].noteSequencer);
             
             //Change notes of Left Spawner
             song.LeftSpawner.attackNoteCopy = enemy[index].AttackNote;

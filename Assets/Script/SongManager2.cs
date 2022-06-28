@@ -14,12 +14,13 @@ public class SongManager2 : MonoBehaviour
 {
     public static SongManager2 songManager2Instance;
 
+    [Header("CountDown till start")]
+    [SerializeField] private float beatTimer = 0;
+
     [Header("Song")]
     [SerializeField] private Radio radio;
-
-    [Header("Text File")]
     [SerializeField] private NoteSequencer noteSequencer;
-    [SerializeField] private string ChartFile;
+    //[SerializeField] private string ChartFile;
 
     [Header("Debugging")]
     [SerializeField] private bool isDebugging;
@@ -67,9 +68,11 @@ public class SongManager2 : MonoBehaviour
 
     private int playedOnce;
     private int stopedOnce;
+    private AudioSource audioSrc;
 
     private void Awake()
     {
+        audioSrc = GetComponent<AudioSource>();
         if (songManager2Instance == null)
         {
             songManager2Instance = this;
@@ -80,10 +83,10 @@ public class SongManager2 : MonoBehaviour
             Destroy(this);
         }
 
-        //ChangeChart(ChartFile);
         ChangeChart(noteSequencer);
     }
     // Start is called before the first frame update
+
     void Start()
     {
         bpm = bpm / 4;
@@ -106,77 +109,11 @@ public class SongManager2 : MonoBehaviour
 
         if (nCountDown == -1 && enemy.GetfHP > 0)
         {
-            countDown.text = " ";
-            if (playedOnce != 1)
-            {
-                player.IsInvincible = false;
-                GetComponent<AudioSource>().Play();
-                playedOnce = 1;
-            }
-            songPosition = (float)GetComponent<AudioSource>().time;
-            songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
-            //if (GetComponent<AudioSource>().isPlaying)
-            songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
-            //Debug.Log(songPositionInBeats);
-            //Debug.Log(nextIndex);
-            if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying)
-            {
-                beatsShownInAdvance = 0.25f;
-                if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
-                    spawnerIndexStr[nextIndex] != "")
-                {
-                    spawnerIndex.Clear();
-                    spawnerIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
-
-                    for (int i = 0; i < spawnerIndex.Count; i++)
-                    {
-                        //Debug.Log(spawners[spawnerIndex[i]]);
-                        if (spawnerIndex[i] >= 0)
-                        {
-                            //Enemy Spawns a note
-                            bool IsAttack = noteBlockade.GetIsAttackNote();
-                            enemy.Spawn(spawners[spawnerIndex[i]], IsAttack, spawnerIndex[i]);
-                            /*
-                            if(!noteBlockade.GetIsAttackNote())
-                                spawners[spawnerIndex[i]].SpawnDodgeNote();
-                            else
-                                spawners[spawnerIndex[i]].SpawnAttackNote();
-                            */
-                        }
-                            
-                    }
-                    nextIndex++;
-                }
-            }
-            else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
-            {
-                nextIndex = 0;
-                //player.Heal(1);
-                GetComponent<AudioSource>().Play();
-            }
+            RhythmGame();
         }
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
-            player.IsInvincible = true;
-            GetComponent<AudioSource>().Stop();
-            TellAllSpawnereToDestroyTheirNotes();
-            //countDown.text = "Keld 'em";
-            if (stopedOnce != 1)
-            {
-                Debug.Log("Destroyed all notes on map");
-                breakSplashScreen.AddPoints(player.GetHPPoints);
-                stopedOnce = 1;
-                breakSplashScreen.AddIndex(1);
-            }
-
-            if (breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
-            {
-                breakSplashScreen.Appear();
-            }
-            else
-            {
-                VictoryCanvas.gameObject.SetActive(true);
-            }
+            CheckWinCondition();
         }
         else if (enemy.GetfHP > 0 && nCountDown != -1)
         {
@@ -184,9 +121,88 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
-    [Header("CountDown till start")]
-    [SerializeField] private float beatTimer = 0;
     #region Functions
+
+    private void RhythmGame()
+    {
+        countDown.text = " ";
+        //Makesure that it is only played once
+        if (playedOnce != 1)
+        {
+            player.IsInvincible = false;
+            GetComponent<AudioSource>().Play();
+            playedOnce = 1;
+        }
+        songPosition = (float)GetComponent<AudioSource>().time;
+        songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
+        //if (GetComponent<AudioSource>().isPlaying)
+        songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;
+        //Debug.Log(songPositionInBeats);
+        //Debug.Log(nextIndex);
+        ReadBeatMap();
+    }
+
+    private void ReadBeatMap()
+    {
+        if (nextIndex < notes.Count && GetComponent<AudioSource>().isPlaying)
+        {
+            beatsShownInAdvance = 0.25f;
+            if (notes[nextIndex] < songPositionInBeats + beatsShownInAdvance &&
+                spawnerIndexStr[nextIndex] != "")
+            {
+                spawnerIndex.Clear();
+                spawnerIndex = spawnerIndexStr[nextIndex].Split(',').Select(Int32.Parse).ToList();
+
+                for (int i = 0; i < spawnerIndex.Count; i++)
+                {
+                    //Debug.Log(spawners[spawnerIndex[i]]);
+                    if (spawnerIndex[i] >= 0)
+                    {
+                        //Enemy Spawns a note
+                        bool IsAttack = noteBlockade.GetIsAttackNote();
+                        enemy.Spawn(spawners[spawnerIndex[i]], IsAttack, spawnerIndex[i]);
+                        /*
+                        if(!noteBlockade.GetIsAttackNote())
+                            spawners[spawnerIndex[i]].SpawnDodgeNote();
+                        else
+                            spawners[spawnerIndex[i]].SpawnAttackNote();
+                        */
+                    }
+
+                }
+                nextIndex++;
+            }
+        }
+        else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
+        {
+            nextIndex = 0;
+            //player.Heal(1);
+            GetComponent<AudioSource>().Play();
+        }
+    }
+    private void CheckWinCondition()
+    {
+        player.IsInvincible = true;
+        GetComponent<AudioSource>().Stop();
+        TellAllSpawnereToDestroyTheirNotes();
+        //countDown.text = "Keld 'em";
+        if (stopedOnce != 1)
+        {
+            Debug.Log("Destroyed all notes on map");
+            breakSplashScreen.AddPoints(player.GetHPPoints);
+            stopedOnce = 1;
+            breakSplashScreen.AddIndex(1);
+        }
+
+        if (breakSplashScreen.GetListCount > breakSplashScreen.GetIndex)
+        {
+            breakSplashScreen.Appear();
+        }
+        else
+        {
+            VictoryCanvas.gameObject.SetActive(true);
+        }
+    }
     public void CountDown()
     {
         float beatInterval;
@@ -246,42 +262,9 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
-    public void ChangeChart(string file)
-    {
-        //string Path = ChartFile + ".txt";
-        string Path = Application.streamingAssetsPath + "/Charts/" + file + ".txt";
-        TextAsset txtAsset = (TextAsset)Resources.Load(Path);
-        //Read From The File
-        if (File.Exists(Path))
-        {
-            StreamReader reader = new StreamReader(Path);
-            this.GetComponent<AudioSource>().clip = radio.GetADisc(int.Parse(reader.ReadLine()));
-            Debug.Log(this.GetComponent<AudioSource>().clip.name);
-            bpm = float.Parse(reader.ReadLine().ToString());
-            int index = int.Parse(reader.ReadLine().ToString());
-            notes.Clear();
-            for (int i = 0; i < index; i++)
-            {
-                notes.Add(float.Parse(reader.ReadLine().ToString()));
-            }
-            spawnerIndexStr.Clear();
-            for (int i = 0; i < index; i++)
-            {
-                spawnerIndexStr.Add(reader.ReadLine().ToString());
-            }
-
-            reader.Close();
-            //offset += nCountDown;
-        }
-        else
-        {
-            //Debug.LogError("File does not exist");
-        }
-    }
-
     public void ChangeChart(NoteSequencer sequencer)
     {
-        radio.GetADisc(sequencer.song);
+        audioSrc.clip = radio.GetADisc(sequencer.song);
         bpm = sequencer.bpm;
         for (int i = 0; i < sequencer.Sequence.Count; i++)
         {
