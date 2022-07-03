@@ -106,13 +106,16 @@ public class SongManager2 : MonoBehaviour
     void Update()
     {
         WarningPing();
-
-#if true
+#if false
         if (nCountDown == -1 && enemy.GetfHP > 0)
         {
             RhythmGame();
         }
 #endif
+        if (enemy.GetfHP > 0)
+        {
+            RhythmGame();
+        }
         else if (enemy.GetfHP <= 0 && nCountDown == -1)
         {
             CheckWinCondition();
