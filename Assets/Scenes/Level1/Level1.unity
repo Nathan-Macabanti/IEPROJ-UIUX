@@ -656,7 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTimer: 0
   radio: {fileID: 1926940878}
-  noteSequencer: {fileID: 0}
+  noteSequencer: {fileID: 11400000, guid: bdaaf47b5b6b46f40a9279074c9a3449, type: 2}
   isDebugging: 0
   counterBG: {fileID: 4527101987596835215}
   countDown: {fileID: 4066834637248069600}
@@ -26207,7 +26207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4660331478685685337
 RectTransform:
   m_ObjectHideFlags: 0
