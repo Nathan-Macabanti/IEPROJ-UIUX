@@ -106,22 +106,26 @@ public class SongManager2 : MonoBehaviour
     void Update()
     {
         WarningPing();
+
 #if false
         if (nCountDown == -1 && enemy.GetfHP > 0)
         {
             RhythmGame();
         }
 #endif
-        if (enemy.GetfHP > 0)
+        if (nCountDown == -1 && enemy.GetfHP > 0)
         {
+            Debug.Log(nCountDown);
             RhythmGame();
         }
-        else if (enemy.GetfHP <= 0 && nCountDown == -1)
+        else if (enemy.GetfHP <= 0 && nCountDown <= -1)
         {
+            Debug.Log(enemy.GetfHP);
             CheckWinCondition();
         }
-        else if (enemy.GetfHP > 0 && nCountDown != -1)
+        else if (enemy.GetfHP > 0 && nCountDown > -1)
         {
+            Debug.Log("CountDown");
             CountDown();
         }
     }
@@ -213,6 +217,7 @@ public class SongManager2 : MonoBehaviour
         float beatInterval;
         beatInterval = secondsPerBeat / 2;
         beatTimer += Time.deltaTime;
+        Debug.Log(beatTimer.ToString() + beatInterval.ToString());
         if (beatTimer >= beatInterval)
         {
             beatTimer -= beatInterval;
