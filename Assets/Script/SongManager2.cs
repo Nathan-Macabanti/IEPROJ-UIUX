@@ -111,6 +111,12 @@ public class SongManager2 : MonoBehaviour
         {
             RhythmGame();
         }
+#if false
+        if (nCountDown == -1 && enemy.GetfHP > 0)
+        {
+            RhythmGame();
+        }
+#endif
         if (enemy.GetfHP > 0)
         {
             RhythmGame();
@@ -125,7 +131,7 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
-    #region Functions
+#region Functions
 
     private void RhythmGame()
     {
@@ -324,9 +330,9 @@ public class SongManager2 : MonoBehaviour
     {
         GetComponent<AudioSource>().Pause();
     }
-    #endregion
+#endregion
 
-    #region Getters
+#region Getters
     public float BPM { get { return bpm; } }
 
     public float SecondsPerBeat { get { return secondsPerBeat; } }
