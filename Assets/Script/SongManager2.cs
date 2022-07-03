@@ -107,7 +107,7 @@ public class SongManager2 : MonoBehaviour
     {
         WarningPing();
 
-        if (nCountDown == -1 && enemy.GetfHP > 0)
+        if (enemy.GetfHP > 0)
         {
             RhythmGame();
         }
