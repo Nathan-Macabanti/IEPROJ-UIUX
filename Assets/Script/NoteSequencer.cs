@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewNoteSequence", menuName = "ScriptableObjects/NoteSequence", order = 1)]
 public class NoteSequencer : ScriptableObject
 {
+    public AudioClip aClip;
     public int song;
     public float bpm;
     public List<NoteInfo> Sequence;
