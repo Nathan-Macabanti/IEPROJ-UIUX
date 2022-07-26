@@ -87,7 +87,6 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
             spawner.SpawnDodgeNote();
         }
 
-
         if(spawnerIndex == 0 && LAttack) //Left Spawn Animation
         {
             //EnemyAnimator.StopPlayback();
