@@ -28,10 +28,9 @@ namespace NewRhythmSystem
         public void Spawn(float beat)
         {
             GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool("Note", this.transform.position, Quaternion.identity);
-            //GameObject obj = (GameObject)Instantiate(prefab, this.transform.position, Quaternion.identity);
             if (obj.TryGetComponent<Note>(out Note note))
             {
-                note.InitializeNote(this.transform, destination, beat);
+                note.InitializeNote(this.transform, destination, beat, SongManager.GetInstance().CurrentNote().key);
                 noteManagerInstance.noteQueue.Enqueue(note); //Queue the notes
             }
         }

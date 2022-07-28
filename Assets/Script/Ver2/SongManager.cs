@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace NewRhythmSystem
 {
-    public class SongManagerRhythmGame : MonoBehaviour
+    public class SongManager : MonoBehaviour
     {
         private void Awake()
         {
@@ -12,8 +12,8 @@ namespace NewRhythmSystem
         }
 
         #region Singleton
-        private static SongManagerRhythmGame instance;
-        public static SongManagerRhythmGame GetInstance() { return instance; }
+        private static SongManager instance;
+        public static SongManager GetInstance() => instance;
         private void InitializeSingleton()
         {
             if (instance == null)
@@ -22,7 +22,7 @@ namespace NewRhythmSystem
             }
             else
             {
-                Debug.LogError("Multiple instances");
+                Utils.SingletonErrorMessage(this);
             }
         }
         #endregion
@@ -46,7 +46,7 @@ namespace NewRhythmSystem
         [HideInInspector] public int index = 0;
         #endregion
 
-        private NoteInfo CurrentNote() { 
+        public NoteInfo CurrentNote() { 
             if (index < notes.Count) { 
                 return notes[index]; 
             }

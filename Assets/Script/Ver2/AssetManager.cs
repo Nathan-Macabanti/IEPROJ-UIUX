@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace NewRhythmSystem
 {
-    public class NoteManager : MonoBehaviour
+    [System.Serializable]
+    public class AssetManager : MonoBehaviour
     {
-        private static NoteManager instance;
-        public static NoteManager GetInstance() { return instance; }
+        #region Singleton stuff
+        private static AssetManager instance;
+        public static AssetManager GetInstance() { return instance; }
         private void Awake()
         {
             if (instance == null)
@@ -19,14 +23,10 @@ namespace NewRhythmSystem
                 Utils.SingletonErrorMessage(this);
             }
         }
+        #endregion
 
-        public Queue<Note> noteQueue = new Queue<Note>();
-
-        public void RemoveNote()
-        {
-            Note note = noteQueue.Dequeue();
-            note.gameObject.SetActive(false);
-        }
+        public Sprite[] keySprites;
+        public ParticleSystem PerfectParticles;
     }
 }
 

@@ -21,7 +21,7 @@ namespace NewRhythmSystem
     public class NoteInfo
     {
         public float beat;
-        [Range(1,4)]public int key = 1;
+        [Range(0,3)]public int key = 0;
     }
 }
 

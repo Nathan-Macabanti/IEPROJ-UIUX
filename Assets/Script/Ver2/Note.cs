@@ -10,17 +10,20 @@ namespace NewRhythmSystem
         private Transform source;
         private Transform destination;
         private float beat;
+        private int keyToPress;
         #endregion
         #region Getters
         public float GetBeat() { return beat; }
+        public int GetKey() { return keyToPress; }
         #endregion
         public void InitializePoolable() { return; }
         public void UnregisterPoolable() { return; }
-        public void InitializeNote(Transform _source, Transform _destination, float _beat)
+        public void InitializeNote(Transform _source, Transform _destination, float _beat, int _keyToPress)
         {
             source = _source;
             destination = _destination;
             beat = _beat;
+            keyToPress = _keyToPress;
         }
 
         // Update is called once per frame
@@ -32,8 +35,8 @@ namespace NewRhythmSystem
 
         public void Move()
         {
-            float songPosInBeats = SongManagerRhythmGame.GetInstance().songPositionInBeats;
-            float beatsShownInAdvance = SongManagerRhythmGame.GetInstance().beatsShownInAdvance;
+            float songPosInBeats = SongManager.GetInstance().songPositionInBeats;
+            float beatsShownInAdvance = SongManager.GetInstance().beatsShownInAdvance;
             float timeToDestination = (beat - songPosInBeats);
             float distance = (beatsShownInAdvance - timeToDestination) / beatsShownInAdvance;
 
@@ -44,9 +47,8 @@ namespace NewRhythmSystem
         {
             if (Vector3.Distance(destination.position, this.transform.position) <= 0.01f)
             {
-                this.gameObject.SetActive(false);
-                NoteManager.GetInstance().noteQueue.Dequeue();
-                EventManager.GetInstance().NoteCollected(CollectionRank.MISS);
+                EventManager.GetInstance().NoteHit(HitRank.MISS);
+                NoteManager.GetInstance().RemoveNote();
             }
         }
     }
