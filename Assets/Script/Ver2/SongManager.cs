@@ -82,7 +82,6 @@ namespace NewRhythmSystem
         {
             CalculateSongPosition();
             CheckIfNoteCanBeSpawned();
-            //Debug.Log(songPosition.ToString() + " || " + nextIndex.ToString());
         }
 
         private void CalculateSongPosition()
@@ -99,7 +98,7 @@ namespace NewRhythmSystem
             if (index < notes.Count && CurrentNote().beat < (songPositionInBeats + beatsShownInAdvance))
             {
                 //Call all functions subscribed when a beat is played
-                EventManager.GetInstance().Beat(CurrentNote().beat);
+                EventManager.GetInstance().NoteSpawn(CurrentNote().beat);
                 index++;
             }
         }

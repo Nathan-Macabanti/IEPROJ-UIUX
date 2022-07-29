@@ -6,7 +6,6 @@ namespace NewRhythmSystem
 {
     public class HitRankDisplay : MonoBehaviour
     {
-
         private void OnEnable() => EventManager.GetInstance().onNoteHit += DisplayHitRank;
 
         private void OnDisable() => EventManager.GetInstance().onNoteHit -= DisplayHitRank;

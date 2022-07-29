@@ -26,7 +26,7 @@ namespace NewRhythmSystem
 
         private void Update()
         {
-            if (Input.anyKeyDown)
+            if (Input.anyKeyDown && noteManagerInstance.noteQueue.Count > 0)
             {
                 currentNote = noteManagerInstance.noteQueue.Peek();
                 if (Input.GetKeyDown(KeyInputManager.GetInstance().GetKey(currentNote.GetKey())))

@@ -17,12 +17,12 @@ namespace NewRhythmSystem
         }
         private void OnEnable()
         {
-            EventManager.GetInstance().onBeat += Spawn;
+            EventManager.GetInstance().onNoteSpawn += Spawn;
         }
 
         private void OnDisable()
         {
-            EventManager.GetInstance().onBeat -= Spawn;
+            EventManager.GetInstance().onNoteSpawn -= Spawn;
         }
 
         public void Spawn(float beat)

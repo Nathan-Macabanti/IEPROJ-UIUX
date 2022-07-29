@@ -25,7 +25,7 @@ namespace NewRhythmSystem
         public void RemoveNote()
         {
             Note note = noteQueue.Dequeue();
-            note.gameObject.SetActive(false);
+            note.UnregisterPoolable();
         }
     }
 }

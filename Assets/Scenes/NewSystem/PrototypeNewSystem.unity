@@ -169,7 +169,10 @@ MonoBehaviour:
   pools:
   - tag: Note
     prefab: {fileID: 8593008793902527331, guid: 9b1ff3541ae132546b59eb7dfa7b45fd, type: 3}
-    size: 50
+    size: 10
+  - tag: PerfectParticle
+    prefab: {fileID: 916679614187760354, guid: 3624e16ebf1cd644ba279563bff4bf2e, type: 3}
+    size: 5
 --- !u!1 &219594574
 GameObject:
   m_ObjectHideFlags: 0

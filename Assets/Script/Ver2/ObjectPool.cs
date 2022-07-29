@@ -40,11 +40,18 @@ namespace NewRhythmSystem
             }
         }
 
+        //Sets the position and rotation and sets them to active
         public GameObject GetFromPool(string tag, Vector3 pos, Quaternion rot)
         {
             if (!poolDictionary.ContainsKey(tag))
             {
                 Debug.LogWarning("Pool " + tag + "does not exist");
+                return null;
+            }
+
+            if(poolDictionary.Count == 0)
+            {
+                Debug.LogWarning("No more objects in pool " + tag);
                 return null;
             }
 

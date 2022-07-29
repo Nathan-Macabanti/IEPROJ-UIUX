@@ -10,13 +10,15 @@ namespace NewRhythmSystem
 
         private void OnDisable() => EventManager.GetInstance().onNoteHit -= SpawnParticles;
 
+        //Spawns particles when rank is PERFECT
         void SpawnParticles(HitRank rank)
         {
             if(rank == HitRank.PERFECT)
             {
-                GameObject particles = AssetManager.GetInstance().PerfectParticles.gameObject;
-                GameObject obj = (GameObject)Instantiate(particles, this.transform.position, Quaternion.identity);
-                Destroy(obj, 2.0f);
+                ObjectPool.GetInstance().GetFromPool("PerfectParticle", this.transform.position, Quaternion.identity);
+                //GameObject particles = AssetManager.GetInstance().PerfectParticles.gameObject;
+                //GameObject obj = (GameObject)Instantiate(particles, this.transform.position, Quaternion.identity);
+                //Destroy(obj, 2.0f);
             }
         }
     }

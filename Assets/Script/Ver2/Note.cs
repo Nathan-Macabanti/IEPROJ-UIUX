@@ -17,7 +17,7 @@ namespace NewRhythmSystem
         public int GetKey() { return keyToPress; }
         #endregion
         public void InitializePoolable() { return; }
-        public void UnregisterPoolable() { return; }
+        public void UnregisterPoolable() { this.gameObject.SetActive(false); }
         public void InitializeNote(Transform _source, Transform _destination, float _beat, int _keyToPress)
         {
             source = _source;
