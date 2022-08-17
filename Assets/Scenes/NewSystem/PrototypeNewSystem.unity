@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 279796692}
   - component: {fileID: 279796693}
   - component: {fileID: 279796694}
+  - component: {fileID: 279796695}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -308,6 +309,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f40fbb1b8a712534bbc24f612228a052, type: 3}
   - {fileID: 21300000, guid: 68f71d8b450e5fe49b9419841f164556, type: 3}
   PerfectParticles: {fileID: 916679614187760352, guid: 3624e16ebf1cd644ba279563bff4bf2e, type: 3}
+--- !u!114 &279796695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279796688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a55eb137c041f04d9643e2b56480033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aClips:
+  - {fileID: 8300000, guid: c7304d3cbaa559547bce4524fa4c87d0, type: 3}
 --- !u!1 &313775296
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +527,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

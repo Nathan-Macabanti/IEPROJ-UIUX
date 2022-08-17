@@ -16,6 +16,7 @@ namespace NewRhythmSystem
             if(rank == HitRank.PERFECT)
             {
                 ObjectPool.GetInstance().GetFromPool("PerfectParticle", this.transform.position, Quaternion.identity);
+                SFXManager.GetInstance().PlayAudio(0, 0.5f);
                 //GameObject particles = AssetManager.GetInstance().PerfectParticles.gameObject;
                 //GameObject obj = (GameObject)Instantiate(particles, this.transform.position, Quaternion.identity);
                 //Destroy(obj, 2.0f);

@@ -14,13 +14,11 @@ namespace NewRhythmSystem
         private Note currentNote;
         private SongManager songManagerInstance;
         private NoteManager noteManagerInstance;
-        private EventManager eventManagerInstance;
 
         private void Start()
         {
             songManagerInstance = SongManager.GetInstance();
             noteManagerInstance = NoteManager.GetInstance();
-            eventManagerInstance = EventManager.GetInstance();
         }
 
 
@@ -29,7 +27,8 @@ namespace NewRhythmSystem
             if (Input.anyKeyDown && noteManagerInstance.noteQueue.Count > 0)
             {
                 currentNote = noteManagerInstance.noteQueue.Peek();
-                if (Input.GetKeyDown(KeyInputManager.GetInstance().GetKey(currentNote.GetKey())))
+                KeyCode key = KeyInputManager.GetInstance().GetKey(currentNote.GetKey());
+                if (Input.GetKeyDown(key))
                 {
                     CheckIfNoteIsAlligned();
                 }
@@ -46,23 +45,25 @@ namespace NewRhythmSystem
             //minimum distance for collection
             if(difference <= offsetPERFECT)
             {
-                eventManagerInstance.NoteHit(HitRank.PERFECT);
+                EventManager.GetInstance().NoteHit(HitRank.PERFECT);
                 noteManagerInstance.RemoveNote();
             }
             else if(difference <= offsetGOOD && difference > offsetPERFECT)
             {
-                eventManagerInstance.NoteHit(HitRank.GOOD);
+                EventManager.GetInstance().NoteHit(HitRank.GOOD);
                 noteManagerInstance.RemoveNote();
             }
             else if(difference <= offsetBAD && difference > offsetGOOD)
             {
-                eventManagerInstance.NoteHit(HitRank.BAD);
+                EventManager.GetInstance().NoteHit(HitRank.BAD);
                 noteManagerInstance.RemoveNote();
             }
+#if false
             else
             {
-                eventManagerInstance.NoteHit(HitRank.MISS);
+                EventManager.GetInstance().NoteHit(HitRank.MISS);
             }
+#endif
         }
     }
 }
