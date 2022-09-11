@@ -641,9 +641,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b98362bf71335f409e15aec5d9f4ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetPERFECT: 0.1
-  offsetGOOD: 0.2
-  offsetBAD: 0.3
+  offsetPERFECT: 0.2
+  offsetGOOD: 0.3
+  offsetBAD: 0.5
 --- !u!4 &1002908955
 Transform:
   m_ObjectHideFlags: 0

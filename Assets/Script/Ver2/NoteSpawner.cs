@@ -10,6 +10,7 @@ namespace NewRhythmSystem
         [SerializeField] Transform destination;
 
         private NoteManager noteManagerInstance;
+        private int index = 0;
 
         private void Start()
         {
@@ -30,8 +31,10 @@ namespace NewRhythmSystem
             GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool("Note", this.transform.position, Quaternion.identity);
             if (obj.TryGetComponent<Note>(out Note note))
             {
-                note.InitializeNote(this.transform, destination, beat, SongManager.GetInstance().CurrentNote().key);
+                Debug.Log(index);
+                note.InitializeNote(this.transform, destination, beat, (int)SongManager.GetInstance().CurrentNote().input);
                 noteManagerInstance.noteQueue.Enqueue(note); //Queue the notes
+                index++;
             }
         }
     }

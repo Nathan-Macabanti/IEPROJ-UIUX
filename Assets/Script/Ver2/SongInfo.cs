@@ -21,7 +21,10 @@ namespace NewRhythmSystem
     public class NoteInfo
     {
         public float beat;
-        [Range(0,3)]public int key = 0;
+        public Direction input;
+        //[Range(0,3)]public int key = 0;
     }
+
+    public enum Direction { up = 0, left = 1, down = 2, right = 3}
 }
 

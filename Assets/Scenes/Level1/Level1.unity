@@ -3745,10 +3745,10 @@ RectTransform:
   m_Father: {fileID: 832512693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 330, y: -413.225}
-  m_SizeDelta: {x: 610, y: 776.45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &335010422
 MonoBehaviour:
@@ -4495,10 +4495,10 @@ RectTransform:
   m_Father: {fileID: 832512693}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -413.225}
-  m_SizeDelta: {x: 610, y: 776.45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &403562829
 MonoBehaviour:
@@ -7680,10 +7680,10 @@ RectTransform:
   m_Father: {fileID: 347330307}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -1028.225}
-  m_SizeDelta: {x: 1920, y: 103.55}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &702155132
 MonoBehaviour:
@@ -7733,6 +7733,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: BreakSplashScreen, Assembly-CSharp
         m_MethodName: DoneButton
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1752155209}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9206,10 +9218,10 @@ RectTransform:
   m_Father: {fileID: 347330307}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -75}
-  m_SizeDelta: {x: 1920, y: 150}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &804578724
 MonoBehaviour:
@@ -9632,10 +9644,10 @@ RectTransform:
   m_Father: {fileID: 347330307}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -563.225}
-  m_SizeDelta: {x: 1920, y: 826.45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &832512694
 MonoBehaviour:
@@ -11435,10 +11447,10 @@ RectTransform:
   m_Father: {fileID: 832512693}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1590, y: -413.225}
-  m_SizeDelta: {x: 610, y: 776.45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1007748676
 MonoBehaviour:
@@ -20275,7 +20287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1752155210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20373,7 +20385,7 @@ MonoBehaviour:
   IsOn: 0
   enemy:
   - Health: 110
-    noteSequencer: {fileID: 0}
+    noteSequencer: {fileID: 11400000, guid: bdaaf47b5b6b46f40a9279074c9a3449, type: 2}
     EnemySprite: {fileID: 270575299}
     EnemyAnimator: {fileID: 1388570688}
     LAttack: 0
@@ -20384,7 +20396,7 @@ MonoBehaviour:
     AttackNote: {fileID: 1927209512}
     JumpNote: {fileID: 1909816425}
   - Health: 150
-    noteSequencer: {fileID: 0}
+    noteSequencer: {fileID: 11400000, guid: bdaaf47b5b6b46f40a9279074c9a3449, type: 2}
     EnemySprite: {fileID: 28597607}
     EnemyAnimator: {fileID: 28597610}
     LAttack: 1
