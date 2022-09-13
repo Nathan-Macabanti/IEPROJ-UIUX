@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private SongManager2 song;
-    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private Enemy enemyHealth;
 
     [Header("Damage")]
     [SerializeField] private float lengthOfInvincibility;

@@ -52,6 +52,7 @@ public class Spawner : MonoBehaviour
 
     public void SpawnDodgeNote()
     {
+        //
         Note note;
         note = Instantiate(this.DodgeNoteCopy, this.transform.position, this.transform.rotation, this.transform);
         note.NoteObj().SetActive(true);

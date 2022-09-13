@@ -12,19 +12,21 @@ public class BreakSplashScreen : MonoBehaviour
     [SerializeField] private bool IsOn;
     [SerializeField] private List<EnemyInfo> enemy;
     [SerializeField] private SongManager2 song;
-    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] private Enemy enemyHealth;
     [SerializeField] private int index;
     [SerializeField] private int points = 0;
     [SerializeField] private Button[] potions;
 
     private void Start()
     {
+        //Set the Spash Screen to inactive
         Disappear();
         //points = 0;
     }
     
     private void Update()
     {
+        //Points have to be 
         pointText.text = "Points: " + points.ToString();
     }
 
@@ -52,6 +54,7 @@ public class BreakSplashScreen : MonoBehaviour
             song.JumpSpawner.attackNoteCopy = enemy[index].JumpNote;
             song.JumpSpawner.dodgeNoteCopy = enemy[index].JumpNote;
 
+            //Enemy animations
             enemyHealth.enemyAnimator = enemy[index].EnemyAnimator;
             enemyHealth.LeftAtk = enemy[index].LAttack;
             enemyHealth.MidAtk = enemy[index].MAttack;
@@ -86,6 +89,7 @@ public class BreakSplashScreen : MonoBehaviour
         points += p;
     }
 
+    //Resets the 
     public void ResetTheButton()
     {
         potions[0].GetComponent<HealthPotion>().ResetThis();

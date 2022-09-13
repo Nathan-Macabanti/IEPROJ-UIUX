@@ -45,7 +45,7 @@ public class NoteBlockadeTuts : MonoBehaviour
         //Sets the enemy to ATTACKING
         else if (ticks <= 0)
         {
-            // Resets the collected notes to 0
+            //Resets the collected notes to 0
             SliderIsNotesDodge();
             //Resets 
             ticks = ISATTACKNOTE_INTERVAL;

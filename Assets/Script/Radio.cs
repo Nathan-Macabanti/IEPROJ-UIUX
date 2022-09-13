@@ -9,5 +9,5 @@ public class Radio : MonoBehaviour
     public AudioClip GetADisc(int index)
     {
         return SongClip[index];
-    } 
+    }
 }

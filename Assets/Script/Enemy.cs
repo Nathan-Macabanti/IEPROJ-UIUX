@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
+public class Enemy : MonoBehaviour, IDamagable<float>, ISpawner
 {
     [SerializeField] protected Slider HealthBar;
     [SerializeField] private Text HealthCounter;
@@ -73,12 +73,11 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
         EnemyAnimator.Play("Damage");
     }
 
-    public void Spawn(Spawner spawner, bool IsAttack, int spawnerIndex)
+    public void Spawn(Spawner spawner, BotType bot, int spawnerIndex)
     {
         EnemyAnimator.StopPlayback();
 
-
-        if (IsAttack)
+        if (bot == BotType.Attack)
         {
             spawner.SpawnAttackNote();
         }
@@ -87,7 +86,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>, ISpawner
             spawner.SpawnDodgeNote();
         }
 
-        if(spawnerIndex == 0 && LAttack) //Left Spawn Animation
+        if (spawnerIndex == 0 && LAttack) //Left Spawn Animation
         {
             //EnemyAnimator.StopPlayback();
             EnemyAnimator.Play("LAttack");

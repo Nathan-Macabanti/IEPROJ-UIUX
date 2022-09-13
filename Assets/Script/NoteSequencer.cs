@@ -12,10 +12,14 @@ public class NoteSequencer : ScriptableObject
 }
 
 [System.Serializable]
+public enum BotType { Attack = 0, Defend = 1}
+
+[System.Serializable]
 public struct NoteInfo
 {
     public float beat;
     public string spawner;
+    public BotType botType;
 }
 
 
