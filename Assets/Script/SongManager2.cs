@@ -86,6 +86,8 @@ public class SongManager2 : MonoBehaviour
 
         ChangeChart(noteSequencer);
     }
+
+    public static SongManager2 GetInstance() { return songManager2Instance; }
     // Start is called before the first frame update
 
     void Start()
@@ -106,7 +108,7 @@ public class SongManager2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        WarningPing();
+        //WarningPing();
 
 #if false
         if (nCountDown == -1 && enemy.GetfHP > 0)
@@ -117,19 +119,19 @@ public class SongManager2 : MonoBehaviour
         //If the enemy is not dead play the game
         if (nCountDown == -1 && enemy.GetfHP > 0)
         {
-            Debug.Log(nCountDown);
+            //Debug.Log(nCountDown);
             RhythmGame();
         }
         // if dead and countdown is 0 check if you win
         else if (enemy.GetfHP <= 0 && nCountDown <= -1)
         {
-            Debug.Log(enemy.GetfHP);
+            //Debug.Log(enemy.GetfHP);
             CheckWinCondition();
         }
         //If enemy is not dead and countdown is not 0
         else if (enemy.GetfHP > 0 && nCountDown > -1)
         {
-            Debug.Log("CountDown");
+            //Debug.Log("CountDown");
             CountDown();
         }
     }
@@ -168,33 +170,41 @@ public class SongManager2 : MonoBehaviour
         {
             //beatsShownInAdvance = 0.25f;
             //If the current song position is more than the target song position and spawner is defined then spawn the note
-            if (notes[nextIndex].beat < songPositionInBeats + beatsShownInAdvance &&
-                notes[nextIndex].spawner != "")
+            for(int i = 0; i < notes[nextIndex].noteGroups.Count; i++)
             {
-                //Clear the list of spawners that spawned a note
-                spawnerIndex.Clear();
-                //Parses the string and converts to INT
-                spawnerIndex = notes[nextIndex].spawner.Split(',').Select(Int32.Parse).ToList();
-
-                for (int i = 0; i < spawnerIndex.Count; i++)
+                if (notes[nextIndex].beat < songPositionInBeats + beatsShownInAdvance && notes[nextIndex].noteGroups[i].spawner != "")
                 {
-                    //Debug.Log(spawners[spawnerIndex[i]]);
-                    if (spawnerIndex[i] >= 0)
-                    {
-                        //Enemy Spawns a note
-                        bool IsAttack = noteBlockade.GetIsAttackNote();
-                        enemy.Spawn(spawners[spawnerIndex[i]], notes[nextIndex].botType, spawnerIndex[i]);
-                        /*
-                        if(!noteBlockade.GetIsAttackNote())
-                            spawners[spawnerIndex[i]].SpawnDodgeNote();
-                        else
-                            spawners[spawnerIndex[i]].SpawnAttackNote();
-                        */
-                    }
+                    //Clear the list of spawners that spawned a note
+                    spawnerIndex.Clear();
+                    //Parses the string and converts to INT
+                    spawnerIndex = notes[nextIndex].noteGroups[i].spawner.Split(',').Select(Int32.Parse).ToList();
 
+                    for (int j = 0; j < spawnerIndex.Count; j++)
+                    {
+                        if (spawnerIndex[j] >= 0)
+                        {
+                            //Enemy Spawns a note
+                            //bool IsAttack = noteBlockade.GetIsAttackNote();
+                            enemy.Spawn(spawners[spawnerIndex[j]], notes[nextIndex].noteGroups[i].botType, spawnerIndex[j], notes[nextIndex].beat);
+                            //Debug.Log(spawners[spawnerIndex[j]]);
+                            /*
+                            if(!noteBlockade.GetIsAttackNote())
+                                spawners[spawnerIndex[i]].SpawnDodgeNote();
+                            else
+                                spawners[spawnerIndex[i]].SpawnAttackNote();
+                            */
+                        }
+
+                    }
+                    if (i >= notes[nextIndex].noteGroups.Count - 1)
+                    {
+                        Debug.Log(i.ToString() + ">=" + (notes[nextIndex].noteGroups.Count).ToString());
+                        nextIndex++;
+                    }
                 }
-                nextIndex++;
             }
+            
+            
         }
         else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
         {
@@ -275,12 +285,12 @@ public class SongManager2 : MonoBehaviour
         }
     }
 
-
+    /*
     public void WarningPing()
     {
         if (nextIndex < notes.Count)
         {
-            spawnerNextIndex = notes[nextIndex].spawner.Split(',').Select(Int32.Parse).ToList();
+            spawnerNextIndex = noteGroup.spawner.Split(',').Select(Int32.Parse).ToList();
         }
 
         if (spawnerNextIndex != null)
@@ -305,6 +315,7 @@ public class SongManager2 : MonoBehaviour
             }
         }
     }
+    */
 
     public void ChangeChart(NoteSequencer sequencer)
     {
@@ -316,7 +327,6 @@ public class SongManager2 : MonoBehaviour
         for (int i = 0; i < sequencer.Sequence.Count; i++)
         {
             NoteInfo ntInfo = sequencer.Sequence[i];
-            notes.Add(ntInfo);
             notes.Add(ntInfo);
         }
     }
@@ -384,6 +394,12 @@ public class SongManager2 : MonoBehaviour
     public Spawner MidSpawner { get { return spawners[1]; } }
     public Spawner RightSpawner { get { return spawners[2]; } }
     public Spawner JumpSpawner { get { return spawners[3]; } }
+    public NoteInfo CurrentBeat() {
+        if (nextIndex >= notes.Count)
+            return null;
+            
+        return notes[nextIndex]; 
+    }
     public AudioSource AudioSource { get { return GetComponent<AudioSource>(); } }
     public Transform CenterSpawnerLocation { get { return spawners[1].transform; } }
     //public List<string> SpawnerIndexArray { get { return spawnerIndexStr; } }

@@ -50,7 +50,7 @@ public class PlayerCollision : MonoBehaviour
         //Score_points.text = "SCORES: " + ScorePoints.ToString();
         isInvincible = false;
         isHurt = false;
-        PlayerSFX = GetComponent<AudioSource>();
+        PlayerSFX = GetComponentInParent<AudioSource>();
     }
 
     private void Update()
@@ -128,7 +128,7 @@ public class PlayerCollision : MonoBehaviour
                 Destroy(blood, 2f);
             }
             //isInvincible = true;
-            Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
 
             if (HPPoints <= 0) { HPPoints = 0; }
             else 
@@ -164,7 +164,7 @@ public class PlayerCollision : MonoBehaviour
                 GameObject atkParticle = (GameObject)Instantiate(AttackNoteParticles, this.transform.position, this.transform.rotation);
                 Destroy(atkParticle, 2f);
             }
-            Destroy(col.gameObject);
+            col.gameObject.SetActive(false);
         }
     }
 

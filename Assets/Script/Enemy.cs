@@ -73,17 +73,17 @@ public class Enemy : MonoBehaviour, IDamagable<float>, ISpawner
         EnemyAnimator.Play("Damage");
     }
 
-    public void Spawn(Spawner spawner, BotType bot, int spawnerIndex)
+    public void Spawn(Spawner spawner, BotType bot, int spawnerIndex, float beat)
     {
         EnemyAnimator.StopPlayback();
 
         if (bot == BotType.Attack)
         {
-            spawner.SpawnAttackNote();
+            spawner.SpawnAttackNote(beat);
         }
         else
         {
-            spawner.SpawnDodgeNote();
+            spawner.SpawnDodgeNote(beat);
         }
 
         if (spawnerIndex == 0 && LAttack) //Left Spawn Animation

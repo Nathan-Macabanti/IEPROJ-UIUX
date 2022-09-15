@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NewRhythmSystem;
 
 public class Spawner : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Note DodgeNoteCopy;
     [SerializeField] private Note AttackNoteCopy;
     public List<Note> NoteList;
+
+    public Transform source;
+    public Transform destination;
 
     [Header("FX")]
     [SerializeField] private GameObject DodgePortal;
@@ -50,33 +54,41 @@ public class Spawner : MonoBehaviour
         RemoveFromList();
     }
 
-    public void SpawnDodgeNote()
+    public void SpawnDodgeNote(float beat)
     {
-        //
-        Note note;
-        note = Instantiate(this.DodgeNoteCopy, this.transform.position, this.transform.rotation, this.transform);
-        note.NoteObj().SetActive(true);
-        NoteList.Add(note);
+        GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool("Dodge Note", this.source.position, Quaternion.identity);
+        //note = (Note)Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
+        //note.NoteObj().SetActive(true);
+        if(obj.TryGetComponent<Note>(out Note note))
+        {
+            note.InitializeNote(source.position, destination.position, beat);
+            NoteList.Add(note);
+        }
+        
 
         if(DodgePortal != null)
         {
-            GameObject fx = (GameObject)Instantiate(AttackPortal, this.transform.position, Quaternion.identity);
+            GameObject fx = (GameObject)Instantiate(AttackPortal, this.source.position, Quaternion.identity);
             Destroy(fx, 2.0f);
         }
         
         //mat.color = changeColor;
     }
 
-    public void SpawnAttackNote()
+    public void SpawnAttackNote(float beat)
     {
-        Note note;
-        note = Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
-        note.NoteObj().SetActive(true);
-        NoteList.Add(note);
+        GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool("Attack Note", this.source.position, Quaternion.identity);
+        //note = (Note)Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
+        //note.NoteObj().SetActive(true);
+        if (obj.TryGetComponent<Note>(out Note note))
+        {
+            note.InitializeNote(source.position, destination.position, beat);
+            NoteList.Add(note);
+        }
 
         if (AttackPortal != null)
         {
-            GameObject fx = (GameObject)Instantiate(DodgePortal, this.transform.position, Quaternion.identity);
+            GameObject fx = (GameObject)Instantiate(DodgePortal, this.source.position, Quaternion.identity);
             Destroy(fx, 2.0f);
             //mat.color = changeColor;
         }
@@ -109,7 +121,7 @@ public class Spawner : MonoBehaviour
         {
             if(NoteList[i] != null)
             {
-                Debug.Log("Destroying" + NoteList[i].name);
+                //Debug.Log("Destroying" + NoteList[i].name);
                 GameObject.Destroy(NoteList[i].gameObject);
                 NoteList.RemoveAt(i);
             }

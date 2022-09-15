@@ -42,7 +42,7 @@ public class NoteBlockade : MonoBehaviour
             SliderIsNotesDodge();
             ticks = ISATTACKNOTE_INTERVAL;
             NotesDodged = 0;
-            Debug.Log("Reset CollectedAttackNotes to 0");
+            //Debug.Log("Reset CollectedAttackNotes to 0");
             
         }
         else if(NotesDodged < RequiredAmountToDodge)
@@ -77,8 +77,9 @@ public class NoteBlockade : MonoBehaviour
         {
             NotesDodged++;
         }
-        Debug.Log("NotesTouchedBlockade");
-        Destroy(other.gameObject);
+        //Debug.Log("NotesTouchedBlockade");
+        //Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
     }
 
     //public int GetNotesDodged { get { return NotesDodged; } }
