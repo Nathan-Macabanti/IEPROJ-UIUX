@@ -14,7 +14,7 @@ public class RhythmNote : Note
 
         transform.position = Vector3.Lerp(SpawnPosition, DestroyPosition, distance);
 #endif
-        if (distance > 0.96)
+        if (distance > 0.976f)
             gameObject.SetActive(false);
 
         base.Move();

@@ -12,8 +12,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Vector3 decayFactor;
     [SerializeField] private int nMaxNotes;
     //[SerializeField] private Transform spawnLoc;
-    [SerializeField] private Note DodgeNoteCopy;
-    [SerializeField] private Note AttackNoteCopy;
+    [SerializeField] private string DodgeNoteTag;
+    [SerializeField] private string AttackNoteTag;
+    //[SerializeField] private Note DodgeNoteCopy;
+    //[SerializeField] private Note AttackNoteCopy;
     public List<Note> NoteList;
 
     public Transform source;
@@ -41,8 +43,8 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DodgeNoteCopy.gameObject.SetActive(false);
-        AttackNoteCopy.gameObject.SetActive(false);
+        //DodgeNoteCopy.gameObject.SetActive(false);
+        //AttackNoteCopy.gameObject.SetActive(false);
         //mat = GetComponentInChildren<Renderer>().material;
         //initialColor = mat.color;
     }
@@ -56,7 +58,7 @@ public class Spawner : MonoBehaviour
 
     public void SpawnDodgeNote(float beat)
     {
-        GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool("Dodge Note", this.source.position, Quaternion.identity);
+        GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool(DodgeNoteTag, this.source.position, Quaternion.identity);
         //note = (Note)Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
         //note.NoteObj().SetActive(true);
         if(obj.TryGetComponent<Note>(out Note note))
@@ -77,7 +79,7 @@ public class Spawner : MonoBehaviour
 
     public void SpawnAttackNote(float beat)
     {
-        GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool("Attack Note", this.source.position, Quaternion.identity);
+        GameObject obj = (GameObject)ObjectPool.GetInstance().GetFromPool(AttackNoteTag, this.source.position, Quaternion.identity);
         //note = (Note)Instantiate(this.AttackNoteCopy, this.transform.position, this.transform.rotation, this.transform);
         //note.NoteObj().SetActive(true);
         if (obj.TryGetComponent<Note>(out Note note))
@@ -141,15 +143,9 @@ public class Spawner : MonoBehaviour
         return false;
     }
 
-    public Note dodgeNoteCopy
+    public void ChangeNotes(string dgNote, string atkNote)
     {
-        //get { return DodgeNoteCopy; }
-        set { DodgeNoteCopy = value; }
-    }
-
-    public Note attackNoteCopy
-    {
-        //get { return AttackNoteCopy; }
-        set { AttackNoteCopy = value; }
+        DodgeNoteTag = dgNote;
+        AttackNoteTag = atkNote;
     }
 }

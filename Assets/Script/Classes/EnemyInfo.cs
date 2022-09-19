@@ -15,7 +15,7 @@ public class EnemyInfo
     public bool MAttack;
     public bool RAttack;
     public bool JAttack;
-    public Note DodgeNote;
-    public Note AttackNote;
-    public Note JumpNote;
+    public string DodgeNote;
+    public string AttackNote;
+    public string JumpNote;
 }

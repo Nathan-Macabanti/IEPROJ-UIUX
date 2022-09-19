@@ -10,9 +10,9 @@ public class BreakSplashScreen : MonoBehaviour
 
     [Header("Backend Stuff")]
     [SerializeField] private bool IsOn;
-    [SerializeField] private List<EnemyInfo> enemy;
+    [SerializeField] private List<EnemyInfo> enemyInfo;
     [SerializeField] private SongManager2 song;
-    [SerializeField] private Enemy enemyHealth;
+    [SerializeField] private Enemy enemy;
     [SerializeField] private int index;
     [SerializeField] private int points = 0;
     [SerializeField] private Button[] potions;
@@ -32,15 +32,19 @@ public class BreakSplashScreen : MonoBehaviour
 
     public void DoneButton()
     {
-        if (index <= enemy.Count)
+        if (index <= enemyInfo.Count)
         {
             //Change Enemies Sprite
             ChangeSprite();
             //Change Health;
-            enemyHealth.UpdateHealth(enemy[index].Health);
+            enemy.UpdateHealth(enemyInfo[index].Health);
             //Change chart
-            song.ChangeChart(enemy[index].noteSequencer);
-            
+            song.ChangeChart(enemyInfo[index].noteSequencer);
+
+            song.LeftSpawner.ChangeNotes(enemyInfo[index].DodgeNote, enemyInfo[index].AttackNote);
+            song.MidSpawner.ChangeNotes(enemyInfo[index].DodgeNote, enemyInfo[index].AttackNote);
+            song.RightSpawner.ChangeNotes(enemyInfo[index].DodgeNote, enemyInfo[index].AttackNote);
+            /*
             //Change notes of Left Spawner
             song.LeftSpawner.attackNoteCopy = enemy[index].AttackNote;
             song.LeftSpawner.dodgeNoteCopy = enemy[index].DodgeNote;
@@ -53,13 +57,14 @@ public class BreakSplashScreen : MonoBehaviour
             //Change notes of Jump Spawner
             song.JumpSpawner.attackNoteCopy = enemy[index].JumpNote;
             song.JumpSpawner.dodgeNoteCopy = enemy[index].JumpNote;
+            */
 
             //Enemy animations
-            enemyHealth.enemyAnimator = enemy[index].EnemyAnimator;
-            enemyHealth.LeftAtk = enemy[index].LAttack;
-            enemyHealth.MidAtk = enemy[index].MAttack;
-            enemyHealth.RightAtk = enemy[index].RAttack;
-            enemyHealth.JumpAtk = enemy[index].JAttack;
+            enemy.enemyAnimator = enemyInfo[index].EnemyAnimator;
+            enemy.LeftAtk = enemyInfo[index].LAttack;
+            enemy.MidAtk = enemyInfo[index].MAttack;
+            enemy.RightAtk = enemyInfo[index].RAttack;
+            enemy.JumpAtk = enemyInfo[index].JAttack;
             //Reset the song and chart nextIndex to 0
             song.StartAgain();
 
@@ -105,17 +110,17 @@ public class BreakSplashScreen : MonoBehaviour
     public void ChangeSprite()
     {
         //Turn every enemy sprite off
-        for (int i = 0; i < enemy.Count; i++)
+        for (int i = 0; i < enemyInfo.Count; i++)
         {
-            enemy[i].EnemySprite.gameObject.SetActive(false);
-            Debug.LogWarning("Active off: " + enemy[i].EnemySprite.gameObject.name);
+            enemyInfo[i].EnemySprite.gameObject.SetActive(false);
+            Debug.LogWarning("Active off: " + enemyInfo[i].EnemySprite.gameObject.name);
         }
-        for (int i = 0; i < enemy.Count; i++)
+        for (int i = 0; i < enemyInfo.Count; i++)
         {
             if (i == index)
             {
-                enemy[i].EnemySprite.gameObject.SetActive(true);
-                Debug.LogWarning("Spawning: " + enemy[i].EnemySprite.gameObject.name);
+                enemyInfo[i].EnemySprite.gameObject.SetActive(true);
+                Debug.LogWarning("Spawning: " + enemyInfo[i].EnemySprite.gameObject.name);
             }
                 
         }
@@ -124,5 +129,5 @@ public class BreakSplashScreen : MonoBehaviour
     public int GetPoints { get { return points; } }
     public bool GetIsON { get { return IsOn; } }
     public int GetIndex { get { return index; } }
-    public int GetListCount { get { return enemy.Count; } }
+    public int GetListCount { get { return enemyInfo.Count; } }
 }

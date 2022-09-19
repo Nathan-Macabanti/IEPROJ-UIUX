@@ -35,7 +35,7 @@ public class SongManager2 : MonoBehaviour
     [SerializeField] private float songPosition;
     [SerializeField] private float songPositionInBeats;
     [SerializeField] private float secondsPerBeat;
-    //[SerializeField] private float dspTimeSong;
+    [SerializeField] private float dspTimeSong;
 
     [Header("Spawner Manager")]
     [SerializeField] private NoteBlockade noteBlockade;
@@ -61,7 +61,7 @@ public class SongManager2 : MonoBehaviour
     //[SerializeField] private string[] chartList;
 
     [SerializeField] private List<NoteInfo> notes;
-    private float offset = 0.25f;
+    private float offset = 0;
     private float bpm;
     private int nextIndex = 0;
 
@@ -96,7 +96,6 @@ public class SongManager2 : MonoBehaviour
         nCountDown = 3;
         //_note.gameObject.SetActive(false);
         secondsPerBeat = 60F / bpm;
-        //dspTimeSong = (float)AudioSettings.dspTime;
         playedOnce = 0;
         nextIndex = 0;
         stopedOnce = 0;
@@ -147,14 +146,23 @@ public class SongManager2 : MonoBehaviour
             //Player can get hit or can be collideded
             player.IsInvincible = false;
             GetComponent<AudioSource>().Play();
+            dspTimeSong = (float)AudioSettings.dspTime;
             //Played once so that the music will not keep repeating
             playedOnce = 1;
         }
 
+
+        //calculate the position in seconds
+        songPosition = (float)AudioSettings.dspTime - dspTimeSong;
+
+        //calculate the position in beats
+        songPositionInBeats = songPosition / secondsPerBeat;
+        Debug.Log(songPositionInBeats);
+        //Debug.Log(((float)AudioSettings.dspTime).ToString() + " - " + dspTimeSong.ToString() + " = " + songPosition);
         //song position in seconds
-        songPosition = (float)GetComponent<AudioSource>().time;
+        //songPosition = (float)GetComponent<AudioSource>().time;
         //song position in beats 4/4
-        songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
+        //songPositionInBeats = (songPosition / secondsPerBeat) - offset + 1;
         //if (GetComponent<AudioSource>().isPlaying)
         //slider UI <maybe put this in another class>
         songSlider.value = songPosition / GetComponent<AudioSource>().clip.length;

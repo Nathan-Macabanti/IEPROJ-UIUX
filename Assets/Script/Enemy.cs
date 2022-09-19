@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour, IDamagable<float>, ISpawner
     [SerializeField] private float fsuggestedHP;
     [SerializeField] private float fHPClone;
     [SerializeField] private SongManager2 sMan;
-    [SerializeField] private NoteBlockade ntBlkde;
+    //[SerializeField] private NoteBlockade ntBlkde;
     [SerializeField] private bool isDead;
     [SerializeField] private Animator EnemyAnimator;
     [SerializeField] private GameObject damageParticles;
@@ -27,8 +27,8 @@ public class Enemy : MonoBehaviour, IDamagable<float>, ISpawner
     void Start()
     {
         float NumberOfNotes = sMan.Notes.Count;
-        float PercentileOfTime = ntBlkde.GetRequiredAmountToDodge / sMan.AudioSource.clip.length;
-        fsuggestedHP = NumberOfNotes - (NumberOfNotes * PercentileOfTime);
+        //float PercentileOfTime = ntBlkde.GetRequiredAmountToDodge / sMan.AudioSource.clip.length;
+        //fsuggestedHP = NumberOfNotes - (NumberOfNotes * PercentileOfTime);
         if (UseSuggested)
         {
             fHPClone = fsuggestedHP;

@@ -247,9 +247,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decayFactor: {x: 0, y: 0, z: 0}
   nMaxNotes: 40
-  DodgeNoteCopy: {fileID: 336421612}
-  AttackNoteCopy: {fileID: 109472300}
+  DodgeNoteTag: 
+  AttackNoteTag: 
   NoteList: []
+  source: {fileID: 0}
+  destination: {fileID: 0}
   DodgePortal: {fileID: 0}
   AttackPortal: {fileID: 0}
 --- !u!1 &95764018
@@ -401,12 +403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb96efde5e8c1c45a2c4610409d5c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteObj: {fileID: 109472296}
   divisor: 2
   isAttackNote: 1
-  song: {fileID: 0}
-  SpawnPosition: {x: 0, y: 0, z: 0}
-  DestroyPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &109472301
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -619,9 +617,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decayFactor: {x: 0, y: 0, z: 0}
   nMaxNotes: 40
-  DodgeNoteCopy: {fileID: 336421612}
-  AttackNoteCopy: {fileID: 109472300}
+  DodgeNoteTag: 
+  AttackNoteTag: 
   NoteList: []
+  source: {fileID: 0}
+  destination: {fileID: 0}
   DodgePortal: {fileID: 0}
   AttackPortal: {fileID: 0}
 --- !u!1 &123915027
@@ -1855,7 +1855,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level1
+          m_StringArgument: Level1 RhythmGame
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &311974460
@@ -2282,12 +2282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb96efde5e8c1c45a2c4610409d5c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteObj: {fileID: 336421606}
   divisor: 2
   isAttackNote: 0
-  song: {fileID: 0}
-  SpawnPosition: {x: 0, y: 0, z: 0}
-  DestroyPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &336421613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10917,12 +10913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb96efde5e8c1c45a2c4610409d5c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteObj: {fileID: 1502058985}
   divisor: 2
   isAttackNote: 0
-  song: {fileID: 0}
-  SpawnPosition: {x: 0, y: 0, z: 0}
-  DestroyPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &1502058990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13788,9 +13780,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decayFactor: {x: 0, y: 0, z: 0}
   nMaxNotes: 40
-  DodgeNoteCopy: {fileID: 336421612}
-  AttackNoteCopy: {fileID: 109472300}
+  DodgeNoteTag: 
+  AttackNoteTag: 
   NoteList: []
+  source: {fileID: 0}
+  destination: {fileID: 0}
   DodgePortal: {fileID: 0}
   AttackPortal: {fileID: 0}
 --- !u!1 &1772738282
