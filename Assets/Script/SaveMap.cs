@@ -19,6 +19,7 @@ namespace BeatMap
             { 
                 using (StreamWriter writer = new StreamWriter(path))
                 {
+                    /*
                     writer.WriteLine(SngManager.BPM * 4);
                     writer.WriteLine(SngManager.Notes.Count);
                     for(int i = 0; i < SngManager.Notes.Count; i++)
@@ -31,7 +32,7 @@ namespace BeatMap
                         IsSaving.text = "Saving...";
                         writer.WriteLine(SngManager.SpawnerIndexArray[i]);
                     }
-                    writer.WriteLine(SngManager.Notes.Count.ToString());
+                    writer.WriteLine(SngManager.Notes.Count.ToString());*/
                 }
                 IsSaving.text = "Saved";
             }

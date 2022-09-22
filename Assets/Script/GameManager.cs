@@ -8,22 +8,20 @@ public class GameManager : MonoBehaviour
     //[SerializeField] private List<string> chartsFiles;
     //[SerializeField] private GameObject shopPanel;
     //[SerializeField] private EnemyHealth enemy;
-<<<<<<< HEAD
     [SerializeField] private SongManager2 songMan2;
     [SerializeField] private PlayerCollision player;
-    [SerializeField] private Canvas LoseScreen;
-=======
-    //[SerializeField] private SongManager2 songMan2;
-    [SerializeField] private PlayerCollision player;
->>>>>>> working-branch
+    [SerializeField] private Canvas LossScreen;
     [SerializeField] private string LoadThisSceneWhenGameOver;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        LossScreen.gameObject.SetActive(false);
+    }
+
     void Start()
     {
-<<<<<<< HEAD
-        LoseScreen.gameObject.SetActive(false);
-=======
->>>>>>> working-branch
+        LossScreen.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,19 +29,19 @@ public class GameManager : MonoBehaviour
     {
         if(player.GetHPPoints <= 0)
         {
-<<<<<<< HEAD
             songMan2.StopMusic();
-            LoseScreen.gameObject.SetActive(true);
+            songMan2.TellAllSpawnersToDestroyTheirNotes();
+            LossScreen.gameObject.SetActive(true);
         }
     }
 
-    public void ChangeScene(string name)
+    public void SceneChange(string name)
     {
         SceneManager.LoadScene(name);
     }
-=======
-            SceneManager.LoadScene(LoadThisSceneWhenGameOver);
-        }
+
+    public void LossScreenCheckBox()
+    {
+
     }
->>>>>>> working-branch
 }

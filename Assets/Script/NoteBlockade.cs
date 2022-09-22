@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class NoteBlockade : MonoBehaviour
 {
     [Header("Notes Dodge")]
-    [SerializeField] protected float NotesDodged;
+    private float NotesDodged;
     [SerializeField] private float RequiredAmountToDodge = 10;
+    [SerializeField] private PlayerCollision player;
 
     [Header("Timer")]
     [SerializeField] private float ticks;
@@ -17,6 +18,7 @@ public class NoteBlockade : MonoBehaviour
     [SerializeField] private Text notesDodgeStateText;
     [SerializeField] private Slider notesDodgeSlider;
     [SerializeField] private Image notesDodgeSliderFill;
+    [SerializeField] private bool attackPhase;
     [SerializeField] private Color ColorTextNotesDodge;
     [SerializeField] private Color ColorTextTime;
     [SerializeField] private Color ColorSliderFillNotesDodge;
@@ -40,6 +42,8 @@ public class NoteBlockade : MonoBehaviour
             SliderIsNotesDodge();
             ticks = ISATTACKNOTE_INTERVAL;
             NotesDodged = 0;
+            //Debug.Log("Reset CollectedAttackNotes to 0");
+            
         }
         else if(NotesDodged < RequiredAmountToDodge)
         {
@@ -49,10 +53,12 @@ public class NoteBlockade : MonoBehaviour
 
     public void SliderIsNotesDodge()
     {
+        player.CollectedAttackNotes = 0;
         notesDodgeSlider.value = NotesDodged / RequiredAmountToDodge;
         notesDodgeSliderFill.color = ColorSliderFillNotesDodge;
         notesDodgeStateText.color = ColorTextNotesDodge;
-        notesDodgeStateText.text = "DODGE PHASE";
+        notesDodgeStateText.text = "ATTACKING";
+        attackPhase = false;
     }
 
     public void SliderIsTheTimer()
@@ -60,7 +66,8 @@ public class NoteBlockade : MonoBehaviour
         notesDodgeSlider.value = ticks / ISATTACKNOTE_INTERVAL;
         notesDodgeSliderFill.color = ColorSliderFillTime;
         notesDodgeStateText.color = ColorTextTime;
-        notesDodgeStateText.text = "ATTACK PHASE";
+        notesDodgeStateText.text = "VULNERABLE";
+        attackPhase = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -68,15 +75,11 @@ public class NoteBlockade : MonoBehaviour
         bool isAttackNote = other.GetComponent<Note>().GetIsAttackNote;
         if (other.gameObject.CompareTag("Note") && !isAttackNote)
         {
-            Debug.Log("NotesTouchedBlockade");
-            Destroy(other.gameObject);
             NotesDodged++;
         }
-        else if(other.gameObject.CompareTag("Note") && isAttackNote)
-        {
-            Debug.Log("NotesTouchedBlockade");
-            Destroy(other.gameObject);
-        }
+        //Debug.Log("NotesTouchedBlockade");
+        //Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
     }
 
     //public int GetNotesDodged { get { return NotesDodged; } }
@@ -89,5 +92,16 @@ public class NoteBlockade : MonoBehaviour
         return false;
     }
 
+    public void BackToZero()
+    {
+        NotesDodged = 0;
+    }
+
     public float GetRequiredAmountToDodge { get { return RequiredAmountToDodge / 2.0f; } }
+
+    public bool AttackPhase
+    {
+        get { return attackPhase; }
+        set { attackPhase = value; }
+    }
 }

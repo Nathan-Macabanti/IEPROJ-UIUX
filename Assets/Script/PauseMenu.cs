@@ -13,13 +13,15 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        radio = song.GetComponent<AudioSource>();
+        if(song != null)
+            radio = song.GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Debug.Log("Pressing Escape");
             if (GamePaused)
             {
                 Resume();
