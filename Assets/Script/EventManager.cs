@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour
     /*...will be called every time the note is spawned, 
     it needs the beat that it will land on */
     public event UnityAction<float> onNoteSpawn;
+    public event UnityAction onPlayerHit;
     //...will be called every beat
     //public event UnityAction onBeat;
     /*...will be called every time there was an attempt to hit the note, 
@@ -27,6 +28,7 @@ public class EventManager : MonoBehaviour
 
     //These are meant to call the event, events are called in other classes 
     public void NoteSpawn(float beat) { onNoteSpawn?.Invoke(beat); }
+    public void PlayerHit() { onPlayerHit?.Invoke(); }
     //public void Beat() { onBeat?.Invoke(); }
     //public void NoteHit(HitRank rank) { onNoteHit?.Invoke(rank); }
 

@@ -157,7 +157,7 @@ public class SongManager2 : MonoBehaviour
 
         //calculate the position in beats
         songPositionInBeats = songPosition / secondsPerBeat;
-        Debug.Log(songPositionInBeats);
+        //Debug.Log(songPositionInBeats);
         //Debug.Log(((float)AudioSettings.dspTime).ToString() + " - " + dspTimeSong.ToString() + " = " + songPosition);
         //song position in seconds
         //songPosition = (float)GetComponent<AudioSource>().time;
@@ -217,8 +217,11 @@ public class SongManager2 : MonoBehaviour
         else if (!GetComponent<AudioSource>().isPlaying && nextIndex >= notes.Count && enemy.GetfHP > 0)
         {
             //Reset the index
+            TellAllSpawnersToDestroyTheirNotes();
             nextIndex = 0;
+            dspTimeSong = (float)AudioSettings.dspTime;
             //player.Heal(1);
+            GetComponent<AudioSource>().Stop();
             GetComponent<AudioSource>().Play();
         }
     }
@@ -229,7 +232,7 @@ public class SongManager2 : MonoBehaviour
         //Stop music
         GetComponent<AudioSource>().Stop();
         //Destroy all notes on the field
-        TellAllSpawnereToDestroyTheirNotes();
+        TellAllSpawnersToDestroyTheirNotes();
         //countDown.text = "Keld 'em";
 
         //Destroys all the notes only once
@@ -368,7 +371,7 @@ public class SongManager2 : MonoBehaviour
     }
 #endif
 
-    public void TellAllSpawnereToDestroyTheirNotes()
+    public void TellAllSpawnersToDestroyTheirNotes()
     {
         spawners[0].DestroyAllNotes();
         spawners[1].DestroyAllNotes();

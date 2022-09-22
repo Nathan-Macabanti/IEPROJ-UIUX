@@ -101,7 +101,8 @@ public class Spawner : MonoBehaviour
     {
         if(NoteList.Count >= maximum)
         {
-            GameObject.Destroy(this.NoteList[0].gameObject);
+            this.NoteList[0].gameObject.SetActive(false);
+            //GameObject.Destroy(this.NoteList[0].gameObject);
             NoteList.RemoveAt(0);
         }
     }
@@ -124,7 +125,8 @@ public class Spawner : MonoBehaviour
             if(NoteList[i] != null)
             {
                 //Debug.Log("Destroying" + NoteList[i].name);
-                GameObject.Destroy(NoteList[i].gameObject);
+                //GameObject.Destroy(NoteList[i].gameObject);
+                NoteList[i].gameObject.SetActive(false);
                 NoteList.RemoveAt(i);
             }
 
