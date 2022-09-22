@@ -239,12 +239,5 @@ public class PlayerCollision : MonoBehaviour
         get { return collectedAttackNotes; }
         set { collectedAttackNotes = value; }
     }
-<<<<<<< HEAD
 
-    public void Heal(int amount)
-    {
-        HPPoints += amount;
-    }
-=======
->>>>>>> working-branch
 }
